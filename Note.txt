@@ -1,0 +1,8 @@
+Server
+1. npm init -y
+2. npm i express cors mysql body-parser morgan bcryptjs jsonwebtoken dotenv nodemon
+
+Create Client React Web
+1. npx create-reate-app client
+2. cd client
+3. npm install axios react-router-dom redux react-redux redux-devtools-extension react-toastify moment react-moment antd react-toastify
