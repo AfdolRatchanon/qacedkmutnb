@@ -2,7 +2,6 @@
 const express = require("express");
 require("dotenv").config();
 const { readdirSync } = require("fs");
-const connectDB = require("./configs/db");
 
 // TriMerge
 const cors = require("cors");
@@ -11,7 +10,6 @@ const morgan = require("morgan");
 
 // Run Server
 const app = express();
-connectDB();
 
 //NOTE VALIABLE
 const port = process.env.PORT;
