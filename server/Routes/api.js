@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 const { register, login, listUser, editUser, deleteUser } = require("../controllers/auth.js");
 
+//NOTE MiddleWare
+const { auth } = require("../middlewares/auth");
+
 //NOTE REGISTER
 //@Enpoint  http://Localhost:3001/api/register
 //@Method   POST
@@ -14,6 +17,17 @@ router.post("/register", register);
 //@Method   POST
 //@Access   Publish
 router.post("/login", login);
+
+//@Enpoint  http://Localhost:3001/api/auth
+//@Method   GET
+//@Access   Publish
+router.get("/1", auth, (req, res) => {
+   res.send("hello middleware");
+});
+
+router.get("/2", (req, res) => {
+   res.send("hello middleware");
+});
 
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET

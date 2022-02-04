@@ -34,18 +34,36 @@ exports.register = async (req, res) => {
                // เข้ารหัส Encrypt
                const salt = await bcrypt.genSalt(10);
                const passwordHash = await bcrypt.hash(mem_pwd, salt);
-
-               db.query(
-                  "INSERT INTO tbl_member (mem_user, mem_pwd, mem_name, mem_mail, mem_tal, mem_img, lv_id, sta_id, date_create, date_update ) VALUES (?,?,?,?,?,?,?,?,now(),now())",
-                  [mem_user, passwordHash, mem_name, mem_mail, mem_tal, mem_img, 1, 1],
-                  (err, result) => {
-                     if (err) {
-                        console.log(err);
+               if (mem_user === "" || mem_user === null) {
+                  return res.status(400).send("Please Input Username");
+               } else {
+                  if (mem_pwd === "" || mem_pwd === null) {
+                     return res.status(400).send("Please Input Password ");
+                  } else {
+                     if (mem_name === "" || mem_name === null) {
+                        return res.status(400).send("Please Input Name ");
                      } else {
-                        res.send("Register Success");
+                        if (mem_mail === "" || mem_mail === null) {
+                           return res.status(400).send("Please Input Email ");
+                        } else {
+                           if (mem_tal === "" || mem_tal === null) {
+                              return res.status(400).send("Please Input Telephone Number");
+                           } else
+                              db.query(
+                                 "INSERT INTO tbl_member (mem_user, mem_pwd, mem_name, mem_mail, mem_tal, mem_img, lv_id, sta_id, date_create, date_update ) VALUES (?,?,?,?,?,?,?,?,now(),now())",
+                                 [mem_user, passwordHash, mem_name, mem_mail, mem_tal, mem_img, 1, 1],
+                                 (err, result) => {
+                                    if (err) {
+                                       console.log(err);
+                                    } else {
+                                       res.send("Register Success");
+                                    }
+                                 }
+                              );
+                        }
                      }
                   }
-               );
+               }
             }
          }
       );
@@ -78,6 +96,7 @@ exports.login = async (req, res) => {
                return res.status(400).send("This username does not exist. ");
             } else {
                // Username ไม่ได้ถูกปิดการใช้งาน
+               // FIXME อาจมีการแก้ไขในอนาคต
                if (!result[0].sta_id) {
                   return res.status(400).send("This Username Disable. ");
                }
@@ -97,6 +116,7 @@ exports.login = async (req, res) => {
                };
 
                // Genarate Token
+               // NOTE jwtSecret คือ Secret Code
                jwt.sign(payLoad, "jwtSecret", { expiresIn: 60 * 60 }, (err, token) => {
                   if (err) {
                      throw err;
