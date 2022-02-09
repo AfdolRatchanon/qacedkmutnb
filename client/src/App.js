@@ -13,6 +13,7 @@ import About from "./components/pages/About";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
+import AdminManageUser from "./components/pages/admin/AdminManageUser";
 
 // page Officer
 import HomeOfficer from "./components/pages/officer/Home";
@@ -48,6 +49,7 @@ function App() {
                   token: idtoken,
                   mem_id: res.data.mem_id,
                   mem_mail: res.data.mem_mail,
+                  mem_name: res.data.mem_name,
                   mem_user: res.data.mem_user,
                   lv_id: res.data.lv_id,
                },
@@ -70,6 +72,7 @@ function App() {
                   <Route path="/Register" element={<Register />} />
                   <Route path="/Login" element={<Login />} />
                   <Route path="/about" element={<About />} />
+                  {/* NOTE ADMIN */}
                   <Route
                      path="/index-admin"
                      element={
@@ -79,6 +82,15 @@ function App() {
                      }
                   />
                   <Route
+                     path="/admin-manage-user"
+                     element={
+                        <AdminRoute>
+                           <AdminManageUser />
+                        </AdminRoute>
+                     }
+                  ></Route>
+                  {/* NOTE OFFICER */}
+                  <Route
                      path="/index-officer"
                      element={
                         <OfficerRoute>
@@ -86,6 +98,7 @@ function App() {
                         </OfficerRoute>
                      }
                   />
+                  {/* NOTE USER */}
                   <Route
                      path="/index-user"
                      element={

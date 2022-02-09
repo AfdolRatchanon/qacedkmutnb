@@ -40,7 +40,7 @@ export default function Header() {
             {/* Right navbar links */}
             <ul className="navbar-nav ml-auto">
                {/* Navbar Search */}
-               <li className="nav-item">
+               {/* <li className="nav-item">
                   <a className="nav-link" data-widget="navbar-search" href="#" role="button">
                      <i className="fas fa-search" />
                   </a>
@@ -64,7 +64,7 @@ export default function Header() {
                         </div>
                      </form>
                   </div>
-               </li>
+               </li> */}
 
                <li className="nav-item">
                   <a className="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -82,10 +82,31 @@ export default function Header() {
                )}
                {user && (
                   <>
-                     <li className="nav-item  d-sm-inline-block" onClick={logout}>
-                        <a className="nav-link" role="button">
-                           ออกจากระบบ
+                     <li className="nav-item dropdown">
+                        <a className="nav-link" data-toggle="dropdown" href="#">
+                           {user.mem_user}
                         </a>
+
+                        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                           <span className=" dropdown-header">
+                              <i className="nav-icon far fa-envelope">{" \u00A0\u00A0" + user.mem_mail}</i>
+                           </span>
+
+                           <div className="dropdown-divider" />
+                           <a href="#" className="dropdown-item dropdown-footer" onClick={logout}>
+                              <p className="nav-link" role="button">
+                                 ออกจากระบบ
+                              </p>
+                           </a>
+                        </div>
+                     </li>
+                     <li className="nav-item">
+                        <img
+                           src="../../dist/img/AdminLTELogo.png"
+                           height={38}
+                           className="img-circle elevation-1"
+                           alt="User Image"
+                        />
                      </li>
                   </>
                )}

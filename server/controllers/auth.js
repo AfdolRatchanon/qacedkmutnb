@@ -112,6 +112,7 @@ exports.login = async (req, res) => {
                   user: {
                      mem_id: result[0].mem_id,
                      mem_user: result[0].mem_user,
+                     mem_name: result[0].mem_name,
                      mem_mail: result[0].mem_mail,
                      lv_id: result[0].lv_id,
                   },
