@@ -5,9 +5,10 @@ import React, { useState } from "react";
 //fucntions
 import { register } from "../../functions/auth";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+   const navigate = useNavigate();
    const [value, setValue] = useState({
       mem_user: "",
       mem_pwd: "",
@@ -33,6 +34,7 @@ const Register = () => {
             .then((res) => {
                console.log(res.data);
                alert(res.data);
+               navigate("/login")
             })
             .catch((err) => {
                console.log(err.response.data);

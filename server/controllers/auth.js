@@ -51,7 +51,7 @@ exports.register = async (req, res) => {
                            } else
                               db.query(
                                  "INSERT INTO tbl_member (mem_user, mem_pwd, mem_name, mem_mail, mem_tal, mem_img, lv_id, sta_id, date_create, date_update ) VALUES (?,?,?,?,?,?,?,?,now(),now())",
-                                 [mem_user, passwordHash, mem_name, mem_mail, mem_tal, mem_img, 1, 1],
+                                 [mem_user, passwordHash, mem_name, mem_mail, mem_tal, mem_img, 3, 1],
                                  (err, result) => {
                                     if (err) {
                                        console.log(err);
@@ -110,7 +110,9 @@ exports.login = async (req, res) => {
                // Create Payload
                const payLoad = {
                   user: {
+                     mem_id: result[0].mem_id,
                      mem_user: result[0].mem_user,
+                     mem_mail: result[0].mem_mail,
                      lv_id: result[0].lv_id,
                   },
                };
@@ -132,6 +134,40 @@ exports.login = async (req, res) => {
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");
+   }
+};
+
+//POST
+
+exports.currentUser = async (req, res) => {
+   try {
+      // console.log("HELLO", req.user);
+      // req.user มาจากการ decode midleware
+      db.query("SELECT * FROM tbl_member WHERE mem_user = ?", [req.user.mem_user], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            // console.log(result[0]);
+            // res.send(result[0]);
+            if (result[0] == null) {
+               // Username มีข้อมูลหรือไม่
+               //console.log(result);
+               return res.status(400).send("This username does not exist. ");
+            } else {
+               // Username ไม่ได้ถูกปิดการใช้งาน
+               // FIXME อาจมีการแก้ไขในอนาคต
+               if (!result[0].sta_id) {
+                  return res.status(400).send("This Username Disable. ");
+               }
+               console.log(result[0]);
+               res.send(result[0]);
+            }
+         }
+      });
+   } catch (err) {
+      console.log(err);
+      res.status(500).send("Server Error!");
    }
 };
 

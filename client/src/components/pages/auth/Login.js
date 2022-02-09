@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { login } from "../../functions/auth";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+// redux
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
    const [value, setValue] = useState({
       mem_user: "",
       mem_pwd: "",
@@ -15,6 +20,19 @@ const Login = () => {
    };
    // console.log(value);
 
+   const roleBaseRedirect = (lv_id) => {
+      console.log("lv_id : ", lv_id);
+      if (lv_id === 1) {
+         navigate("/index-admin");
+      } else if (lv_id === 2) {
+         navigate("/index-officer");
+      } else if (lv_id === 3) {
+         navigate("/index-user");
+      } else {
+         navigate("/login");
+      }
+   };
+
    const handleSubmit = (e) => {
       e.preventDefault();
       console.log("submit", value);
@@ -22,7 +40,19 @@ const Login = () => {
       login(value)
          .then((res) => {
             console.log(res.data);
-            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user);
+            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + "เข้าสู่เว็บไซต์");
+            dispatch({
+               type: "LOGIN",
+               payload: {
+                  token: res.data.token,
+                  mem_id: res.data.payLoad.user.mem_id,
+                  mem_mail: res.data.payLoad.user.mem_mail,
+                  mem_user: res.data.payLoad.user.mem_user,
+                  lv_id: res.data.payLoad.user.lv_id,
+               },
+            });
+            localStorage.setItem("token", res.data.token);
+            roleBaseRedirect(res.data.payLoad.user.lv_id);
          })
          .catch((err) => {
             console.log(err.response.data);

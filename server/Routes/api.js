@@ -1,10 +1,10 @@
 //NOTE IMPORT
 const express = require("express");
 const router = express.Router();
-const { register, login, listUser, editUser, deleteUser } = require("../controllers/auth.js");
+const { register, login, listUser, editUser, deleteUser, currentUser } = require("../controllers/auth.js");
 
 //NOTE MiddleWare
-const { auth } = require("../middlewares/auth");
+const { auth, adminCheck, officerCheck } = require("../middlewares/auth");
 
 //NOTE REGISTER
 //@Enpoint  http://Localhost:3001/api/register
@@ -17,6 +17,21 @@ router.post("/register", register);
 //@Method   POST
 //@Access   Publish
 router.post("/login", login);
+
+//@Enpoint  http://Localhost:3001/api/current-user
+//@Method   POST
+//@Access   Publish
+router.post("/current-user", auth, currentUser);
+
+//@Enpoint  http://Localhost:3001/api/current-officer
+//@Method   POST
+//@Access   Publish
+router.post("/current-officer", auth, officerCheck, currentUser);
+
+//@Enpoint  http://Localhost:3001/api/current-admin
+//@Method   POST
+//@Access   Publish
+router.post("/current-admin", auth, officerCheck, adminCheck, currentUser);
 
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET
