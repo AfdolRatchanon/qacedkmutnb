@@ -5,8 +5,8 @@ import { currentAdmin } from "../functions/auth";
 
 const AdminRoute = ({ children }) => {
    // user มาจาก Redux
-   const { user } = useSelector((state) => ({ ...state }));
    const [ok, setOk] = useState(false);
+   const { user } = useSelector((state) => ({ ...state }));
 
    useEffect(() => {
       if (user && user.token) {

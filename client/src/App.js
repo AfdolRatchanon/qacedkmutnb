@@ -49,7 +49,6 @@ function App() {
                   token: idtoken,
                   mem_id: res.data.mem_id,
                   mem_mail: res.data.mem_mail,
-                  mem_name: res.data.mem_name,
                   mem_user: res.data.mem_user,
                   lv_id: res.data.lv_id,
                },
@@ -72,7 +71,7 @@ function App() {
                   <Route path="/Register" element={<Register />} />
                   <Route path="/Login" element={<Login />} />
                   <Route path="/about" element={<About />} />
-                  {/* NOTE ADMIN */}
+                  {/*NOTE ADMIN */}
                   <Route
                      path="/index-admin"
                      element={
@@ -88,8 +87,8 @@ function App() {
                            <AdminManageUser />
                         </AdminRoute>
                      }
-                  ></Route>
-                  {/* NOTE OFFICER */}
+                  />
+                  {/*NOTE OFFICER */}
                   <Route
                      path="/index-officer"
                      element={
@@ -98,7 +97,7 @@ function App() {
                         </OfficerRoute>
                      }
                   />
-                  {/* NOTE USER */}
+                  {/*NOTE USER */}
                   <Route
                      path="/index-user"
                      element={

@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { adminListUser } from "../../functions/admin";
+
 const AdminManageUser = () => {
+   const [data, setData] = useState([]);
+   const { user } = useSelector((state) => ({ ...state }));
+
+   const loadData = () => {
+      adminListUser(user.token)
+         .then((res) => {
+            // console.log(res);
+            setData(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response);
+         });
+   };
+
+   useEffect(() => {
+      loadData();
+   }, []);
+
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -8,14 +30,14 @@ const AdminManageUser = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>จัดการข้อมูลสมาชิก</h1>
+                     <h1>ข้อมูลสมาชิก</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">จัดการข้อมูลสมาชิก</li>
+                        <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
                      </ol>
                   </div>
                </div>
@@ -29,47 +51,39 @@ const AdminManageUser = () => {
                   <div className="col-12">
                      {/* Default box */}
                      <div className="card">
-                        {/* <div className="card-header">
-                 <h3 className="card-title">Title</h3>
-                 <div className="card-tools">
-                    <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                       <i className="fas fa-minus" />
-                    </button>
-                    <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-                       <i className="fas fa-times" />
-                    </button>
-                 </div>
-              </div> */}
+                        <div className="card-header">
+                           <h3 className="card-title">ข้อมูลสมาชิก</h3>
+                           <div className="card-tools">
+                              {/* <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                 <i className="fas fa-minus" />
+                              </button>
+                              <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
+                                 <i className="fas fa-times" />
+                              </button> */}
+                           </div>
+                        </div>
                         <div className="card-body">
-                           <h1>Admin Management User</h1>
-                           <table class="table">
-                              <thead>
+                           <h1>ข้อมูลสมาชิก</h1>
+                           <table className="table table-hover table-bordered">
+                              <thead className="thead-dark">
                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">ลำดับ</th>
+                                    <th scope="col">ชื่อ - สกุล</th>
+                                    <th scope="col">สถานะ</th>
+                                    <th scope="col">ระดับการเข้าถึงข้อมูล</th>
+                                    <th scope="col">การดำเนินการ</th>
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                 </tr>
-                                 <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                 </tr>
-                                 <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                 </tr>
+                                 {data.map((val, key) => (
+                                    <tr>
+                                       <th scope="row">{key + 1}</th>
+                                       <td>{val.mem_name}</td>
+                                       <td>{val.sta_id}</td>
+                                       <td>{val.lv_id}</td>
+                                       <td>{val.mem_user}</td>
+                                    </tr>
+                                 ))}
                               </tbody>
                            </table>
                         </div>

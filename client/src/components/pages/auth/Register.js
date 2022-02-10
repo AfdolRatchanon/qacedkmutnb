@@ -8,7 +8,6 @@ import { register } from "../../functions/auth";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-   const navigate = useNavigate();
    const [value, setValue] = useState({
       mem_user: "",
       mem_pwd: "",
@@ -17,11 +16,13 @@ const Register = () => {
       mem_mail: null,
       mem_tal: null,
    });
+   const navigate = useNavigate();
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
       setValue({ ...value, [e.target.name]: e.target.value });
    };
+
    // console.log(value);
 
    const handleSubmit = (e) => {
@@ -34,7 +35,7 @@ const Register = () => {
             .then((res) => {
                console.log(res.data);
                alert(res.data);
-               navigate("/login")
+               navigate("/login");
             })
             .catch((err) => {
                console.log(err.response.data);

@@ -7,12 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
    const [value, setValue] = useState({
       mem_user: "",
       mem_pwd: "",
    });
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
@@ -40,14 +40,13 @@ const Login = () => {
       login(value)
          .then((res) => {
             console.log(res.data);
-            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_name + " เข้าสู่เว็บไซต์");
+            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + "เข้าสู่เว็บไซต์");
             dispatch({
                type: "LOGIN",
                payload: {
                   token: res.data.token,
                   mem_id: res.data.payLoad.user.mem_id,
                   mem_mail: res.data.payLoad.user.mem_mail,
-                  mem_name: res.data.payLoad.user.mem_name,
                   mem_user: res.data.payLoad.user.mem_user,
                   lv_id: res.data.payLoad.user.lv_id,
                },

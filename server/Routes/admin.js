@@ -11,24 +11,24 @@ const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
 //@Enpoint  http://Localhost:3001/api/admin-list-user
 //@Method   GET
 //@Access   Private
-router.get("/admin-list-user", adminListUser);
+router.get("/admin-list-user", auth, officerCheck, adminCheck, adminListUser);
 
 //NOTE edituser
 //@Enpoint  http://Localhost:3001/api/admin-edituser
 //@Method   GET
 //@Access   Private
-router.get("/admin-read-user/:id", adminReadUser);
+router.get("/admin-read-user/${id}", adminReadUser);
 
 //NOTE edituser
 //@Enpoint  http://Localhost:3001/api/admin-edituser
 //@Method   PUT
 //@Access   Private
-router.put("/admin-edit-user/:id", adminEditUser);
+router.put("/admin-edit-user/${id}", adminEditUser);
 
 //NOTE edituser
 //@Enpoint  http://Localhost:3001/api/admin-edituser
 //@Method   DELETE
 //@Access   Private
-router.delete("/admin-delete-user/:id", adminDeleteUser);
+router.delete("/admin-delete-user/${id}", adminDeleteUser);
 
 module.exports = router;

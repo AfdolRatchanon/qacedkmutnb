@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const About = () => {
    return (
@@ -13,9 +12,6 @@ const About = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
-                        </li>
                         <li className="breadcrumb-item font-weight-bold">เกี่ยวกับระบบ</li>
                      </ol>
                   </div>
@@ -42,7 +38,7 @@ const About = () => {
                  </div>
               </div> */}
                         <div className="card-body">
-                           <h1>เกี่ยวกับระบบ</h1>
+                           <h1>Home Page</h1>
                            <p>
                               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                               industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type

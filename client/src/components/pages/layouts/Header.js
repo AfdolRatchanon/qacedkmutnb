@@ -40,7 +40,7 @@ export default function Header() {
             {/* Right navbar links */}
             <ul className="navbar-nav ml-auto">
                {/* Navbar Search */}
-               {/* <li className="nav-item">
+               <li className="nav-item">
                   <a className="nav-link" data-widget="navbar-search" href="#" role="button">
                      <i className="fas fa-search" />
                   </a>
@@ -64,7 +64,7 @@ export default function Header() {
                         </div>
                      </form>
                   </div>
-               </li> */}
+               </li>
 
                <li className="nav-item">
                   <a className="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -101,12 +101,7 @@ export default function Header() {
                         </div>
                      </li>
                      <li className="nav-item">
-                        <img
-                           src="../../dist/img/AdminLTELogo.png"
-                           height={38}
-                           className="img-circle elevation-1"
-                           alt="User Image"
-                        />
+                        <img src="../../dist/img/AdminLTELogo.png" height={38} className="img-circle elevation-1" />
                      </li>
                   </>
                )}

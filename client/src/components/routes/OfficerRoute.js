@@ -5,8 +5,8 @@ import { currentOfficer } from "../functions/auth";
 
 const OfficerRoute = ({ children }) => {
    // user มาจาก Redux
-   const { user } = useSelector((state) => ({ ...state }));
    const [ok, setOk] = useState(false);
+   const { user } = useSelector((state) => ({ ...state }));
 
    useEffect(() => {
       if (user && user.token) {
