@@ -40,7 +40,7 @@ const Login = () => {
       login(value)
          .then((res) => {
             console.log(res.data);
-            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + "เข้าสู่เว็บไซต์");
+            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + " เข้าสู่เว็บไซต์");
             dispatch({
                type: "LOGIN",
                payload: {

@@ -20,6 +20,8 @@ import HomeOfficer from "./components/pages/officer/Home";
 
 // Page User
 import HomeUser from "./components/pages/user/Home";
+import UserQuestion from "./components/pages/user/UserQuestion";
+import AddQuestion from "./components/pages/user/AddQuestion";
 
 import { currentUser } from "./components/functions/auth";
 
@@ -103,6 +105,22 @@ function App() {
                      element={
                         <UserRoute>
                            <HomeUser />
+                        </UserRoute>
+                     }
+                  />
+                  <Route
+                     path="/user-question"
+                     element={
+                        <UserRoute>
+                           <UserQuestion />
+                        </UserRoute>
+                     }
+                  />
+                  <Route
+                     path="/user-add-question"
+                     element={
+                        <UserRoute>
+                           <AddQuestion />
                         </UserRoute>
                      }
                   />

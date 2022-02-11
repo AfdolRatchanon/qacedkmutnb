@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const { register, login, listUser, editUser, deleteUser, currentUser } = require("../controllers/auth.js");
+const { question_Type } = require("../controllers/query");
 
 //NOTE MiddleWare
 const { auth, adminCheck, officerCheck } = require("../middlewares/auth");
@@ -20,22 +21,27 @@ router.post("/login", login);
 
 //@Enpoint  http://Localhost:3001/api/current-user
 //@Method   POST
-//@Access   Publish
+//@Access   private
 router.post("/current-user", auth, currentUser);
 
 //@Enpoint  http://Localhost:3001/api/current-officer
 //@Method   POST
-//@Access   Publish
+//@Access   private
 router.post("/current-officer", auth, officerCheck, currentUser);
 
 //@Enpoint  http://Localhost:3001/api/current-admin
 //@Method   POST
-//@Access   Publish
+//@Access   private
 router.post("/current-admin", auth, officerCheck, adminCheck, currentUser);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   POST
+//@Access   private
+router.get("/query-question-type", question_Type);
 
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET
-//@Access   Publish
+//@Access   private
 router.get("/1", auth, (req, res) => {
    res.send("hello middleware");
 });

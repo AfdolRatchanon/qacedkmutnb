@@ -6,20 +6,23 @@ const jwt = require("jsonwebtoken");
 exports.adminListUser = async (req, res) => {
    try {
       // Check user
-      db.query("SELECT * FROM tbl_member", async (err, result) => {
-         if (err) {
-            console.log(err);
-            return res.status(400).send("Query Database ERROR!!!");
-         } else {
-            if (result[0] == null) {
-               // Username มีข้อมูลหรือไม่
-               //console.log(result);
-               return res.status(400).send("This username does not exist. ");
+      db.query(
+         "SELECT * FROM `tbl_member` INNER JOIN tbl_status ON tbl_member.sta_id = tbl_status.sta_id INNER JOIN tbl_level ON tbl_member.lv_id=tbl_level.lv_id",
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
             } else {
-               return res.send(result);
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("This username does not exist. ");
+               } else {
+                  return res.send(result);
+               }
             }
          }
-      });
+      );
       //res.send("adminListUser");
    } catch (error) {
       console.log(error);

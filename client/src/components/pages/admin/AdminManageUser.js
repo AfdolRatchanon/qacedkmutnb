@@ -79,9 +79,27 @@ const AdminManageUser = () => {
                                     <tr>
                                        <th scope="row">{key + 1}</th>
                                        <td>{val.mem_name}</td>
-                                       <td>{val.sta_id}</td>
-                                       <td>{val.lv_id}</td>
-                                       <td>{val.mem_user}</td>
+                                       <td>{val.sta_name}</td>
+                                       <td>{val.lv_name}</td>
+                                       <td>
+                                          <div className="dropdown">
+                                             <button
+                                                className="btn btn-secondary dropdown-toggle"
+                                                type="button"
+                                                id="dropdownMenuButton"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                             >
+                                                จัดการข้อมูล
+                                             </button>
+                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a className="dropdown-item">Action</a>
+                                                <a className="dropdown-item">Another action</a>
+                                                <a className="dropdown-item">Something else here</a>
+                                             </div>
+                                          </div>
+                                       </td>
                                     </tr>
                                  ))}
                               </tbody>

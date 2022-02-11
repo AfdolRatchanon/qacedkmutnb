@@ -97,7 +97,7 @@ exports.login = async (req, res) => {
             } else {
                // Username ไม่ได้ถูกปิดการใช้งาน
                // FIXME อาจมีการแก้ไขในอนาคต
-               if (!result[0].sta_id) {
+               if (result[0].sta_id === 2) {
                   return res.status(400).send("This Username Disable. ");
                }
                // check Password
@@ -158,7 +158,7 @@ exports.currentUser = async (req, res) => {
             } else {
                // Username ไม่ได้ถูกปิดการใช้งาน
                // FIXME อาจมีการแก้ไขในอนาคต
-               if (!result[0].sta_id) {
+               if (result[0].sta_id === 2) {
                   return res.status(400).send("This Username Disable. ");
                }
                console.log(result[0]);

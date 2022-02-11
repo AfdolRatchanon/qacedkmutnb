@@ -1,22 +1,35 @@
-/* eslint-disable no-useless-escape */
-// rafce
-// Import
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 //fucntions
 import { register } from "../../functions/auth";
+import { useSelector } from "react-redux";
+import { loadQuestionType } from "../../functions/query";
 
-import { Link, useNavigate } from "react-router-dom";
-
-const Register = () => {
+const AddQuestion = () => {
+   const [questionType, setQuestionType] = useState([]);
    const [value, setValue] = useState({
-      mem_user: "",
-      mem_pwd: "",
-      con_mem_pwd: "",
-      mem_name: "",
-      mem_mail: null,
-      mem_tal: null,
+      type_id: {},
+      qst_title: "",
+      qst_detail: "",
+      qst_name: "",
+      qst_mail: "",
    });
    const navigate = useNavigate();
+   const { user } = useSelector((state) => ({ ...state }));
+
+   const loadDataTypeQ = () => {
+      loadQuestionType(user.token)
+         .then((res) => {
+            console.log(res.data);
+            // setQuestionType(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response);
+         });
+   };
+   useEffect(() => {
+      loadDataTypeQ();
+   }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
@@ -27,23 +40,23 @@ const Register = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("submit", value);
-      if (value.mem_pwd !== value.con_mem_pwd) {
-         alert("password not match");
-      } else {
-         register(value)
-            .then((res) => {
-               console.log(res.data);
-               alert(res.data);
-               navigate("/login");
-            })
-            .catch((err) => {
-               console.log(err.response.data);
-               alert(err.response.data);
-            });
-      }
-   };
+      console.log("submit Add Question", value);
 
+      //   if (value.mem_pwd !== value.con_mem_pwd) {
+      //      alert("password not match");
+      //   } else {
+      //      register(value)
+      //         .then((res) => {
+      //            console.log(res.data);
+      //            alert(res.data);
+      //            navigate("/login");
+      //         })
+      //         .catch((err) => {
+      //            console.log(err.response.data);
+      //            alert(err.response.data);
+      //         });
+      //   }
+   };
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -51,14 +64,17 @@ const Register = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>สมัครสมาชิก</h1>
+                     <h1>เพิ่มคำถาม</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">สมัครสมาชิก</li>
+                        <li className="breadcrumb-item float-sm-right">
+                           <Link to="/user-question">คำถามของฉัน</Link>
+                        </li>
+                        <li className="breadcrumb-item font-weight-bold">เพิ่มคำถาม</li>
                      </ol>
                   </div>
                </div>
@@ -88,14 +104,57 @@ const Register = () => {
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">ชื่อ - นามสกุล</label>
+                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
+                                 <select name="type_id" className="form-control col-sm-5" onChange={handleChang}>
+                                    <option value={0}>กรุณาเลือก</option>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                 </select>
+                              </div>
+                              <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">หัวข้อคำถาม</label>
                                  <input
                                     type="text"
                                     className="form-control col-sm-5"
-                                    name="mem_name"
-                                    placeholder="Input Your Name 1 characters or more"
-                                    pattern="^\w(\w|\s){0,30}"
-                                    title="Please input range 1 - 30 alphabet"
+                                    name="qst_title"
+                                    placeholder="Input Username 4 characters or more"
+                                    pattern="\w{4,30}"
+                                    title="Please input range 4 - 30 alphabet"
+                                    onChange={handleChang}
+                                 />
+                              </div>
+                              <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">รายละเอียด</label>
+                                 <textarea
+                                    className="form-control col-sm-5"
+                                    name="qst_detail"
+                                    rows="3"
+                                    onChange={handleChang}
+                                 ></textarea>
+                                 {/* <input
+                                    type="tel"
+                                    className="form-control col-sm-5"
+                                    name="qst_detail"
+                                    placeholder="0XXXXXXXXX"
+                                    title="format 0xxxxxxxxx"
+                                    pattern="^0\d{9}$"
+                                    onChange={handleChang}
+                                 /> */}
+                              </div>
+                              <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">ผู้ตั้งคำถาม</label>
+                                 <input
+                                    type="text"
+                                    className="form-control col-sm-5"
+                                    name="qst_name"
+                                    placeholder="Input Username 4 characters or more"
+                                    pattern="\w{4,30}"
+                                    title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -112,62 +171,11 @@ const Register = () => {
                                     onChange={handleChang}
                                  />
                               </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">เบอร์โทรศัพท์</label>
-                                 <input
-                                    type="tel"
-                                    className="form-control col-sm-5"
-                                    name="mem_tal"
-                                    placeholder="0XXXXXXXXX"
-                                    title="format 0xxxxxxxxx"
-                                    pattern="^0\d{9}$"
-                                    onChange={handleChang}
-                                 />
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ชื่อผู้ใช้</label>
-                                 <input
-                                    type="text"
-                                    className="form-control col-sm-5"
-                                    name="mem_user"
-                                    placeholder="Input Username 4 characters or more"
-                                    pattern="\w{4,30}"
-                                    title="Please input range 4 - 30 alphabet"
-                                    onChange={handleChang}
-                                 />
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">รหัสผ่าน</label>
-                                 <input
-                                    type="password"
-                                    className="form-control col-sm-5"
-                                    name="mem_pwd"
-                                    placeholder="Input Password 6 characters or more"
-                                    pattern="\w{6,30}"
-                                    title="Please input range 6 - 30 alphabet"
-                                    onChange={handleChang}
-                                 />
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ยืนยันรหัสผ่าน</label>
-                                 <input
-                                    type="password"
-                                    className="form-control col-sm-5"
-                                    name="con_mem_pwd"
-                                    placeholder="Input like a Password"
-                                    onChange={handleChang}
-                                 />
-                              </div>
                               <div className="form-group" align="center">
-                                 {" "}
                                  <button type="reset" className="btn btn-danger">
                                     ยกเลิก
                                  </button>
-                                 <button className="btn btn-success">ยืนยัน</button>{" "}
+                                 <button className="btn btn-success">ยืนยัน</button>
                               </div>
 
                               {/*disabled={checkLength()} */}
@@ -187,4 +195,4 @@ const Register = () => {
    );
 };
 
-export default Register;
+export default AddQuestion;

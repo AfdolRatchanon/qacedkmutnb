@@ -37,7 +37,7 @@ exports.officerCheck = async (req, res, next) => {
             } else {
                // Username ไม่ได้ถูกปิดการใช้งาน
                // FIXME อาจมีการแก้ไขในอนาคต
-               if (!result[0].sta_id) {
+               if (result[0].sta_id === 2) {
                   return res.status(400).send("This Username Disable. ");
                } else {
                   console.log("adminCheck DB Tbl_mem", result[0].lv_id);
@@ -76,7 +76,7 @@ exports.adminCheck = async (req, res, next) => {
             } else {
                // Username ไม่ได้ถูกปิดการใช้งาน
                // FIXME อาจมีการแก้ไขในอนาคต
-               if (!result[0].sta_id) {
+               if (result[0].sta_id === 2) {
                   return res.status(400).send("This Username Disable. ");
                } else {
                   console.log("adminCheck DB Tbl_mem", result[0].lv_id);
