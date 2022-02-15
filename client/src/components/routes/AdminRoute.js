@@ -17,8 +17,9 @@ const AdminRoute = ({ children }) => {
                setOk(true);
             })
             .catch((err) => {
-               alert(err);
-               console.log(err);
+               alert(err.response.data);
+               console.log(err.response);
+               console.log(err.response.data);
                setOk(false);
             });
       }

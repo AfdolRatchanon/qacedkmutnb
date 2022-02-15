@@ -8,3 +8,12 @@ export const adminListUser = async (authtoken) => {
       },
    });
 };
+
+export const adminEnableAndDisenableMember = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.post(process.env.REACT_APP_API + "/admin-enable-and-disenable-member", value, {
+      headers: {
+         authtoken,
+      },
+   });
+};

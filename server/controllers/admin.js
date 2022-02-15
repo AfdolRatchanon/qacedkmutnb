@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 
 exports.adminListUser = async (req, res) => {
    try {
-      // Check user
       db.query(
          "SELECT * FROM `tbl_member` INNER JOIN tbl_status ON tbl_member.sta_id = tbl_status.sta_id INNER JOIN tbl_level ON tbl_member.lv_id=tbl_level.lv_id",
          async (err, result) => {
@@ -24,6 +23,24 @@ exports.adminListUser = async (req, res) => {
          }
       );
       //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.adminEnableAndDisenableMember = async (req, res) => {
+   try {
+      console.log(req.body);
+      const { sta_id, mem_id } = req.body;
+      db.query("UPDATE tbl_member SET sta_id = ? WHERE mem_id = ?;", [sta_id, mem_id], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            return res.send("เปลี่ยนสถานะสำเร็จ");
+         }
+      });
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");

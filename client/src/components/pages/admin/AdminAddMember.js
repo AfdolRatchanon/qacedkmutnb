@@ -1,13 +1,12 @@
-/* eslint-disable no-useless-escape */
-// rafce
-// Import
-import React, { useState } from "react";
-//fucntions
-import { register } from "../../functions/auth";
-
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+//Function
+import { register } from "../../functions/auth";
+import { loadQuestionLevel } from "../../functions/query";
 
-const Register = () => {
+const AdminAddMember = () => {
+   const [questionLevel, setQuestionLevel] = useState([]);
    const [value, setValue] = useState({
       mem_user: "",
       mem_pwd: "",
@@ -15,9 +14,26 @@ const Register = () => {
       mem_name: "",
       mem_mail: null,
       mem_tal: null,
-      lv_id: 3,
+      lv_id: null,
    });
+
    const navigate = useNavigate();
+   const { user } = useSelector((state) => ({ ...state }));
+
+   const loadDataLevelQ = async () => {
+      loadQuestionLevel(user.token, value)
+         .then((res) => {
+            console.log(res.data);
+            setQuestionLevel(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response);
+         });
+   };
+
+   useEffect(() => {
+      loadDataLevelQ();
+   }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
@@ -36,7 +52,7 @@ const Register = () => {
             .then((res) => {
                console.log(res.data);
                alert(res.data);
-               navigate("/login");
+               navigate("/admin-manage-user");
             })
             .catch((err) => {
                console.log(err.response.data);
@@ -52,14 +68,17 @@ const Register = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>สมัครสมาชิก</h1>
+                     <h1>หน้าแรก</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">สมัครสมาชิก</li>
+                        <li className="breadcrumb-item">
+                           <Link to="/admin-manage-user">ข้อมูลสมาชิก</Link>
+                        </li>
+                        <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
                      </ol>
                   </div>
                </div>
@@ -74,18 +93,17 @@ const Register = () => {
                      {/* Default box */}
                      <div className="card">
                         {/* <div className="card-header">
-                           <h3 className="card-title">Title</h3>
-                           <div className="card-tools">
-                              <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                 <i className="fas fa-minus" />
-                              </button>
-                              <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-                                 <i className="fas fa-times" />
-                              </button>
-                           </div>
-                        </div> */}
+                 <h3 className="card-title">Title</h3>
+                 <div className="card-tools">
+                    <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                       <i className="fas fa-minus" />
+                    </button>
+                    <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
+                       <i className="fas fa-times" />
+                    </button>
+                 </div>
+              </div> */}
                         <div className="card-body">
-                           {/* Form Register */}
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
@@ -163,11 +181,20 @@ const Register = () => {
                                     onChange={handleChang}
                                  />
                               </div>
+                              <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
+                                 <select name="lv_id" className="form-control col-sm-5" onChange={handleChang}>
+                                    <option value={0}>กรุณาเลือก</option>
+                                    {questionLevel.map((questionLevel) => (
+                                       <option key={questionLevel.lv_id} value={questionLevel.lv_id}>
+                                          {questionLevel.lv_name}
+                                       </option>
+                                    ))}
+                                 </select>
+                              </div>
                               <div className="form-group" align="center">
-                                 <button type="reset" className="btn btn-danger">
-                                    ยกเลิก
-                                 </button>
-                                 <button className="btn btn-success">ยืนยัน</button>
+                                 <button className="btn btn-success">บันทึกข้อมูล</button>
                               </div>
 
                               {/*disabled={checkLength()} */}
@@ -187,4 +214,4 @@ const Register = () => {
    );
 };
 
-export default Register;
+export default AdminAddMember;

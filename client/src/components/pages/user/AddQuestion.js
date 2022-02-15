@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //fucntions
-import { register } from "../../functions/auth";
+import { addQuestion } from "../../functions/user";
+
+//Redux
 import { useSelector } from "react-redux";
+
+//Query
 import { loadQuestionType } from "../../functions/query";
 
 const AddQuestion = () => {
    const [questionType, setQuestionType] = useState([]);
    const [value, setValue] = useState({
-      type_id: {},
+      type_id: 0,
       qst_title: "",
       qst_detail: "",
       qst_name: "",
@@ -17,11 +21,11 @@ const AddQuestion = () => {
    const navigate = useNavigate();
    const { user } = useSelector((state) => ({ ...state }));
 
-   const loadDataTypeQ = () => {
-      loadQuestionType(user.token)
+   const loadDataTypeQ = async () => {
+      loadQuestionType(user.token, value)
          .then((res) => {
             console.log(res.data);
-            // setQuestionType(res.data);
+            setQuestionType(res.data);
          })
          .catch((err) => {
             console.log(err.response);
@@ -41,22 +45,22 @@ const AddQuestion = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       console.log("submit Add Question", value);
-
-      //   if (value.mem_pwd !== value.con_mem_pwd) {
-      //      alert("password not match");
-      //   } else {
-      //      register(value)
-      //         .then((res) => {
-      //            console.log(res.data);
-      //            alert(res.data);
-      //            navigate("/login");
-      //         })
-      //         .catch((err) => {
-      //            console.log(err.response.data);
-      //            alert(err.response.data);
-      //         });
-      //   }
+      addQuestion(user.token, value)
+         .then((res) => {
+            console.log(res.data);
+            alert(res.data);
+            navigate("/user-question");
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+            alert(err.response.data);
+         });
    };
+
+   const handCancel = (e) => {
+      setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "" });
+   };
+
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -103,68 +107,60 @@ const AddQuestion = () => {
                            {/* Form Register */}
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
-                                 <select name="type_id" className="form-control col-sm-5" onChange={handleChang}>
+                                 <div className="col-sm-4"></div>
+                                 <label className="col-sm-4 col-form-label">หมวดคำถาม</label>
+                                 <select name="type_id" className="form-control col-sm-8" onChange={handleChang}>
                                     <option value={0}>กรุณาเลือก</option>
-                                    <option value={1}>1</option>
-                                    <option value={2}>2</option>
-                                    <option value={3}>3</option>
-                                    <option value={4}>4</option>
+                                    {questionType.map((questionType) => (
+                                       <option key={questionType.type_id} value={questionType.type_id}>
+                                          {questionType.type_name}
+                                       </option>
+                                    ))}
                                  </select>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">หัวข้อคำถาม</label>
+                                 <div className="col-sm-4"></div>
+                                 <label className="col-sm-4">หัวข้อคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-5"
+                                    className="form-control col-sm-8"
                                     name="qst_title"
-                                    placeholder="Input Username 4 characters or more"
-                                    pattern="\w{4,30}"
-                                    title="Please input range 4 - 30 alphabet"
+                                    placeholder="กรอกหัวข้อคำถาม"
+                                    // pattern="\w{4,30}"
+                                    // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">รายละเอียด</label>
+                                 <div className="col-sm-4"></div>
+                                 <label className="col-sm-4">รายละเอียด</label>
                                  <textarea
-                                    className="form-control col-sm-5"
+                                    className="form-control col-sm-8"
                                     name="qst_detail"
                                     rows="3"
                                     onChange={handleChang}
                                  ></textarea>
-                                 {/* <input
-                                    type="tel"
-                                    className="form-control col-sm-5"
-                                    name="qst_detail"
-                                    placeholder="0XXXXXXXXX"
-                                    title="format 0xxxxxxxxx"
-                                    pattern="^0\d{9}$"
-                                    onChange={handleChang}
-                                 /> */}
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ผู้ตั้งคำถาม</label>
+                                 <div className="col-sm-4"></div>
+                                 <label className="col-sm-4">ผู้ตั้งคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-5"
+                                    className="form-control col-sm-8"
                                     name="qst_name"
                                     placeholder="Input Username 4 characters or more"
-                                    pattern="\w{4,30}"
-                                    title="Please input range 4 - 30 alphabet"
+                                    // pattern="\w{4,30}"
+                                    // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">อีเมล</label>
+                                 <div className="col-sm-4"></div>
+                                 <label className="col-sm-4">อีเมล</label>
                                  <input
                                     type="email"
-                                    className="form-control col-sm-5"
-                                    name="mem_mail"
+                                    className="form-control col-sm-8"
+                                    name="qst_mail"
                                     placeholder="example@example.com"
                                     pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
                                     title="Please input correct format Email"
@@ -172,7 +168,7 @@ const AddQuestion = () => {
                                  />
                               </div>
                               <div className="form-group" align="center">
-                                 <button type="reset" className="btn btn-danger">
+                                 <button type="reset" className="btn btn-danger" onClick={handCancel}>
                                     ยกเลิก
                                  </button>
                                  <button className="btn btn-success">ยืนยัน</button>

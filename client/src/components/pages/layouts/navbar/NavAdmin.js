@@ -44,7 +44,7 @@ const NavAdmin = () => {
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link to="/" className="nav-link">
+                        <Link to="/admin-manage-lavel" className="nav-link">
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>ระดับการเข้าถึงข้อมูล</p>

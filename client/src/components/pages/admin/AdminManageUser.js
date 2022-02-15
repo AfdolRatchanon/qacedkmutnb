@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { adminListUser } from "../../functions/admin";
+//function
+import { adminListUser, adminEnableAndDisenableMember } from "../../functions/admin";
+
+//BootStrap Table
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 const AdminManageUser = () => {
    const [data, setData] = useState([]);
    const { user } = useSelector((state) => ({ ...state }));
+   const [dataEnableAndDisable, setDataEnableAndDisable] = useState({
+      sta_id: null,
+   });
 
    const loadData = () => {
       adminListUser(user.token)
@@ -15,13 +22,69 @@ const AdminManageUser = () => {
             setData(res.data);
          })
          .catch((err) => {
-            console.log(err.response);
+            console.log(err.response.data);
          });
    };
 
    useEffect(() => {
       loadData();
-   }, []);
+   }, [dataEnableAndDisable]);
+   // dataEnableAndDisable
+
+   //BootStrap Table
+
+   function indexN(cell, row, enumObject, index) {
+      return <div>{index + 1}</div>;
+   }
+
+   const manageButoon = (cell, row) => {
+      if (row.mem_id) {
+         return (
+            <>
+               <div className="dropdown position-static">
+                  <button
+                     className="btn btn-primary dropdown-toggle "
+                     type="button"
+                     id="dropdownMenuButton"
+                     data-toggle="dropdown"
+                     aria-haspopup="true"
+                     aria-expanded="false"
+                  >
+                     จัดการข้อมูล
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <p
+                        className="dropdown-item"
+                        onClick={() => {
+                           handleEnable(user.token, row.mem_id);
+                        }}
+                     >
+                        อนุญาติ
+                     </p>
+                     <p
+                        className="dropdown-item"
+                        onClick={() => {
+                           handleDisable(user.token, row.mem_id);
+                        }}
+                     >
+                        ไม่อนุญาติ
+                     </p>
+                  </div>
+               </div>
+            </>
+         );
+      }
+   };
+
+   const handleEnable = (token, id) => {
+      setDataEnableAndDisable({ sta_id: 1 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 1 });
+   };
+
+   const handleDisable = (token, id) => {
+      setDataEnableAndDisable({ sta_id: 2 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 2 });
+   };
 
    return (
       <div className="content-wrapper">
@@ -29,8 +92,13 @@ const AdminManageUser = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
-                  <div className="col-sm-6">
+                  <div className="col-sm-3">
                      <h1>ข้อมูลสมาชิก</h1>
+                  </div>
+                  <div className="col-sm-3">
+                     <Link className="btn btn-success btn-sm " to="/admin-add-member">
+                        เพิ่มข้อมูลสมาชิก
+                     </Link>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -56,15 +124,15 @@ const AdminManageUser = () => {
                            <div className="card-tools">
                               {/* <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                  <i className="fas fa-minus" />
-                              </button>
-                              <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
+                              </button> */}
+                              {/* <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
                                  <i className="fas fa-times" />
                               </button> */}
                            </div>
                         </div>
                         <div className="card-body">
                            <h1>ข้อมูลสมาชิก</h1>
-                           <table className="table table-hover table-bordered">
+                           {/* <table className="table table-hover table-bordered">
                               <thead className="thead-dark">
                                  <tr>
                                     <th scope="col">ลำดับ</th>
@@ -103,7 +171,28 @@ const AdminManageUser = () => {
                                     </tr>
                                  ))}
                               </tbody>
-                           </table>
+                           </table> */}
+                           <BootstrapTable data={data} bordered={false} hover pagination search>
+                              <TableHeaderColumn width="150" dataAlign="center" dataField="any" dataFormat={indexN}>
+                                 ลำดับ
+                              </TableHeaderColumn>
+                              <TableHeaderColumn isKey dataSort dataAlign="center" dataField="mem_id">
+                                 ID
+                              </TableHeaderColumn>
+                              <TableHeaderColumn width="150" headerAlign="center" dataField="mem_name">
+                                 ชื่อ - สกุล
+                              </TableHeaderColumn>
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="sta_name">
+                                 สถานะ
+                              </TableHeaderColumn>
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="lv_name" width="150">
+                                 ระดับการเข้าถึง
+                              </TableHeaderColumn>
+
+                              <TableHeaderColumn width="150" dataField="any" dataFormat={manageButoon}>
+                                 การดำเนินการ
+                              </TableHeaderColumn>
+                           </BootstrapTable>
                         </div>
                         {/* /.card-body */}
                         {/* <div className="card-footer"></div> */}

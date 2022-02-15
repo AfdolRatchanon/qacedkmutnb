@@ -2,7 +2,13 @@
 const express = require("express");
 const router = express.Router();
 //Controller
-const { adminListUser, adminReadUser, adminEditUser, adminDeleteUser } = require("../controllers/admin");
+const {
+   adminListUser,
+   adminReadUser,
+   adminEditUser,
+   adminDeleteUser,
+   adminEnableAndDisenableMember,
+} = require("../controllers/admin");
 
 //NOTE MiddleWare
 const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
@@ -12,6 +18,12 @@ const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
 //@Method   GET
 //@Access   Private
 router.get("/admin-list-user", auth, officerCheck, adminCheck, adminListUser);
+
+//NOTE listuser
+//@Enpoint  http://Localhost:3001/api/admin-list-user
+//@Method   POST
+//@Access   Private
+router.post("/admin-enable-and-disenable-member", auth, officerCheck, adminCheck, adminEnableAndDisenableMember);
 
 //NOTE edituser
 //@Enpoint  http://Localhost:3001/api/admin-edituser

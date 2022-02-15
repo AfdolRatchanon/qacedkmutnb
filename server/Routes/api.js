@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const { register, login, listUser, editUser, deleteUser, currentUser } = require("../controllers/auth.js");
-const { question_Type } = require("../controllers/query");
+const { question_Type,question_Level } = require("../controllers/query");
 
 //NOTE MiddleWare
 const { auth, adminCheck, officerCheck } = require("../middlewares/auth");
@@ -35,9 +35,16 @@ router.post("/current-officer", auth, officerCheck, currentUser);
 router.post("/current-admin", auth, officerCheck, adminCheck, currentUser);
 
 //@Enpoint  http://Localhost:3001/api/query-question-type
-//@Method   POST
-//@Access   private
+//@Method   GET
+//@Access   public
 router.get("/query-question-type", question_Type);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   GET
+//@Access   public
+router.get("/query-question-Level", question_Level);
+
+
 
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET

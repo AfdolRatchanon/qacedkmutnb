@@ -14,7 +14,7 @@ exports.auth = (req, res, next) => {
       next();
    } catch (error) {
       console.log(error);
-      res.status(401).send("Token Invalid!!!");
+      return res.status(401).send("Token Invalid!!!");
    }
 };
 

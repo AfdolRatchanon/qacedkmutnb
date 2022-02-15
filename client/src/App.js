@@ -14,6 +14,8 @@ import About from "./components/pages/About";
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
 import AdminManageUser from "./components/pages/admin/AdminManageUser";
+import AdminAddMember from "./components/pages/admin/AdminAddMember";
+import AdminManageLevel from "./components/pages/admin/AdminManageLevel";
 
 // page Officer
 import HomeOfficer from "./components/pages/officer/Home";
@@ -43,7 +45,6 @@ function App() {
       // console.log(idtoken);
       currentUser(idtoken)
          .then((res) => {
-            //
             // console.log(res.data);
             dispatch({
                type: "LOGIN",
@@ -58,7 +59,11 @@ function App() {
          })
          .catch((err) => {
             //err
-            console.log("app.js ", err);
+            // console.log(err);
+            // alert(err);
+            // localStorage.clear();
+            console.log(err.response.data);
+            alert(err.response.data + " โทเค็นหมดอายุกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
          });
    }
 
@@ -90,6 +95,23 @@ function App() {
                         </AdminRoute>
                      }
                   />
+                  <Route
+                     path="/admin-add-member"
+                     element={
+                        <AdminRoute>
+                           <AdminAddMember />
+                        </AdminRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin-manage-lavel"
+                     element={
+                        <AdminRoute>
+                           <AdminManageLevel />
+                        </AdminRoute>
+                     }
+                  />
+
                   {/*NOTE OFFICER */}
                   <Route
                      path="/index-officer"
@@ -99,6 +121,7 @@ function App() {
                         </OfficerRoute>
                      }
                   />
+
                   {/*NOTE USER */}
                   <Route
                      path="/index-user"
