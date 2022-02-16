@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
 
 // BootStrap
 import { Modal, Button, Form } from "react-bootstrap";
-// import { Modal, Button } from "antd";
-
-// import { Modal } from "antd";
 
 // BootStrap Table
-// import BootStrapTable from "react-bootstrap-table-next";
-// import paginationFactory from "react-bootstrap-table2-paginator";
-// import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// import TableHeaderColumn from "react-bootstrap-table-next";
-
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 //Query
 import { listQuestion } from "../../functions/user";
 import { loadQuestionType } from "../../functions/query";
 
-const UserQuestion = () => {
+const UserManageQusetion = () => {
    const [data, setData] = useState([]);
    const [questionType, setQuestionType] = useState([]);
    const [tableIndex, setTableIndex] = useState(0);
@@ -34,6 +27,7 @@ const UserQuestion = () => {
    });
 
    const { user } = useSelector((state) => ({ ...state }));
+   const dispatch = useDispatch();
 
    const loadData = () => {
       loadQuestionType(user.token, value)
@@ -105,17 +99,22 @@ const UserQuestion = () => {
                >
                   รายละเอียด
                </button>
-               <button
-                  type="button"
-                  className="btn btn-warning"
+
+               <Link
+                  className="btn btn-warning "
+                  to={`/user-edit-question`}
                   onClick={() => {
-                     setModalEditValue(row);
-                     console.log("แก้ไข", modalEditValue);
-                     toggleMETrueFalse();
+                     localStorage.setItem("question_id", row.qst_id);
+                     dispatch({
+                        type: "SETQUESTION",
+                        payload: {
+                           qst_id: row.qst_id,
+                        },
+                     });
                   }}
                >
                   แก้ไข
-               </button>
+               </Link>
                <button
                   type="button"
                   className="btn btn-danger"
@@ -150,7 +149,7 @@ const UserQuestion = () => {
 
    const ModalConfirmDelete = () => {
       return (
-         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter">
+         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
@@ -189,7 +188,7 @@ const UserQuestion = () => {
 
    const ModalView = (val) => {
       return (
-         <Modal show={showMV} onHide={handleMVClose} aria-labelledby="contained-modal-title-vcenter">
+         <Modal show={showMV} onHide={handleMVClose} aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header>
                <Modal.Title>รายละเอียด</Modal.Title>
             </Modal.Header>
@@ -285,6 +284,7 @@ const UserQuestion = () => {
                         type="text"
                         className="form-control col-sm-8"
                         name="qst_title"
+                        value={modalEditValue.qst_title}
                         placeholder="กรอกหัวข้อคำถาม"
                         onChange={handleChang}
                      />
@@ -369,17 +369,10 @@ const UserQuestion = () => {
                            <h1>คำถามของฉัน</h1>
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="150"
-                                 isKey
-                                 dataAlign="center"
-                                 dataField="any"
-                                 dataFormat={indexN}
-                              >
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="any" dataFormat={indexN}>
                                  ลำดับ
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="qst_id">
+                              <TableHeaderColumn isKey dataSort width="150" dataAlign="center" dataField="qst_id">
                                  ID
                               </TableHeaderColumn>
                               <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="qst_title">
@@ -417,9 +410,9 @@ const UserQuestion = () => {
          {/* <ConfirmDelete /> */}
          {showMCD ? <ModalConfirmDelete /> : null}
          {showMV ? <ModalView /> : null}
-         {showME ? <ModalEdit /> : null}
+         {/* {showME ? <ModalEdit /> : null} */}
       </div>
    );
 };
 
-export default UserQuestion;
+export default UserManageQusetion;

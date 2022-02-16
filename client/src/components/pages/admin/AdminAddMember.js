@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 //Function
 import { register } from "../../functions/auth";
-import { loadQuestionLevel } from "../../functions/query";
+import { loadLevel } from "../../functions/query";
 
 const AdminAddMember = () => {
    const [questionLevel, setQuestionLevel] = useState([]);
@@ -20,8 +20,8 @@ const AdminAddMember = () => {
    const navigate = useNavigate();
    const { user } = useSelector((state) => ({ ...state }));
 
-   const loadDataLevelQ = async () => {
-      loadQuestionLevel(user.token, value)
+   const loadDataLevel = async () => {
+      loadLevel(user.token)
          .then((res) => {
             console.log(res.data);
             setQuestionLevel(res.data);
@@ -32,7 +32,7 @@ const AdminAddMember = () => {
    };
 
    useEffect(() => {
-      loadDataLevelQ();
+      loadDataLevel();
    }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ

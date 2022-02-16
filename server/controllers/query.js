@@ -23,7 +23,7 @@ exports.question_Type = async (req, res) => {
    }
 };
 
-exports.question_Level = async (req, res) => {
+exports.level = async (req, res) => {
    try {
       //res.send(req.body);
       db.query("SELECT * FROM tbl_level", async (err, result) => {

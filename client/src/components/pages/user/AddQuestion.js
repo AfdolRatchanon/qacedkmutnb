@@ -107,9 +107,9 @@ const AddQuestion = () => {
                            {/* Form Register */}
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
-                                 <div className="col-sm-4"></div>
-                                 <label className="col-sm-4 col-form-label">หมวดคำถาม</label>
-                                 <select name="type_id" className="form-control col-sm-8" onChange={handleChang}>
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
+                                 <select name="type_id" className="form-control col-sm-6" onChange={handleChang}>
                                     <option value={0}>กรุณาเลือก</option>
                                     {questionType.map((questionType) => (
                                        <option key={questionType.type_id} value={questionType.type_id}>
@@ -117,55 +117,60 @@ const AddQuestion = () => {
                                        </option>
                                     ))}
                                  </select>
+                                 <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-4"></div>
-                                 <label className="col-sm-4">หัวข้อคำถาม</label>
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">หัวข้อคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-8"
+                                    className="form-control col-sm-6"
                                     name="qst_title"
                                     placeholder="กรอกหัวข้อคำถาม"
                                     // pattern="\w{4,30}"
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
+                                 <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-4"></div>
-                                 <label className="col-sm-4">รายละเอียด</label>
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">รายละเอียด</label>
                                  <textarea
-                                    className="form-control col-sm-8"
+                                    className="form-control col-sm-6"
                                     name="qst_detail"
                                     rows="3"
                                     onChange={handleChang}
                                  ></textarea>
+                                 <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-4"></div>
-                                 <label className="col-sm-4">ผู้ตั้งคำถาม</label>
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">ผู้ตั้งคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-8"
+                                    className="form-control col-sm-6"
                                     name="qst_name"
                                     placeholder="Input Username 4 characters or more"
                                     // pattern="\w{4,30}"
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
+                                 <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-4"></div>
-                                 <label className="col-sm-4">อีเมล</label>
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">อีเมล</label>
                                  <input
                                     type="email"
-                                    className="form-control col-sm-8"
+                                    className="form-control col-sm-6"
                                     name="qst_mail"
                                     placeholder="example@example.com"
                                     pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
                                     title="Please input correct format Email"
                                     onChange={handleChang}
                                  />
+                                 <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group" align="center">
                                  <button type="reset" className="btn btn-danger" onClick={handCancel}>

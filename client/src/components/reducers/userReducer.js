@@ -9,3 +9,14 @@ export function userReducer(state = null, action) {
          return state;
    }
 }
+
+export function questionReducer(state = null, action) {
+   switch (action.type) {
+      case "SETQUESTION":
+         return action.payload;
+      case "REMOVEQUESTION":
+         return null;
+      default:
+         return state;
+   }
+}

@@ -4,7 +4,7 @@ exports.addQuestion = async (req, res) => {
    try {
       // Check user
       const { type_id, qst_title, qst_detail, qst_name, qst_mail } = req.body;
-      console.log(req.body, req.user);
+      // console.log(req.body, req.user);
 
       //res.send(req.body);
       if (type_id === 0 || type_id === null) {
@@ -47,6 +47,7 @@ exports.addQuestion = async (req, res) => {
 exports.listQuestion = async (req, res) => {
    try {
       // Check user
+
       db.query(
          "SELECT * FROM tbl_question INNER JOIN tbl_type ON tbl_type.type_id = tbl_question.type_id INNER JOIN tbl_status ON tbl_status.sta_id = tbl_question.sta_id WHERE mem_id = ?",
          [req.user.mem_id],
@@ -66,6 +67,85 @@ exports.listQuestion = async (req, res) => {
          }
       );
       //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.readQuestion = async (req, res) => {
+   try {
+      // Check user
+      console.log(req.body, req.user);
+      db.query(
+         "SELECT * FROM tbl_question WHERE mem_id = ? and qst_id = ?;",
+         [req.user.mem_id, req.body.qst_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("This username does not exist. ");
+               } else {
+                  return res.send(result);
+               }
+            }
+         }
+      );
+      //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.updateQuestion = async (req, res) => {
+   try {
+      // Check user
+      const { sta_id, type_id, qst_title, qst_detail, qst_name, qst_mail, qst_id } = req.body;
+
+      // console.log(req.body, req.user);
+
+      //res.send(req.body);
+      if (sta_id === 4 || sta_id === null) {
+         return res.status(400).send("ไม่สามารถแก้ไขได้เนื่องจากได้คำถามได้รับการตอบแล้ว");
+      } else {
+         if (type_id === 0 || type_id == null) {
+            return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณาเลือกหมวดคำถาม");
+         } else {
+            if (qst_title === "" || qst_title == null) {
+               return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณากรอกหัวข้อคำถาม");
+            } else {
+               if (qst_detail === "" || qst_detail == null) {
+                  return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณากรอกรายระเอียด");
+               } else {
+                  if (qst_name === "" || qst_name == null) {
+                     return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณากรอกชื่อผู้ต้ังคำถาม");
+                  } else {
+                     if (qst_mail === "" || qst_mail == null) {
+                        return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณากรอกอีเมล");
+                     } else {
+                        console.log(req.body);
+                        db.query(
+                           "UPDATE tbl_question SET type_id = ? , qst_title = ?, qst_detail = ? , qst_name = ? , qst_mail = ?  WHERE qst_id = ?",
+                           [type_id, qst_title, qst_detail, qst_name, qst_mail, qst_id],
+                           (err, result) => {
+                              if (err) {
+                                 console.log(err);
+                              } else {
+                                 res.send("บันทึกคำถามสำเร็จ");
+                              }
+                           }
+                        );
+                     }
+                  }
+               }
+            }
+         }
+      }
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");

@@ -7,16 +7,16 @@ import { Modal, Button } from "react-bootstrap";
 
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-import { loadLevel } from "../../functions/query";
+import { loadQuestionType } from "../../functions/query";
 
-const AdminManageLevel = () => {
+const AdminManageQuestionType = () => {
    const [data, setData] = useState([]);
    //    const [tableIndex, setTableIndex] = useState(0);
 
    const { user } = useSelector((state) => ({ ...state }));
 
    const loadData = () => {
-      loadLevel(user.token)
+      loadQuestionType(user.token)
          .then((res) => {
             console.log(res.data);
             setData(res.data);
@@ -37,27 +37,38 @@ const AdminManageLevel = () => {
    };
 
    const manageButoon = (cell, row) => {
-      if (row.lv_id) {
+      if (row.type_id) {
          return (
             <div className="position-sticky">
                {/* <button
-                  type="button"
-                  className="btn btn-warning"
-                  onClick={() => {
-                     alert("กำลังดำเนินการสร้าง");
-                  }}
-               >
-                  แก้ไข
-               </button>  */}
+                   type="button"
+                   className="btn btn-warning"
+                   onClick={() => {
+                      alert("กำลังดำเนินการสร้าง");
+                   }}
+                >
+                   แก้ไข
+                </button>  */}
                <Link
-                  to="/admin-edit-level"
+                  to="/admin-edit-question-type"
                   className="btn btn-warning"
                   onClick={() => {
-                     localStorage.setItem("level_id", row.lv_id);
+                     localStorage.setItem("question_type_id", row.type_id);
                   }}
                >
                   แก้ไข
                </Link>
+               <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => {
+                     setModalConfirmDeleteValue(row.type_id);
+                     console.log("ลบ", modalConfirmDeleteValue);
+                     toggleMCDTrueFalse();
+                  }}
+               >
+                  ลบ
+               </button>
             </div>
          );
       }
@@ -71,7 +82,7 @@ const AdminManageLevel = () => {
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
-      console.log("OK", modalConfirmDeleteValue);
+      console.log("ConfirmDelete OK", modalConfirmDeleteValue);
       setShowMCD(false);
    };
 
@@ -100,8 +111,6 @@ const AdminManageLevel = () => {
       );
    };
 
-   /*****************************************************************************/
-
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -109,19 +118,19 @@ const AdminManageLevel = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-4">
-                     <h1>จัดการระดับการเข้าถึง</h1>
+                     <h1>จัดการหมวดคำถาม</h1>
                   </div>
-                  {/* <div className="col-sm-3">
-                     <Link className="btn btn-success btn-sm " to="/user-add-question">
-                        เพิ่มคำถาม
+                  <div className="col-sm-2">
+                     <Link className="btn btn-success btn-sm " to="/admin-add-question-type">
+                        เพิ่มหมวดคำถาม
                      </Link>
-                  </div> */}
-                  <div className="col-sm-8">
+                  </div>
+                  <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">จัดการระดับการเข้าถึง</li>
+                        <li className="breadcrumb-item font-weight-bold">จัดการหมวดคำถาม</li>
                      </ol>
                   </div>
                </div>
@@ -136,7 +145,7 @@ const AdminManageLevel = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">ข้อมูลระดับการเข้าถึง</h3>
+                           <h3 className="card-title">ข้อมูลหมวดคำถาม</h3>
                         </div>
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
@@ -146,9 +155,9 @@ const AdminManageLevel = () => {
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="100" headerAlign="center" dataField="lv_name">
+                                  ID
+                               </TableHeaderColumn> */}
+                              <TableHeaderColumn dataSort width="100" headerAlign="center" dataField="type_name">
                                  ชื่อระดับการเข้าถึง
                               </TableHeaderColumn>
                               <TableHeaderColumn dataSort width="50" dataAlign="center" dataFormat={manageButoon} dataField="any">
@@ -156,8 +165,8 @@ const AdminManageLevel = () => {
                               </TableHeaderColumn>
 
                               {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
-                                 การดำเนินการ
-                              </TableHeaderColumn> */}
+                                  การดำเนินการ
+                               </TableHeaderColumn> */}
                            </BootstrapTable>
                         </div>
                         {/* /.card-body */}
@@ -177,4 +186,4 @@ const AdminManageLevel = () => {
    );
 };
 
-export default AdminManageLevel;
+export default AdminManageQuestionType;

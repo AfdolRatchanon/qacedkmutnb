@@ -8,24 +8,53 @@ const {
    adminEditUser,
    adminDeleteUser,
    adminEnableAndDisenableMember,
+   adminReadLevel,
+   adminUpdateLevel,
+   adminReadQuestionType,
+   adminUpdateQuestionType,
+   adminAddQuestionType,
 } = require("../controllers/admin");
 
 //NOTE MiddleWare
 const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
 
-//NOTE listuser
 //@Enpoint  http://Localhost:3001/api/admin-list-user
 //@Method   GET
 //@Access   Private
 router.get("/admin-list-user", auth, officerCheck, adminCheck, adminListUser);
 
-//NOTE listuser
-//@Enpoint  http://Localhost:3001/api/admin-list-user
+//@Enpoint  http://Localhost:3001/api/admin-enable-and-disenable-member
 //@Method   POST
 //@Access   Private
 router.post("/admin-enable-and-disenable-member", auth, officerCheck, adminCheck, adminEnableAndDisenableMember);
 
-//NOTE edituser
+//@Enpoint  http://Localhost:3001/api/admin-list-user
+//@Method   POST
+//@Access   Private
+router.post("/admin-read-level", auth, officerCheck, adminCheck, adminReadLevel);
+
+//@Enpoint  http://Localhost:3001/api/admin-update-level
+//@Method   POST
+//@Access   Private
+router.post("/admin-update-level", auth, officerCheck, adminCheck, adminUpdateLevel);
+
+//@Enpoint  http://Localhost:3001/api/admin-read-question-type
+//@Method   POST
+//@Access   Private
+router.post("/admin-read-question-type", auth, officerCheck, adminCheck, adminReadQuestionType);
+
+//@Enpoint  http://Localhost:3001/api/admin-update-question-type
+//@Method   POST
+//@Access   Private
+router.post("/admin-update-question-type", auth, officerCheck, adminCheck, adminUpdateQuestionType);
+
+//@Enpoint  http://Localhost:3001/api/admin-update-question-type
+//@Method   POST
+//@Access   Private
+router.post("/admin-add-question-type", auth, officerCheck, adminCheck, adminAddQuestionType);
+
+//****************************************************************************************************************** */
+
 //@Enpoint  http://Localhost:3001/api/admin-edituser
 //@Method   GET
 //@Access   Private
@@ -37,7 +66,6 @@ router.get("/admin-read-user/${id}", adminReadUser);
 //@Access   Private
 router.put("/admin-edit-user/${id}", adminEditUser);
 
-//NOTE edituser
 //@Enpoint  http://Localhost:3001/api/admin-edituser
 //@Method   DELETE
 //@Access   Private

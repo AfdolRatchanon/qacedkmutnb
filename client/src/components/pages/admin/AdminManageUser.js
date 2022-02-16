@@ -39,40 +39,44 @@ const AdminManageUser = () => {
 
    const manageButoon = (cell, row) => {
       if (row.mem_id) {
-         return (
-            <>
-               <div className="dropdown position-static">
-                  <button
-                     className="btn btn-primary dropdown-toggle "
-                     type="button"
-                     id="dropdownMenuButton"
-                     data-toggle="dropdown"
-                     aria-haspopup="true"
-                     aria-expanded="false"
-                  >
-                     จัดการข้อมูล
-                  </button>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                     <p
-                        className="dropdown-item"
-                        onClick={() => {
-                           handleEnable(user.token, row.mem_id);
-                        }}
+         if (row.lv_id == 1) {
+            return <></>;
+         } else {
+            return (
+               <>
+                  <div className="dropdown position-static">
+                     <button
+                        className="btn btn-primary dropdown-toggle "
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                      >
-                        อนุญาติ
-                     </p>
-                     <p
-                        className="dropdown-item"
-                        onClick={() => {
-                           handleDisable(user.token, row.mem_id);
-                        }}
-                     >
-                        ไม่อนุญาติ
-                     </p>
+                        จัดการข้อมูล
+                     </button>
+                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <p
+                           className="dropdown-item"
+                           onClick={() => {
+                              handleEnable(user.token, row.mem_id);
+                           }}
+                        >
+                           อนุญาติ
+                        </p>
+                        <p
+                           className="dropdown-item"
+                           onClick={() => {
+                              handleDisable(user.token, row.mem_id);
+                           }}
+                        >
+                           ไม่อนุญาติ
+                        </p>
+                     </div>
                   </div>
-               </div>
-            </>
-         );
+               </>
+            );
+         }
       }
    };
 
@@ -179,7 +183,7 @@ const AdminManageUser = () => {
                               <TableHeaderColumn isKey dataSort dataAlign="center" dataField="mem_id">
                                  ID
                               </TableHeaderColumn>
-                              <TableHeaderColumn width="150" headerAlign="center" dataField="mem_name">
+                              <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="mem_name">
                                  ชื่อ - สกุล
                               </TableHeaderColumn>
                               <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="sta_name">

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const NavUser = () => {
+   const dispatch = useDispatch();
    const { user } = useSelector((state) => ({ ...state }));
 
    if (user) {
@@ -18,7 +19,16 @@ const NavUser = () => {
                </a>
                <ul className="nav nav-treeview">
                   <li className="nav-item">
-                     <Link to="/user-question" className="nav-link">
+                     <Link
+                        to="/user-question"
+                        className="nav-link"
+                        onClick={() => {
+                           localStorage.setItem("question_id", null);
+                           dispatch({
+                              type: "REMOVEQUESTION",
+                           });
+                        }}
+                     >
                         {/* <i className="nav-icon fas fa-file" /> */}
                         {" \u00A0\u00A0\u00A0\u00A0"}
                         <p>คำถามของฉัน</p>

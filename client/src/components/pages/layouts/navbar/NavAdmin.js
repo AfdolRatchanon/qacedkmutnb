@@ -5,6 +5,11 @@ import { useSelector } from "react-redux";
 const NavAdmin = () => {
    const { user } = useSelector((state) => ({ ...state }));
 
+   const clearLocalStoreNull = () => {
+      localStorage.setItem("level_id", null);
+      localStorage.setItem("question_type_id", null);
+   };
+
    if (user) {
       if (user.lv_id === 1) {
          return (
@@ -19,7 +24,7 @@ const NavAdmin = () => {
                   </a>
                   <ul className="nav nav-treeview">
                      <li className="nav-item">
-                        <Link to="/" className="nav-link">
+                        <Link to="/admin-manage-question-type" className="nav-link" onClick={clearLocalStoreNull}>
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>หมวดคำถาม</p>
@@ -37,14 +42,14 @@ const NavAdmin = () => {
                   </a>
                   <ul className="nav nav-treeview">
                      <li className="nav-item">
-                        <Link to="/admin-manage-user" className="nav-link">
+                        <Link to="/admin-manage-user" className="nav-link" onClick={clearLocalStoreNull}>
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>ข้อมูลสมาชิก</p>
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link to="/admin-manage-lavel" className="nav-link">
+                        <Link to="/admin-manage-level" className="nav-link" onClick={clearLocalStoreNull}>
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>ระดับการเข้าถึงข้อมูล</p>

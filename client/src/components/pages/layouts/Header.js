@@ -26,12 +26,12 @@ export default function Header() {
                      <i className="fas fa-bars" />
                   </a>
                </li>
-               {/* <li className="nav-item d-none d-sm-inline-block">
-                  <a href="index3.html" className="nav-link">
-                     หน้าแรก
-                  </a>
-               </li>
                <li className="nav-item d-none d-sm-inline-block">
+                  <Link className="nav-link" to="/">
+                     ระบบบริการตอบคำถามสำหรับนักศึกษา
+                  </Link>
+               </li>
+               {/*<li className="nav-item d-none d-sm-inline-block">
                   <a href="#" className="nav-link">
                      Contact
                   </a>
@@ -40,7 +40,7 @@ export default function Header() {
             {/* Right navbar links */}
             <ul className="navbar-nav ml-auto">
                {/* Navbar Search */}
-               <li className="nav-item">
+               {/* <li className="nav-item">
                   <a className="nav-link" data-widget="navbar-search" href="#" role="button">
                      <i className="fas fa-search" />
                   </a>
@@ -64,7 +64,7 @@ export default function Header() {
                         </div>
                      </form>
                   </div>
-               </li>
+               </li> */}
 
                <li className="nav-item">
                   <a className="nav-link" data-widget="fullscreen" href="#" role="button">

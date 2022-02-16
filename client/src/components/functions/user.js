@@ -18,6 +18,24 @@ export const listQuestion = async (authtoken) => {
    });
 };
 
+export const readQuestion = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.post(process.env.REACT_APP_API + "/user-read-question", value, {
+      headers: {
+         authtoken,
+      },
+   });
+};
+
+export const updateQuestion = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.post(process.env.REACT_APP_API + "/user-update-question", value, {
+      headers: {
+         authtoken,
+      },
+   });
+};
+
 export const deleteQuestion = async (authtoken) => {
    //    console.log("Func", authtoken);
    return await axios.get(process.env.REACT_APP_API + "/user-delete-question", {

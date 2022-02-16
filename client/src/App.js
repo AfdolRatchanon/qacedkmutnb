@@ -16,14 +16,19 @@ import HomeAdmin from "./components/pages/admin/Home";
 import AdminManageUser from "./components/pages/admin/AdminManageUser";
 import AdminAddMember from "./components/pages/admin/AdminAddMember";
 import AdminManageLevel from "./components/pages/admin/AdminManageLevel";
+import AdminEditLevel from "./components/pages/admin/AdminEditLevel";
+import AdminManageQuestionType from "./components/pages/admin/AdminManageQuestionType";
+import AdminEditQuestionType from "./components/pages/admin/AdminEditQuestionType";
+import AdminAddQuestionType from "./components/pages/admin/AdminAddQuestionType"
 
 // page Officer
 import HomeOfficer from "./components/pages/officer/Home";
 
 // Page User
 import HomeUser from "./components/pages/user/Home";
-import UserQuestion from "./components/pages/user/UserQuestion";
+import UserManageQusetion from "./components/pages/user/UserManageQusetion";
 import AddQuestion from "./components/pages/user/AddQuestion";
+import EditQuestion from "./components/pages/user/EditQuestion";
 
 import { currentUser } from "./components/functions/auth";
 
@@ -78,12 +83,37 @@ function App() {
                   <Route path="/Register" element={<Register />} />
                   <Route path="/Login" element={<Login />} />
                   <Route path="/about" element={<About />} />
+                  
                   {/*NOTE ADMIN */}
                   <Route
                      path="/index-admin"
                      element={
                         <AdminRoute>
                            <HomeAdmin />
+                        </AdminRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin-manage-question-type"
+                     element={
+                        <AdminRoute>
+                           <AdminManageQuestionType />
+                        </AdminRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin-add-question-type"
+                     element={
+                        <AdminRoute>
+                           <AdminAddQuestionType />
+                        </AdminRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin-edit-question-type"
+                     element={
+                        <AdminRoute>
+                           <AdminEditQuestionType />
                         </AdminRoute>
                      }
                   />
@@ -95,6 +125,7 @@ function App() {
                         </AdminRoute>
                      }
                   />
+
                   <Route
                      path="/admin-add-member"
                      element={
@@ -104,10 +135,18 @@ function App() {
                      }
                   />
                   <Route
-                     path="/admin-manage-lavel"
+                     path="/admin-manage-level"
                      element={
                         <AdminRoute>
                            <AdminManageLevel />
+                        </AdminRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin-edit-level"
+                     element={
+                        <AdminRoute>
+                           <AdminEditLevel />
                         </AdminRoute>
                      }
                   />
@@ -135,7 +174,7 @@ function App() {
                      path="/user-question"
                      element={
                         <UserRoute>
-                           <UserQuestion />
+                           <UserManageQusetion />
                         </UserRoute>
                      }
                   />
@@ -144,6 +183,14 @@ function App() {
                      element={
                         <UserRoute>
                            <AddQuestion />
+                        </UserRoute>
+                     }
+                  />
+                  <Route
+                     path="/user-edit-question"
+                     element={
+                        <UserRoute>
+                           <EditQuestion />
                         </UserRoute>
                      }
                   />

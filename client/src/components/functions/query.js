@@ -9,9 +9,9 @@ export const loadQuestionType = async (authtoken) => {
    });
 };
 
-export const loadQuestionLevel = async (authtoken) => {
+export const loadLevel = async (authtoken) => {
    //    console.log("Func", authtoken);
-   return await axios.get(process.env.REACT_APP_API + "/query-question-Level", {
+   return await axios.get(process.env.REACT_APP_API + "/query-Level", {
       headers: {
          authtoken,
       },
