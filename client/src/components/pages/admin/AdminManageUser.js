@@ -8,6 +8,9 @@ import { adminListUser, adminEnableAndDisenableMember } from "../../functions/ad
 //BootStrap Table
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
+//Toastify
+import { toast } from "react-toastify";
+
 const AdminManageUser = () => {
    const [data, setData] = useState([]);
    const { user } = useSelector((state) => ({ ...state }));
@@ -32,10 +35,6 @@ const AdminManageUser = () => {
    // dataEnableAndDisable
 
    //BootStrap Table
-
-   function indexN(cell, row, enumObject, index) {
-      return <div>{index + 1}</div>;
-   }
 
    const manageButoon = (cell, row) => {
       if (row.mem_id) {
@@ -82,12 +81,24 @@ const AdminManageUser = () => {
 
    const handleEnable = (token, id) => {
       setDataEnableAndDisable({ sta_id: 1 });
-      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 1 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 1 })
+         .then((res) => {
+            toast.success(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+         });
    };
 
    const handleDisable = (token, id) => {
       setDataEnableAndDisable({ sta_id: 2 });
-      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 2 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 2 })
+         .then((res) => {
+            toast.success(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+         });
    };
 
    return (
@@ -177,12 +188,12 @@ const AdminManageUser = () => {
                               </tbody>
                            </table> */}
                            <BootstrapTable data={data} bordered={false} hover pagination search>
-                              <TableHeaderColumn width="150" dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn dataSort isKey width="150" dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
-                              <TableHeaderColumn isKey dataSort dataAlign="center" dataField="mem_id">
+                              {/* <TableHeaderColumn  dataSort dataAlign="center" dataField="mem_id">
                                  ID
-                              </TableHeaderColumn>
+                              </TableHeaderColumn> */}
                               <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="mem_name">
                                  ชื่อ - สกุล
                               </TableHeaderColumn>

@@ -9,17 +9,19 @@ import { useSelector } from "react-redux";
 //Query
 import { loadQuestionType } from "../../functions/query";
 
+import { toast } from "react-toastify";
+
 const AddQuestion = () => {
+   const navigate = useNavigate();
+   const { user } = useSelector((state) => ({ ...state }));
    const [questionType, setQuestionType] = useState([]);
    const [value, setValue] = useState({
       type_id: 0,
       qst_title: "",
       qst_detail: "",
-      qst_name: "",
-      qst_mail: "",
+      qst_name: user.mem_name,
+      qst_mail: user.mem_mail,
    });
-   const navigate = useNavigate();
-   const { user } = useSelector((state) => ({ ...state }));
 
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token, value)
@@ -33,6 +35,7 @@ const AddQuestion = () => {
    };
    useEffect(() => {
       loadDataTypeQ();
+      console.log(user);
    }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
@@ -48,12 +51,12 @@ const AddQuestion = () => {
       addQuestion(user.token, value)
          .then((res) => {
             console.log(res.data);
-            alert(res.data);
+            toast.success(res.data);
             navigate("/user-question");
          })
          .catch((err) => {
             console.log(err.response.data);
-            alert(err.response.data);
+            toast.error(err.response.data);
          });
    };
 
@@ -155,6 +158,7 @@ const AddQuestion = () => {
                                     // pattern="\w{4,30}"
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
+                                    defaultValue={user.mem_user}
                                  />
                                  <div className="col-sm-2"></div>
                               </div>
@@ -168,6 +172,7 @@ const AddQuestion = () => {
                                     placeholder="example@example.com"
                                     pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
                                     title="Please input correct format Email"
+                                    defaultValue={user.mem_mail}
                                     onChange={handleChang}
                                  />
                                  <div className="col-sm-2"></div>

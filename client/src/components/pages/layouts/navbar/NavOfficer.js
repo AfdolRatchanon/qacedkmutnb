@@ -18,7 +18,13 @@ const NavOfficer = () => {
                </a>
                <ul className="nav nav-treeview">
                   <li className="nav-item">
-                     <Link to="/" className="nav-link">
+                     <Link
+                        to="/officer-question-type"
+                        className="nav-link"
+                        onClick={() => {
+                           localStorage.setItem("officer_type_id", null);
+                        }}
+                     >
                         {/* <i className="nav-icon fas fa-file" /> */}
                         {" \u00A0\u00A0\u00A0\u00A0"}
                         <p>หมวดคำถาม</p>

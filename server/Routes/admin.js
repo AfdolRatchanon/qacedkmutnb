@@ -13,6 +13,7 @@ const {
    adminReadQuestionType,
    adminUpdateQuestionType,
    adminAddQuestionType,
+   adminDeleteQuestionType,
 } = require("../controllers/admin");
 
 //NOTE MiddleWare
@@ -52,6 +53,11 @@ router.post("/admin-update-question-type", auth, officerCheck, adminCheck, admin
 //@Method   POST
 //@Access   Private
 router.post("/admin-add-question-type", auth, officerCheck, adminCheck, adminAddQuestionType);
+
+//@Enpoint  http://Localhost:3001/api/admin-edituser
+//@Method   DELETE
+//@Access   Private
+router.post("/admin-delete-question-type/", auth, officerCheck, adminCheck, adminDeleteQuestionType);
 
 //****************************************************************************************************************** */
 

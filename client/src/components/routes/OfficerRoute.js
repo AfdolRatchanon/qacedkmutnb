@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import LoadingToRedirect from "./LoadingToRedirect";
 import { currentOfficer } from "../functions/auth";
+import { toast } from "react-toastify";
 
 const OfficerRoute = ({ children }) => {
    // user มาจาก Redux
@@ -17,7 +18,7 @@ const OfficerRoute = ({ children }) => {
                setOk(true);
             })
             .catch((err) => {
-               alert(err.response.data);
+               toast.error(err.response.data);
                console.log(err.response);
                console.log(err.response.data);
                setOk(false);

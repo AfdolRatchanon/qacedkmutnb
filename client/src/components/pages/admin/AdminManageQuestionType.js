@@ -7,12 +7,17 @@ import { Modal, Button } from "react-bootstrap";
 
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
+// Function
 import { loadQuestionType } from "../../functions/query";
+import { adminDeleteQuestionType } from "../../functions/admin";
+
+//Toastify
+import { toast } from "react-toastify";
 
 const AdminManageQuestionType = () => {
    const [data, setData] = useState([]);
    //    const [tableIndex, setTableIndex] = useState(0);
-
+   const [showMCD, setShowMCD] = useState(false);
    const { user } = useSelector((state) => ({ ...state }));
 
    const loadData = () => {
@@ -30,7 +35,7 @@ const AdminManageQuestionType = () => {
 
    useEffect(() => {
       loadData();
-   }, []);
+   }, [showMCD]);
 
    const indexN = (cell, row, enumObject, index) => {
       return <div>{index + 1}</div>;
@@ -50,6 +55,7 @@ const AdminManageQuestionType = () => {
                    แก้ไข
                 </button>  */}
                <Link
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
                   to="/admin-edit-question-type"
                   className="btn btn-warning"
                   onClick={() => {
@@ -59,6 +65,7 @@ const AdminManageQuestionType = () => {
                   แก้ไข
                </Link>
                <button
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
                   type="button"
                   className="btn btn-danger"
                   onClick={() => {
@@ -77,13 +84,26 @@ const AdminManageQuestionType = () => {
    //Modal Bootstrap
    const [modalConfirmDeleteValue, setModalConfirmDeleteValue] = useState([]);
    const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
-   const [showMCD, setShowMCD] = useState(false);
+   // อยู่ข้างบน เนื่องจากต้องใช้ refresh Table
+   // const [showMCD, setShowMCD] = useState(false);
    const handleMCDClose = () => setShowMCD(false);
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
       console.log("ConfirmDelete OK", modalConfirmDeleteValue);
       setShowMCD(false);
+      adminDeleteQuestionType(user.token, { type_id: modalConfirmDeleteValue })
+         .then((res) => {
+            console.log(res);
+            toast.success(res.data);
+            // setData(res.data);
+         })
+         .catch((err) => {
+            toast.error(err.response.data);
+            console.log(err);
+            console.log(err.response);
+            console.log(err.response.data);
+         });
    };
 
    const toggleMCDTrueFalse = () => {
@@ -96,7 +116,7 @@ const AdminManageQuestionType = () => {
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
-            <Modal.Body>คุณต้องการลบคำถามของคุณใช่หรือไม่ !!!</Modal.Body>
+            <Modal.Body>คุณต้องการลบหมวดคำถามนี้ใช่หรือไม่ !!!</Modal.Body>
             <Modal.Footer>
                {/* onClick={props.onHide} */}
                <Button variant="primary" onClick={handleMCDClose}>
@@ -151,7 +171,7 @@ const AdminManageQuestionType = () => {
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">

@@ -16,6 +16,13 @@ export default function Header() {
       navigate("/");
    };
 
+   const clearLocalStorage = () => {
+      localStorage.setItem("officer_type_id", null);
+      localStorage.setItem("question_id", null);
+      localStorage.setItem("level_id", null);
+      localStorage.setItem("question_type_id", null);
+   };
+
    return (
       <div>
          <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -27,7 +34,7 @@ export default function Header() {
                   </a>
                </li>
                <li className="nav-item d-none d-sm-inline-block">
-                  <Link className="nav-link" to="/">
+                  <Link className="nav-link" to="/" onClick={clearLocalStorage}>
                      ระบบบริการตอบคำถามสำหรับนักศึกษา
                   </Link>
                </li>
@@ -89,9 +96,12 @@ export default function Header() {
 
                         <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                            <span className=" dropdown-header">
-                              <i className="nav-icon far fa-envelope">{" \u00A0\u00A0" + user.mem_mail}</i>
+                              <i className="nav-icon far fa-envelope ">{" \u00A0\u00A0" + user.mem_mail}</i>
                            </span>
-
+                           <div className="dropdown-divider" />
+                           <span className=" dropdown-header">
+                              <i class="nav-icon far fa-address-card">{" \u00A0\u00A0" + user.lv_name}</i>
+                           </span>
                            <div className="dropdown-divider" />
                            <a href="#" className="dropdown-item dropdown-footer" onClick={logout}>
                               <p className="nav-link" role="button">

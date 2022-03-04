@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 // redux
 import { useDispatch } from "react-redux";
 
+//Toastfy
+import { toast } from "react-toastify";
+
 const Login = () => {
    const [value, setValue] = useState({
       mem_user: "",
@@ -33,6 +36,14 @@ const Login = () => {
       }
    };
 
+   const handCancel = (e) => {
+      localStorage.clear();
+      setValue({
+         mem_user: "",
+         mem_pwd: "",
+      });
+   };
+
    const handleSubmit = (e) => {
       e.preventDefault();
       console.log("submit", value);
@@ -40,7 +51,7 @@ const Login = () => {
       login(value)
          .then((res) => {
             console.log(res.data);
-            alert("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + " เข้าสู่เว็บไซต์");
+            toast.success("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + " เข้าสู่เว็บไซต์");
             dispatch({
                type: "LOGIN",
                payload: {
@@ -49,6 +60,7 @@ const Login = () => {
                   mem_mail: res.data.payLoad.user.mem_mail,
                   mem_user: res.data.payLoad.user.mem_user,
                   lv_id: res.data.payLoad.user.lv_id,
+                  lv_name: res.data.payLoad.user.lv_name,
                },
             });
             localStorage.setItem("token", res.data.token);
@@ -56,7 +68,8 @@ const Login = () => {
          })
          .catch((err) => {
             console.log(err.response.data);
-            alert(err.response.data);
+            toast.error(err.response.data);
+            localStorage.clear();
          });
    };
 
@@ -87,7 +100,7 @@ const Login = () => {
                <div className="row">
                   <div className="col-12">
                      {/* Default box */}
-                     <div className="card">
+                     <div className="card card-success card-outline">
                         {/* <div className="card-header">
                       <h3 className="card-title">Title</h3>
                       <div className="card-tools">
@@ -133,17 +146,32 @@ const Login = () => {
                                     />
                                  </div>
                                  <div className="col-sm-1"></div>
-                                 <Link className="btn btn-warning" to="/">
+                                 <Link
+                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    className="btn btn-warning"
+                                    to="/ForgotPassword"
+                                 >
                                     ลืมรหัสผ่าน
                                  </Link>
                                  <div className="col-sm-1"></div>
                               </div>
                               <div className="form-group" align="center">
-                                 <button type="reset" className="btn btn-danger ">
+                                 <button
+                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    type="reset"
+                                    className="btn btn-danger"
+                                    onClick={handCancel}
+                                 >
                                     ยกเลิก
                                  </button>
-                                 <button className="btn btn-success">เข้าสู่ระบบ</button>
-                                 <Link className="btn btn-primary" to="/Register">
+                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                    เข้าสู่ระบบ
+                                 </button>
+                                 <Link
+                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    className="btn btn-primary"
+                                    to="/Register"
+                                 >
                                     สมัครสมาชิก
                                  </Link>
                               </div>

@@ -17,3 +17,12 @@ export const loadLevel = async (authtoken) => {
       },
    });
 };
+
+export const countQuestionType = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.get(process.env.REACT_APP_API + "/query-count-question-type", {
+      headers: {
+         authtoken,
+      },
+   });
+};

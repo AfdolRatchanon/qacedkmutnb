@@ -18,6 +18,30 @@ const NavAdmin = () => {
                   <a href="#" className="nav-link">
                      {/* <i className="nav-icon fas fa-chart-pie" /> */}
                      <p>
+                        ระบบตอบคำถาม
+                        <i className="right fas fa-angle-left" />
+                     </p>
+                  </a>
+                  <ul className="nav nav-treeview">
+                     <li className="nav-item">
+                        <Link
+                           to="/officer-question-type"
+                           className="nav-link"
+                           onClick={() => {
+                              localStorage.setItem("officer_type_id", null);
+                           }}
+                        >
+                           {/* <i className="nav-icon fas fa-file" /> */}
+                           {" \u00A0\u00A0\u00A0\u00A0"}
+                           <p>หมวดคำถาม</p>
+                        </Link>
+                     </li>
+                  </ul>
+               </li>
+               <li className="nav-item menu-open">
+                  <a href="#" className="nav-link">
+                     {/* <i className="nav-icon fas fa-chart-pie" /> */}
+                     <p>
                         ข้อมูลทั่วไป
                         <i className="right fas fa-angle-left" />
                      </p>

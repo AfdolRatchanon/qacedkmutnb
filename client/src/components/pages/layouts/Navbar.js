@@ -13,16 +13,12 @@ export default function Navbar() {
    useEffect(() => {
       setUserLv(user);
    });
-   const menuAdmin = () => {
-      if (user) {
-         if (user.lv_id === 1) {
-            return (
-               <div>
-                  <h1>ADMIN</h1>
-               </div>
-            );
-         }
-      }
+
+   const clearLocalStorage = () => {
+      localStorage.setItem("officer_type_id", null);
+      localStorage.setItem("question_id", null);
+      localStorage.setItem("level_id", null);
+      localStorage.setItem("question_type_id", null);
    };
 
    //console.log("admin");
@@ -51,13 +47,13 @@ export default function Navbar() {
                <nav className="mt-2">
                   <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <li className="nav-item">
-                        <Link to="/" className="nav-link">
+                        <Link to="/" className="nav-link" onClick={clearLocalStorage}>
                            {/* <i className="nav-icon fas fa-file" /> */}
                            <p>หน้าแรก</p>
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link to="/about" className="nav-link">
+                        <Link to="/about" className="nav-link" onClick={clearLocalStorage}>
                            {/* <i className="nav-icon fas fa-file" /> */}
 
                            <p>เกี่ยวกับระบบ</p>

@@ -62,3 +62,12 @@ export const adminUpdateQuestionType = async (authtoken, value) => {
       },
    });
 };
+
+export const adminDeleteQuestionType = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.post(process.env.REACT_APP_API + "/admin-delete-question-type", value, {
+      headers: {
+         authtoken,
+      },
+   });
+};

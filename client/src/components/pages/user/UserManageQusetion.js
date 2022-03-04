@@ -12,6 +12,7 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 //Query
 import { listQuestion } from "../../functions/user";
 import { loadQuestionType } from "../../functions/query";
+import { toast } from "react-toastify";
 
 const UserManageQusetion = () => {
    const [data, setData] = useState([]);
@@ -86,48 +87,66 @@ const UserManageQusetion = () => {
 
    const manageButoon = (cell, row) => {
       if (row.qst_id) {
-         return (
-            <div className="position-sticky">
-               <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={() => {
-                     setModalViewValue(row);
-                     console.log("รายละเอียด", modalViewValue);
-                     toggleMVTrueFalse();
-                  }}
-               >
-                  รายละเอียด
-               </button>
-
-               <Link
-                  className="btn btn-warning "
-                  to={`/user-edit-question`}
-                  onClick={() => {
-                     localStorage.setItem("question_id", row.qst_id);
-                     dispatch({
-                        type: "SETQUESTION",
-                        payload: {
-                           qst_id: row.qst_id,
-                        },
-                     });
-                  }}
-               >
-                  แก้ไข
-               </Link>
-               <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => {
-                     setModalConfirmDeleteValue(row.qst_id);
-                     console.log("ลบ", modalConfirmDeleteValue);
-                     toggleMCDTrueFalse();
-                  }}
-               >
-                  ลบ
-               </button>
-            </div>
-         );
+         if (row.sta_id == 3) {
+            return (
+               <div className="position-sticky">
+                  <button
+                     type="button"
+                     className="btn btn-success"
+                     style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                     onClick={() => {
+                        setModalViewValue(row);
+                        console.log("รายละเอียด", modalViewValue);
+                        toggleMVTrueFalse();
+                     }}
+                  >
+                     รายละเอียด
+                  </button>
+                  <Link
+                     className="btn btn-warning "
+                     style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                     to={`/user-edit-question`}
+                     onClick={() => {
+                        localStorage.setItem("question_id", row.qst_id);
+                     }}
+                  >
+                     แก้ไข
+                  </Link>
+                  <button
+                     type="button"
+                     style={{ width: "50px", margin: " 0px 5px 0px 5px" }}
+                     className="btn btn-danger"
+                     onClick={() => {
+                        setModalConfirmDeleteValue(row.qst_id);
+                        console.log("ลบ", modalConfirmDeleteValue);
+                        toggleMCDTrueFalse();
+                     }}
+                  >
+                     ลบ
+                  </button>
+               </div>
+            );
+         } else {
+            return (
+               <div className="position-sticky">
+                  <button
+                     style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                     className="btn btn-success"
+                     onClick={() => {
+                        setModalViewValue(row);
+                        console.log("รายละเอียด", modalViewValue);
+                        toggleMVTrueFalse();
+                     }}
+                  >
+                     รายละเอียด
+                  </button>
+                  <button className="btn btn-warning disabled" style={{ width: "75px", margin: " 0px 5px 0px 5px" }}>แก้ไข</button>
+                  <button type="button" className="btn btn-danger disabled" style={{ width: "50px", margin: " 0px 5px 0px 5px" }}>
+                     ลบ
+                  </button>
+               </div>
+            );
+         }
       }
    };
 
@@ -140,6 +159,7 @@ const UserManageQusetion = () => {
 
    const handleOK_ModalConfirmDelete = () => {
       console.log("OK", modalConfirmDeleteValue);
+      toast.info("Delete OK : " + modalConfirmDeleteValue);
       setShowMCD(false);
    };
 
@@ -201,7 +221,7 @@ const UserManageQusetion = () => {
                      </tr>
                   </thead> */}
                   <tbody>
-                     <tr>
+                     <tr className="bg-dark">
                         <th width="125">หมวดคำถาม</th>
                         <td>{modalViewValue.type_name}</td>
                      </tr>
@@ -214,6 +234,10 @@ const UserManageQusetion = () => {
                         <td>{modalViewValue.qst_detail}</td>
                      </tr>
                      <tr>
+                        <th>วันที่ตั้งคำถาม</th>
+                        <td>{modalViewValue.date_q}</td>
+                     </tr>
+                     <tr>
                         <th>ผู้ตั้งคำถาม</th>
                         <td>{modalViewValue.qst_name}</td>
                      </tr>
@@ -221,9 +245,13 @@ const UserManageQusetion = () => {
                         <th>อีเมล</th>
                         <td>{modalViewValue.qst_mail}</td>
                      </tr>
-                     <tr>
+                     <tr className="table-success">
+                        <th width="125">วันที่ตอบ</th>
+                        <td>{modalViewValue.date_a}</td>
+                     </tr>
+                     <tr className="table-success">
                         <th>คำตอบกลับ</th>
-                        <td>กำลังดำเนินการสร้าง</td>
+                        <td>{modalViewValue.reply_detail}</td>
                      </tr>
                   </tbody>
                </table>
@@ -369,12 +397,12 @@ const UserManageQusetion = () => {
                            <h1>คำถามของฉัน</h1>
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn isKey dataSort width="150" dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
-                              <TableHeaderColumn isKey dataSort width="150" dataAlign="center" dataField="qst_id">
+                              {/* <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="qst_id">
                                  ID
-                              </TableHeaderColumn>
+                              </TableHeaderColumn> */}
                               <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="qst_title">
                                  หัวข้อคำถาม
                               </TableHeaderColumn>

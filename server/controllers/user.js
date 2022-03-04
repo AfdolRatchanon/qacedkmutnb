@@ -7,19 +7,19 @@ exports.addQuestion = async (req, res) => {
       // console.log(req.body, req.user);
 
       //res.send(req.body);
-      if (type_id === 0 || type_id === null) {
+      if (type_id === 0 || type_id == null) {
          return res.status(400).send("กรุณาเลือกหมวดคำถาม");
       } else {
-         if (qst_title === "" || qst_title === null) {
+         if (qst_title === "" || qst_title == null) {
             return res.status(400).send("กรุณากรอกหัวข้อคำถาม");
          } else {
-            if (qst_detail === "" || qst_detail === null) {
+            if (qst_detail === "" || qst_detail == null) {
                return res.status(400).send("กรุณากรอกรายระเอียด");
             } else {
-               if (qst_name === "" || qst_name === null) {
+               if (qst_name === "" || qst_name == null) {
                   return res.status(400).send("กรุณากรอกชื่อผู้ต้ังคำถาม");
                } else {
-                  if (qst_mail === "" || qst_mail === null) {
+                  if (qst_mail === "" || qst_mail == null) {
                      return res.status(400).send("กรุณากรอกอีเมล");
                   } else {
                      db.query(
@@ -49,7 +49,7 @@ exports.listQuestion = async (req, res) => {
       // Check user
 
       db.query(
-         "SELECT * FROM tbl_question INNER JOIN tbl_type ON tbl_type.type_id = tbl_question.type_id INNER JOIN tbl_status ON tbl_status.sta_id = tbl_question.sta_id WHERE mem_id = ?",
+         'SELECT ROW_NUMBER() OVER(ORDER BY q.qst_id) AS num_row,q.qst_id,t.type_name,q.qst_title,q.qst_detail,q.qst_name,q.qst_name,q.qst_mail,q.qst_date,q.type_id,q.mem_id,s.sta_id,s.sta_name,r.reply_id,r.reply_detail,DATE_FORMAT(qst_date, "%d-%m-%Y") AS date_q,DATE_FORMAT(reply_date, "%d-%m-%Y") AS date_a FROM tbl_reply r RIGHT JOIN (tbl_question q INNER JOIN tbl_status s ON q.sta_id = s.sta_id INNER JOIN tbl_type t ON t.type_id = q.type_id) ON r.reply_id = q.reply_id WHERE q.mem_id = ?',
          [req.user.mem_id],
          async (err, result) => {
             if (err) {
@@ -110,7 +110,7 @@ exports.updateQuestion = async (req, res) => {
       // console.log(req.body, req.user);
 
       //res.send(req.body);
-      if (sta_id === 4 || sta_id === null) {
+      if (sta_id === 4 || sta_id == null) {
          return res.status(400).send("ไม่สามารถแก้ไขได้เนื่องจากได้คำถามได้รับการตอบแล้ว");
       } else {
          if (type_id === 0 || type_id == null) {

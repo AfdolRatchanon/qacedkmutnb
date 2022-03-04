@@ -10,6 +10,8 @@ import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
+import ForgotPassword from "./components/pages/auth/ForgotPassword";
+import NewPassword from "./components/pages/auth/NewPassword";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
@@ -19,10 +21,13 @@ import AdminManageLevel from "./components/pages/admin/AdminManageLevel";
 import AdminEditLevel from "./components/pages/admin/AdminEditLevel";
 import AdminManageQuestionType from "./components/pages/admin/AdminManageQuestionType";
 import AdminEditQuestionType from "./components/pages/admin/AdminEditQuestionType";
-import AdminAddQuestionType from "./components/pages/admin/AdminAddQuestionType"
+import AdminAddQuestionType from "./components/pages/admin/AdminAddQuestionType";
 
 // page Officer
 import HomeOfficer from "./components/pages/officer/Home";
+import OfficerQuestionType from "./components/pages/officer/OfficerQuestionType";
+import OfficerReadQuestionType from "./components/pages/officer/OfficerReadQuestionType";
+import OfficerAnswerQuestion from "./components/pages/officer/OfficerAnswerQuestion";
 
 // Page User
 import HomeUser from "./components/pages/user/Home";
@@ -39,6 +44,10 @@ import { useDispatch } from "react-redux";
 import UserRoute from "./components/routes/UserRoute";
 import OfficerRoute from "./components/routes/OfficerRoute";
 import AdminRoute from "./components/routes/AdminRoute";
+
+//Toastfy
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
    const dispatch = useDispatch();
@@ -58,7 +67,9 @@ function App() {
                   mem_id: res.data.mem_id,
                   mem_mail: res.data.mem_mail,
                   mem_user: res.data.mem_user,
+                  mem_name: res.data.mem_name,
                   lv_id: res.data.lv_id,
+                  lv_name: res.data.lv_name,
                },
             });
          })
@@ -74,6 +85,17 @@ function App() {
 
    return (
       <div className="App">
+         <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+         />
          <Navbar />
          <div className="wrapper d-flex flex-column min-vh-100 bg-light">
             <Header />
@@ -83,7 +105,8 @@ function App() {
                   <Route path="/Register" element={<Register />} />
                   <Route path="/Login" element={<Login />} />
                   <Route path="/about" element={<About />} />
-                  
+                  <Route path="/ForgotPassword" element={<ForgotPassword />} />
+                  <Route path="/NewPassword" element={<NewPassword />} />
                   {/*NOTE ADMIN */}
                   <Route
                      path="/index-admin"
@@ -157,6 +180,30 @@ function App() {
                      element={
                         <OfficerRoute>
                            <HomeOfficer />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-question-type"
+                     element={
+                        <OfficerRoute>
+                           <OfficerQuestionType />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-read-question-type"
+                     element={
+                        <OfficerRoute>
+                           <OfficerReadQuestionType />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-answer-question"
+                     element={
+                        <OfficerRoute>
+                           <OfficerAnswerQuestion />
                         </OfficerRoute>
                      }
                   />

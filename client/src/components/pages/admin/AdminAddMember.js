@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import { register } from "../../functions/auth";
 import { loadLevel } from "../../functions/query";
 
+//Toastify
+import { toast } from "react-toastify";
+
 const AdminAddMember = () => {
    const [questionLevel, setQuestionLevel] = useState([]);
    const [value, setValue] = useState({
@@ -46,17 +49,17 @@ const AdminAddMember = () => {
       e.preventDefault();
       console.log("submit", value);
       if (value.mem_pwd !== value.con_mem_pwd) {
-         alert("password not match");
+         toast.error("รหัสผ่าน และ ยืนยันรหัสผ่านไม่ตรงกัน");
       } else {
          register(value)
             .then((res) => {
                console.log(res.data);
-               alert(res.data);
+               toast.success(res.data);
                navigate("/admin-manage-user");
             })
             .catch((err) => {
                console.log(err.response.data);
-               alert(err.response.data);
+               toast.error(err.response.data);
             });
       }
    };

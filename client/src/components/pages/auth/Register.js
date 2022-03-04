@@ -30,7 +30,7 @@ const Register = () => {
       e.preventDefault();
       console.log("submit", value);
       if (value.mem_pwd !== value.con_mem_pwd) {
-         alert("password not match");
+         alert("รหัสผ่านไม่ตรงกัน");
       } else {
          register(value)
             .then((res) => {
@@ -72,7 +72,7 @@ const Register = () => {
                <div className="row">
                   <div className="col-12">
                      {/* Default box */}
-                     <div className="card">
+                     <div className="card card-primary card-outline">
                         {/* <div className="card-header">
                            <h3 className="card-title">Title</h3>
                            <div className="card-tools">
@@ -94,7 +94,7 @@ const Register = () => {
                                     type="text"
                                     className="form-control col-sm-5"
                                     name="mem_name"
-                                    placeholder="Input Your Name 1 characters or more"
+                                    placeholder="กรอกชื่อ-นามสกุล"
                                     pattern="^\w(\w|\s){0,30}"
                                     title="Please input range 1 - 30 alphabet"
                                     onChange={handleChang}
@@ -107,9 +107,9 @@ const Register = () => {
                                     type="email"
                                     className="form-control col-sm-5"
                                     name="mem_mail"
-                                    placeholder="example@example.com"
+                                    placeholder="กรอกอีเมล"
                                     pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
-                                    title="Please input correct format Email"
+                                    title="กรุณาข้อมูลตามรูปแบบของอีเมล"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -120,8 +120,8 @@ const Register = () => {
                                     type="tel"
                                     className="form-control col-sm-5"
                                     name="mem_tal"
-                                    placeholder="0XXXXXXXXX"
-                                    title="format 0xxxxxxxxx"
+                                    placeholder="กรอกเบอร์โทรศัพท์"
+                                    title="กรอกตามรูปแบบ 0xxxxxxxxx"
                                     pattern="^0\d{9}$"
                                     onChange={handleChang}
                                  />
@@ -133,9 +133,9 @@ const Register = () => {
                                     type="text"
                                     className="form-control col-sm-5"
                                     name="mem_user"
-                                    placeholder="Input Username 4 characters or more"
-                                    pattern="\w{4,30}"
-                                    title="Please input range 4 - 30 alphabet"
+                                    placeholder="กรอกชื่อผู้ใช้"
+                                    pattern="^(?=.*\d).{6,30}$"
+                                    title="กรอกชื่อผู้ใช้ 4 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -146,9 +146,9 @@ const Register = () => {
                                     type="password"
                                     className="form-control col-sm-5"
                                     name="mem_pwd"
-                                    placeholder="Input Password 6 characters or more"
-                                    pattern="\w{6,30}"
-                                    title="Please input range 6 - 30 alphabet"
+                                    placeholder="รหัสผ่าน"
+                                    pattern="^(?=.*\d).{6,30}$"
+                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -159,15 +159,23 @@ const Register = () => {
                                     type="password"
                                     className="form-control col-sm-5"
                                     name="con_mem_pwd"
-                                    placeholder="Input like a Password"
+                                    pattern="^(?=.*\d).{6,30}$"
+                                    placeholder="ยืนยันรหัสผ่าน"
+                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
                                     onChange={handleChang}
                                  />
                               </div>
                               <div className="form-group" align="center">
-                                 <button type="reset" className="btn btn-danger">
+                                 <button
+                                    style={{ width: "75px", margin: " 0px 5px 5px 0px" }}
+                                    type="reset"
+                                    className="btn btn-danger"
+                                 >
                                     ยกเลิก
                                  </button>
-                                 <button className="btn btn-success">ยืนยัน</button>
+                                 <button style={{ width: "75px", margin: " 0px 5px 5px 0px" }} className="btn btn-success">
+                                    ยืนยัน
+                                 </button>
                               </div>
 
                               {/*disabled={checkLength()} */}

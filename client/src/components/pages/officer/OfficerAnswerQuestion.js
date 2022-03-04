@@ -2,54 +2,34 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //fucntions
 import { readQuestion } from "../../functions/user";
+import { officerReadQuestion, replyQuestion } from "../../functions/officer";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 //Query
-import { loadQuestionType } from "../../functions/query";
-import { updateQuestion } from "../../functions/user";
+// import { updateQuestion } from "../../functions/user";
 
 //Toastify
 import { toast } from "react-toastify";
 
-const EditQuestion = () => {
+const OfficerAnswerQuestion = () => {
    // const { qst_id } = useParams();
+   const navigate = useNavigate();
+   const { user } = useSelector((state) => ({ ...state }));
    const question_id = localStorage.question_id;
    const [editValue, setEditValue] = useState([]);
-   const [questionType, setQuestionType] = useState([]);
    const [value, setValue] = useState({
-      type_id: 0,
-      qst_title: "",
-      qst_detail: "",
-      qst_name: "",
-      qst_mail: "",
+      reply_detail: "",
+      qst_id: question_id,
+      mem_id: user.mem_id,
    });
 
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
-   const { user } = useSelector((state) => ({ ...state }));
-
-   const loadDataTypeQ = async () => {
-      loadQuestionType(user.token)
-         .then((res) => {
-            console.log("EditQ Type :", res.data);
-            setQuestionType(res.data);
-         })
-         .catch((err) => {
-            console.log(err.response);
-         });
-   };
-
    const loadDataQuestion = async () => {
-      readQuestion(user.token, { qst_id: question_id })
+      officerReadQuestion(user.token, { qst_id: question_id })
          .then((res) => {
             console.log(res.data);
-            if (res.data[0].sta_id != 3) {
-               navigate("/user-question");
-            } else {
-               setEditValue(res.data);
-            }
+            setEditValue(res.data);
          })
          .catch((err) => {
             console.log(err.response);
@@ -58,9 +38,8 @@ const EditQuestion = () => {
 
    useEffect(() => {
       if (question_id == null) {
-         navigate("/user-question");
+         navigate("/officer-read-question-type");
       } else {
-         loadDataTypeQ();
          loadDataQuestion();
          console.log("editValue : ", question_id);
       }
@@ -68,10 +47,13 @@ const EditQuestion = () => {
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
-      setValue({ ...editValue[0], [e.target.name]: e.target.value });
+      setValue({ ...value, [e.target.name]: e.target.value });
    };
 
    // console.log(value);
+   const handCancel = (e) => {
+      setValue({ ...value, reply_detail: "" });
+   };
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -79,11 +61,11 @@ const EditQuestion = () => {
          toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
          console.log("submit Edit Question", value);
-         updateQuestion(user.token, value)
+         replyQuestion(user.token, value)
             .then((res) => {
                console.log(res.data);
                toast.success(res.data);
-               navigate("/user-question");
+               navigate("/officer-read-question-type");
             })
             .catch((err) => {
                console.log(err.response.data);
@@ -108,15 +90,22 @@ const EditQuestion = () => {
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link
-                              to="/user-question"
+                              to="/officer-question-type"
                               onClick={() => {
                                  localStorage.setItem("question_id", null);
-                                 dispatch({
-                                    type: "REMOVEQUESTION",
-                                 });
                               }}
                            >
-                              คำถามของฉัน
+                              หมวดคำถาม
+                           </Link>
+                        </li>
+                        <li className="breadcrumb-item float-sm-right">
+                           <Link
+                              to="/officer-read-question-type"
+                              onClick={() => {
+                                 localStorage.setItem("question_id", null);
+                              }}
+                           >
+                              ตอบคำถามตามหมวดคำถาม
                            </Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">แก้ไขคำถาม</li>
@@ -134,36 +123,30 @@ const EditQuestion = () => {
                      {/* Default box */}
                      <div className="card">
                         {/* <div className="card-header">
-                              <h3 className="card-title">Title</h3>
-                              <div className="card-tools">
-                                 <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i className="fas fa-minus" />
-                                 </button>
-                                 <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-                                    <i className="fas fa-times" />
-                                 </button>
-                              </div>
-                           </div> */}
+                           <h3 className="card-title">Title</h3>
+                           <div className="card-tools">
+                              <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                 <i className="fas fa-minus" />
+                              </button>
+                              <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
+                                 <i className="fas fa-times" />
+                              </button>
+                           </div>
+                        </div> */}
                         <div className="card-body">
                            {/* Form Register */}
                            {editValue.map((value, key) => (
                               <form key={key} onSubmit={handleSubmit}>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
-                                    <select
-                                       name="type_id"
+                                    <label className="col-sm-2">หมวดคำถาม</label>
+                                    <input
+                                       type="text"
                                        className="form-control col-sm-6"
-                                       onChange={handleChang}
-                                       defaultValue={value.type_id}
-                                    >
-                                       <option value={0}>กรุณาเลือก</option>
-                                       {questionType.map((questionType) => (
-                                          <option key={questionType.type_id} value={questionType.type_id}>
-                                             {questionType.type_name}
-                                          </option>
-                                       ))}
-                                    </select>
+                                       name="qst_title"
+                                       defaultValue={value.type_name}
+                                       readOnly
+                                    />
                                     <div className="col-sm-2"></div>
                                  </div>
                                  <div className="form-group row">
@@ -174,8 +157,7 @@ const EditQuestion = () => {
                                        className="form-control col-sm-6"
                                        name="qst_title"
                                        defaultValue={value.qst_title}
-                                       placeholder="กรอกหัวข้อคำถาม"
-                                       onChange={handleChang}
+                                       readOnly
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
@@ -187,8 +169,20 @@ const EditQuestion = () => {
                                        name="qst_detail"
                                        defaultValue={value.qst_detail}
                                        rows="3"
-                                       onChange={handleChang}
+                                       readOnly
                                     ></textarea>
+                                    <div className="col-sm-2"></div>
+                                 </div>
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">วันที่ตั้งคำถาม</label>
+                                    <input
+                                       className="form-control col-sm-6"
+                                       name="qst_detail"
+                                       defaultValue={value.date_q}
+                                       rows="3"
+                                       readOnly
+                                    />
                                     <div className="col-sm-2"></div>
                                  </div>
                                  <div className="form-group row">
@@ -199,8 +193,7 @@ const EditQuestion = () => {
                                        className="form-control col-sm-6"
                                        name="qst_name"
                                        defaultValue={value.qst_name}
-                                       placeholder="Input Username 4 characters or more"
-                                       onChange={handleChang}
+                                       readOnly
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
@@ -212,15 +205,40 @@ const EditQuestion = () => {
                                        className="form-control col-sm-6"
                                        name="qst_mail"
                                        defaultValue={value.qst_mail}
-                                       placeholder="example@example.com"
-                                       pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
-                                       title="Please input correct format Email"
-                                       onChange={handleChang}
+                                       readOnly
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">ตอบ</label>
+                                    <textarea
+                                       className="form-control col-sm-6"
+                                       name="reply_detail"
+                                       rows="3"
+                                       onChange={handleChang}
+                                       defaultValue={value.reply_detail}
+                                    ></textarea>
+                                    <div className="col-sm-2"></div>
+                                 </div>
+
                                  <div className="form-group" align="center">
-                                    <button className="btn btn-success">ยืนยัน</button>
+                                    {/* onClick={handCancel} */}
+                                    {/* {value.sta_id == 3 && (
+                                       <> */}
+                                    <button
+                                       style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                       type="reset"
+                                       className="btn btn-danger"
+                                       onClick={handCancel}
+                                    >
+                                       ยกเลิก
+                                    </button>
+                                    <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                       ยืนยัน
+                                    </button>
+                                    {/* </>
+                                    )} */}
                                  </div>
                               </form>
                            ))}
@@ -239,4 +257,4 @@ const EditQuestion = () => {
    );
 };
 
-export default EditQuestion;
+export default OfficerAnswerQuestion;

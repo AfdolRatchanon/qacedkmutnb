@@ -7,6 +7,9 @@ import { adminReadLevel, adminUpdateLevel } from "../../functions/admin";
 //Redux
 import { useSelector } from "react-redux";
 
+//Toastify
+import { toast } from "react-toastify";
+
 const AdminEditLevel = () => {
    const level_id = localStorage.level_id;
    const [editValue, setEditValue] = useState([]);
@@ -48,18 +51,18 @@ const AdminEditLevel = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       if (value.type_id === 0) {
-         alert("คุณยังไม่ได้แก้ไขข้อมูล");
+         toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
          console.log("submit Edit Level", value);
          adminUpdateLevel(user.token, value)
             .then((res) => {
                console.log(res.data);
-               alert(res.data);
+               toast.success(res.data);
                navigate("/admin-manage-level");
             })
             .catch((err) => {
                console.log(err.response.data);
-               alert(err.response.data);
+               toast.warning(err.response.data);
             });
       }
    };
@@ -131,7 +134,21 @@ const AdminEditLevel = () => {
                                     <div className="col-sm-1"></div>
                                  </div>
                                  <div className="form-group" align="center">
-                                    <button className="btn btn-success">ยืนยัน</button>
+                                    <button
+                                       style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                                       type="reset"
+                                       className="btn btn-danger"
+                                       onClick={() => {
+                                          setValue({
+                                             lv_name: null,
+                                          });
+                                       }}
+                                    >
+                                       ยกเลิก
+                                    </button>
+                                    <button style={{ width: "75px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                       ยืนยัน
+                                    </button>
                                  </div>
                               </form>
                            ))}

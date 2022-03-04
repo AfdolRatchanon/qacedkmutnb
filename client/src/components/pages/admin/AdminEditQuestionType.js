@@ -6,6 +6,9 @@ import { adminReadQuestionType, adminUpdateQuestionType } from "../../functions/
 //Redux
 import { useSelector } from "react-redux";
 
+//Toastify
+import { toast } from "react-toastify";
+
 const AdminEditQuestionType = () => {
    const type_id = localStorage.question_type_id;
    const [editValue, setEditValue] = useState([]);
@@ -47,18 +50,18 @@ const AdminEditQuestionType = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       if (value.type_id === 0) {
-         alert("คุณยังไม่ได้แก้ไขข้อมูล");
+         toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
          console.log("submit Edit Level", value);
          adminUpdateQuestionType(user.token, value)
             .then((res) => {
                console.log(res.data);
-               alert(res.data);
+               toast.success(res.data);
                navigate("/admin-manage-question-type");
             })
             .catch((err) => {
                console.log(err.response.data);
-               alert(err.response.data);
+               toast.warning(err.response.data);
             });
       }
    };
@@ -130,7 +133,21 @@ const AdminEditQuestionType = () => {
                                     <div className="col-sm-1"></div>
                                  </div>
                                  <div className="form-group" align="center">
-                                    <button className="btn btn-success">ยืนยัน</button>
+                                    <button
+                                       style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                                       type="reset"
+                                       className="btn btn-danger"
+                                       onClick={() => {
+                                          setValue({
+                                             type_name: null,
+                                          });
+                                       }}
+                                    >
+                                       ยกเลิก
+                                    </button>
+                                    <button style={{ width: "75px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                       ยืนยัน
+                                    </button>
                                  </div>
                               </form>
                            ))}

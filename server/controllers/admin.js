@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.adminListUser = async (req, res) => {
    try {
       db.query(
-         "SELECT * FROM `tbl_member` INNER JOIN tbl_status ON tbl_member.sta_id = tbl_status.sta_id INNER JOIN tbl_level ON tbl_member.lv_id=tbl_level.lv_id",
+         "SELECT ROW_NUMBER() OVER(ORDER BY m.mem_id) AS num_row,  m.mem_id,m.mem_name,m.mem_mail,m.mem_tal,m.mem_user,m.mem_id, l.lv_id,l.lv_name,s.sta_id,s.sta_name FROM tbl_member m INNER JOIN tbl_status s ON m.sta_id = s.sta_id INNER JOIN tbl_level l ON m.lv_id = l.lv_id ORDER BY m.mem_id ASC",
          async (err, result) => {
             if (err) {
                console.log(err);
@@ -15,7 +15,7 @@ exports.adminListUser = async (req, res) => {
                if (result[0] == null) {
                   // Username มีข้อมูลหรือไม่
                   //console.log(result);
-                  return res.status(400).send("This username does not exist. ");
+                  return res.status(400).send("ไม่พบข้อมูล");
                } else {
                   return res.send(result);
                }
@@ -184,6 +184,40 @@ exports.adminAddQuestionType = async (req, res) => {
                console.log(err);
             } else {
                res.send("เพิ่มหมวดคำถามสำเร็จ");
+            }
+         });
+      }
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+exports.adminDeleteQuestionType = async (req, res) => {
+   try {
+      // Check user
+      const { type_id } = req.body;
+      // console.log("adminDeleteQusetionType", type_id);
+      if (type_id === "" || type_id == null) {
+         return res.status(400).send("กรุณาแก้ไขข้อมูลก่อนกดยืนยัน หรือ กรุณากรอกหมวดคำถาม");
+      } else {
+         console.log(req.body);
+         db.query("SELECT type_id,qst_id FROM tbl_question WHERE type_id = ?", [type_id], (err, result) => {
+            if (err) {
+               console.log(err);
+            } else {
+               if (result[0] != null) {
+                  // console.log("ไม่สามารถลบได้เนื่องจากมีการใช้หมวดคำถามนี้แล้ว");
+                  res.status(400).send("ไม่สามารถลบได้เนื่องจากมีการใช้หมวดคำถามนี้แล้ว");
+               } else {
+                  // console.log("สามารถลบได้");
+                  db.query("DELETE FROM tbl_type WHERE type_id = ?", [type_id], (err, result) => {
+                     if (err) {
+                        console.log(err);
+                     } else {
+                        res.send("ลบข้อมูลสำเร็จ");
+                     }
+                  });
+               }
             }
          });
       }
