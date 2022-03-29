@@ -4,6 +4,7 @@ import App from "./App";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 // import "antd/dist/antd.css";
 // import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 // import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";

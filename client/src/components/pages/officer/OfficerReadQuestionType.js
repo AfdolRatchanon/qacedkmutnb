@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 // BootStrap
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-// 
+//
 import { officerReadQuestionType } from "../../functions/officer";
 import { toast } from "react-toastify";
 
@@ -119,13 +119,13 @@ const OfficerReadQuestionType = () => {
                                  ID
                               </TableHeaderColumn> */}
                               <TableHeaderColumn dataSort width="200" headerAlign="center" dataField="qst_title">
-                                 หัวข้อ
+                                 หัวข้อคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="sta_name">
                                  สถานะ
                               </TableHeaderColumn>
                               <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="date_format">
-                                 วันที่ถาม
+                                 วันที่ส่งคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn
                                  dataSort

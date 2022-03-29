@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //fucntions
 import { readQuestion } from "../../functions/user";
@@ -13,7 +13,24 @@ import { useSelector } from "react-redux";
 //Toastify
 import { toast } from "react-toastify";
 
+//Zoomimg
+import ImageViewer from "react-simple-image-viewer";
 const OfficerAnswerQuestion = () => {
+   //IMG ZOOM START
+   const [currentImage, setCurrentImage] = useState(0);
+   const [isViewerOpen, setIsViewerOpen] = useState(false);
+   // const images = [process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img];
+   const openImageViewer = useCallback((index) => {
+      setCurrentImage(index);
+      setIsViewerOpen(true);
+   }, []);
+
+   const closeImageViewer = () => {
+      setCurrentImage(0);
+      setIsViewerOpen(false);
+   };
+   //IMG ZOOM END
+
    // const { qst_id } = useParams();
    const navigate = useNavigate();
    const { user } = useSelector((state) => ({ ...state }));
@@ -159,6 +176,43 @@ const OfficerAnswerQuestion = () => {
                                        defaultValue={value.qst_title}
                                        readOnly
                                     />
+                                    <div className="col-sm-2"></div>
+                                 </div>
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">ไม่มีไฟล์แนบ</label>
+                                    {/* <input
+                                       type="text"
+                                       className="form-control col-sm-6"
+                                       name="qst_title"
+                                       defaultValue={value.qst_img}
+                                       readOnly
+                                    /> */}
+                                    {value.qst_img != 0 ? (
+                                       <>
+                                          {/* <img
+                                             src={process.env.REACT_APP_API_IMG + "/" + value.qst_img}
+                                             onClick={() => openImageViewer(0)}
+                                             alt=""
+                                             width="200"
+                                          /> */}
+                                          <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                             มีไฟล์แนบ
+                                          </button>
+                                          {isViewerOpen && (
+                                             <ImageViewer
+                                                src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
+                                                currentIndex={currentImage}
+                                                zoomScale=""
+                                                disableScroll={true}
+                                                closeOnClickOutside={true}
+                                                onClose={closeImageViewer}
+                                             />
+                                          )}
+                                       </>
+                                    ) : (
+                                       <>-</>
+                                    )}
                                     <div className="col-sm-2"></div>
                                  </div>
                                  <div className="form-group row">

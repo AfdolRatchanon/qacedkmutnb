@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //fucntions
 import { readQuestion } from "../../functions/user";
@@ -13,7 +13,24 @@ import { updateQuestion } from "../../functions/user";
 //Toastify
 import { toast } from "react-toastify";
 
+//Zoomimg
+import ImageViewer from "react-simple-image-viewer";
 const EditQuestion = () => {
+   //IMG ZOOM START
+   const [currentImage, setCurrentImage] = useState(0);
+   const [isViewerOpen, setIsViewerOpen] = useState(false);
+   // const images = [process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img];
+   const openImageViewer = useCallback((index) => {
+      setCurrentImage(index);
+      setIsViewerOpen(true);
+   }, []);
+
+   const closeImageViewer = () => {
+      setCurrentImage(0);
+      setIsViewerOpen(false);
+   };
+   //IMG ZOOM END
+
    // const { qst_id } = useParams();
    const question_id = localStorage.question_id;
    const [editValue, setEditValue] = useState([]);
@@ -21,10 +38,12 @@ const EditQuestion = () => {
    const [value, setValue] = useState({
       type_id: 0,
       qst_title: "",
+      qst_img: "",
       qst_detail: "",
       qst_name: "",
       qst_mail: "",
    });
+   const [file, setFile] = useState("");
 
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -60,9 +79,10 @@ const EditQuestion = () => {
       if (question_id == null) {
          navigate("/user-question");
       } else {
-         loadDataTypeQ();
-         loadDataQuestion();
-         console.log("editValue : ", question_id);
+         loadDataTypeQ().then(() => {
+            loadDataQuestion();
+            console.log("editValue : ", question_id);
+         });
       }
    }, []);
 
@@ -72,14 +92,38 @@ const EditQuestion = () => {
    };
 
    // console.log(value);
+   const onChange = (e) => {
+      if (e.target.files[0] != null) {
+         setFile(e.target.files[0]);
+         console.log("File : ", file);
+         setValue({ ...editValue[0], [e.target.name]: e.target.value });
+      } else {
+         setFile("null");
+      }
+   };
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      if (value.type_id === 0) {
+
+      if (value.type_id === 0 && file == "") {
          toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
+         const formData = new FormData();
+         console.log("file : ", file);
+         console.log("value : ", value);
+
+         formData.append("sta_id", value.sta_id);
+         formData.append("type_id", value.type_id);
+         formData.append("qst_title", value.qst_title);
+         formData.append("qst_img", value.qst_img);
+         formData.append("qst_detail", value.qst_detail);
+         formData.append("qst_name", value.qst_name);
+         formData.append("qst_mail", value.qst_mail);
+         formData.append("qst_id", value.qst_id);
+         formData.append("file", file);
          console.log("submit Edit Question", value);
-         updateQuestion(user.token, value)
+
+         updateQuestion(user.token, formData)
             .then((res) => {
                console.log(res.data);
                toast.success(res.data);
@@ -176,6 +220,63 @@ const EditQuestion = () => {
                                        defaultValue={value.qst_title}
                                        placeholder="กรอกหัวข้อคำถาม"
                                        onChange={handleChang}
+                                    />
+                                    <div className="col-sm-2"></div>
+                                 </div>
+                                 {value.qst_img != 0 && (
+                                    <>
+                                       <div className="form-group row">
+                                          <div className="col-sm-2"></div>
+                                          <label className="col-sm-2">ไฟล์ที่แนบไว้</label>
+                                          {value.qst_img != 0 ? (
+                                             <>
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-success"
+                                                   onClick={() => openImageViewer(0)}
+                                                >
+                                                   มีไฟล์แนบ
+                                                </button>
+                                                {isViewerOpen && (
+                                                   <ImageViewer
+                                                      src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
+                                                      currentIndex={currentImage}
+                                                      zoomScale=""
+                                                      disableScroll={true}
+                                                      closeOnClickOutside={true}
+                                                      onClose={closeImageViewer}
+                                                   />
+                                                )}
+                                             </>
+                                          ) : (
+                                             <>-</>
+                                          )}
+                                          <div className="col-sm-2"></div>
+                                       </div>
+                                       {/* <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                             มีไฟล์แนบ
+                                          </button>
+                                          {isViewerOpen && (
+                                             <ImageViewer
+                                                src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
+                                                currentIndex={currentImage}
+                                                zoomScale=""
+                                                disableScroll={true}
+                                                closeOnClickOutside={true}
+                                                onClose={closeImageViewer}
+                                             />
+                                          )} */}
+                                    </>
+                                 )}
+
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">แนบไฟล์ใหม่ (JPEG,JPG,PNG)</label>
+                                    <input
+                                       type="file"
+                                       className="form-control-file col-sm-6"
+                                       name="qst_img_test"
+                                       onChange={onChange}
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>

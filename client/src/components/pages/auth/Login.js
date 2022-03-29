@@ -147,7 +147,7 @@ const Login = () => {
                                  </div>
                                  <div className="col-sm-1"></div>
                                  <Link
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    style={{ width: "110px", margin: " 5px 5px 5px 5px" }}
                                     className="btn btn-warning"
                                     to="/ForgotPassword"
                                  >

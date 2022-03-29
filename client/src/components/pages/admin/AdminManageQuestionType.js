@@ -171,16 +171,22 @@ const AdminManageQuestionType = () => {
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="num_row">
+                              <TableHeaderColumn dataSort width="75" isKey dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
                                   ID
                                </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="100" headerAlign="center" dataField="type_name">
+                              <TableHeaderColumn dataSort width="300" headerAlign="center" dataField="type_name">
                                  ชื่อระดับการเข้าถึง
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="50" dataAlign="center" dataFormat={manageButoon} dataField="any">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="200"
+                                 dataAlign="center"
+                                 dataFormat={manageButoon}
+                                 dataField="any"
+                              >
                                  จัดการ
                               </TableHeaderColumn>
 

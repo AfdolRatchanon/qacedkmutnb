@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import InnerImageZoom from "react-inner-image-zoom";
+import ImageViewer from "react-simple-image-viewer";
 // BootStrap
 import { Modal, Button, Form } from "react-bootstrap";
 
@@ -10,11 +12,27 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 //Query
-import { listQuestion } from "../../functions/user";
+import { listQuestion, deleteQuestion } from "../../functions/user";
 import { loadQuestionType } from "../../functions/query";
 import { toast } from "react-toastify";
 
 const UserManageQusetion = () => {
+   //IMG ZOOM START
+   const [currentImage, setCurrentImage] = useState(0);
+   const [isViewerOpen, setIsViewerOpen] = useState(false);
+   // const images = [process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img];
+   const openImageViewer = useCallback((index) => {
+      setCurrentImage(index);
+      setIsViewerOpen(true);
+   }, []);
+
+   const closeImageViewer = () => {
+      setCurrentImage(0);
+      setIsViewerOpen(false);
+   };
+   //IMG ZOOM END
+
+   const [status, setStatus] = useState(0);
    const [data, setData] = useState([]);
    const [questionType, setQuestionType] = useState([]);
    const [tableIndex, setTableIndex] = useState(0);
@@ -22,6 +40,7 @@ const UserManageQusetion = () => {
    const [value, setValue] = useState({
       type_id: 0,
       qst_title: "",
+      qst_img: "",
       qst_detail: "",
       qst_name: "",
       qst_mail: "",
@@ -39,6 +58,7 @@ const UserManageQusetion = () => {
          .catch((err) => {
             console.log(err.response);
          });
+
       listQuestion(user.token)
          .then((res) => {
             console.log(res.data);
@@ -53,7 +73,8 @@ const UserManageQusetion = () => {
 
    useEffect(() => {
       loadData();
-   }, []);
+      setStatus(0);
+   }, [status]);
 
    const handleChang = (e) => {
       setValue({ qst_title: document.getElementById("qst_title") });
@@ -140,7 +161,9 @@ const UserManageQusetion = () => {
                   >
                      รายละเอียด
                   </button>
-                  <button className="btn btn-warning disabled" style={{ width: "75px", margin: " 0px 5px 0px 5px" }}>แก้ไข</button>
+                  <button className="btn btn-warning disabled" style={{ width: "75px", margin: " 0px 5px 0px 5px" }}>
+                     แก้ไข
+                  </button>
                   <button type="button" className="btn btn-danger disabled" style={{ width: "50px", margin: " 0px 5px 0px 5px" }}>
                      ลบ
                   </button>
@@ -159,7 +182,18 @@ const UserManageQusetion = () => {
 
    const handleOK_ModalConfirmDelete = () => {
       console.log("OK", modalConfirmDeleteValue);
-      toast.info("Delete OK : " + modalConfirmDeleteValue);
+      deleteQuestion(user.token, { qst_id: modalConfirmDeleteValue })
+         .then((res) => {
+            console.log(res.data);
+            toast.success(res.data);
+            setStatus(1);
+         })
+         .catch((err) => {
+            console.log(err);
+            console.log(err.response);
+            toast.err(err.response.date);
+            console.log(err.response.date);
+         });
       setShowMCD(false);
    };
 
@@ -228,6 +262,43 @@ const UserManageQusetion = () => {
                      <tr>
                         <th>หัวข้อคำถาม</th>
                         <td>{modalViewValue.qst_title}</td>
+                     </tr>
+
+                     <tr>
+                        <th>ไฟล์แนบ</th>
+                        <td>
+                           {modalViewValue.qst_img != 0 ? (
+                              // <img src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img} width="200" />
+                              // <InnerImageZoom
+                              //    src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
+                              //    zoomType="hover"
+                              //    zoomPreload={true}
+                              // />
+                              <>
+                                 {/* <img
+                                    src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
+                                    onClick={() => openImageViewer(0)}
+                                    alt=""
+                                    width="200"
+                                 /> */}
+                                 <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                    มีไฟล์แนบ
+                                 </button>
+                                 {isViewerOpen && (
+                                    <ImageViewer
+                                       src={[process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img]}
+                                       currentIndex={currentImage}
+                                       zoomScale=""
+                                       disableScroll={true}
+                                       closeOnClickOutside={true}
+                                       onClose={closeImageViewer}
+                                    />
+                                 )}
+                              </>
+                           ) : (
+                              <>-</>
+                           )}
+                        </td>
                      </tr>
                      <tr>
                         <th>รายละเอียด</th>
@@ -397,7 +468,7 @@ const UserManageQusetion = () => {
                            <h1>คำถามของฉัน</h1>
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn isKey dataSort width="150" dataAlign="center" dataField="num_row">
+                              <TableHeaderColumn isKey dataSort width="75" dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="qst_id">
@@ -411,7 +482,7 @@ const UserManageQusetion = () => {
                               </TableHeaderColumn>
                               <TableHeaderColumn
                                  dataSort
-                                 width="250"
+                                 width="300"
                                  dataAlign="center"
                                  dataFormat={manageButoon}
                                  dataField="any"

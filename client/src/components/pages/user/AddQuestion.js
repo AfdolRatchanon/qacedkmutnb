@@ -23,6 +23,8 @@ const AddQuestion = () => {
       qst_mail: user.mem_mail,
    });
 
+   const [file, setFile] = useState("");
+
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token, value)
          .then((res) => {
@@ -40,15 +42,42 @@ const AddQuestion = () => {
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
-      setValue({ ...value, [e.target.name]: e.target.value });
+      setValue({
+         ...value,
+         qst_name: user.mem_name,
+         qst_mail: user.mem_mail,
+         [e.target.name]: e.target.value,
+      });
+      console.log("Value : ", value);
+   };
+
+   const onChange = (e) => {
+      if (e.target.files[0] != null) {
+         setFile(e.target.files[0]);
+         console.log("File : ", file);
+      } else {
+         setFile("null");
+      }
    };
 
    // console.log(value);
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("submit Add Question", value);
-      addQuestion(user.token, value)
+      const formData = new FormData();
+      console.log("file : ", file);
+      console.log("value : ", value);
+
+      formData.append("type_id", value.type_id);
+      formData.append("qst_title", value.qst_title);
+      formData.append("qst_detail", value.qst_detail);
+      formData.append("qst_name", value.qst_name);
+      formData.append("qst_mail", value.qst_mail);
+      formData.append("file", file);
+
+      console.log("submit Add Question", formData);
+
+      addQuestion(user.token, formData)
          .then((res) => {
             console.log(res.data);
             toast.success(res.data);
@@ -61,7 +90,7 @@ const AddQuestion = () => {
    };
 
    const handCancel = (e) => {
-      setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "" });
+      setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "", qst_img: "" });
    };
 
    return (
@@ -134,6 +163,12 @@ const AddQuestion = () => {
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
+                                 <div className="col-sm-2"></div>
+                              </div>
+                              <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">แนบไฟล์ (JPEG,JPG,PNG)</label>
+                                 <input type="file" className="form-control-file col-sm-6" name="qst_img" onChange={onChange} />
                                  <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group row">

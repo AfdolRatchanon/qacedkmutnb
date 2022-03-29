@@ -142,16 +142,16 @@ const AdminManageLevel = () => {
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn dataSort width="75" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
                                  ID
                               </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="100" headerAlign="center" dataField="lv_name">
+                              <TableHeaderColumn dataSort width="175" headerAlign="center" dataField="lv_name">
                                  ชื่อระดับการเข้าถึง
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="50" dataAlign="center" dataFormat={manageButoon} dataField="any">
+                              <TableHeaderColumn dataSort width="85" dataAlign="center" dataFormat={manageButoon} dataField="any">
                                  จัดการ
                               </TableHeaderColumn>
 

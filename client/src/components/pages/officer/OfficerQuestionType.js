@@ -47,8 +47,12 @@ const OfficerQuestionType = () => {
          <div className="col-lg-3 col-6">
             <div className={"small-box " + bgSmallBox[p_key % 10]}>
                <div className="inner">
-                  <h3>{count_type_id}</h3>
-                  <p>หมวด {type_name}</p>
+                  <div className="row">
+                     <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1>
+                     <h4 style={{ margin: " auto 5px auto 5px" }}> คำถาม</h4>
+                  </div>
+
+                  <h6 style={{ height: "60px" }}>หมวด {type_name}</h6>
                </div>
                {/* <div className="icon">
                   <i className="ion ion-pie-graph" />

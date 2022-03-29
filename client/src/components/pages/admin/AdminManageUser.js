@@ -188,10 +188,11 @@ const AdminManageUser = () => {
                               </tbody>
                            </table> */}
                            <BootstrapTable data={data} bordered={false} hover pagination search>
+                              {/*  bordered={false} */}
                               <TableHeaderColumn dataSort isKey width="150" dataAlign="center" dataField="num_row">
                                  ลำดับ
                               </TableHeaderColumn>
-                              {/* <TableHeaderColumn  dataSort dataAlign="center" dataField="mem_id">
+                              {/* <TableHeaderColumn dataSort width="50" dataAlign="center" dataField="mem_id">
                                  ID
                               </TableHeaderColumn> */}
                               <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="mem_name">
@@ -200,11 +201,10 @@ const AdminManageUser = () => {
                               <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="sta_name">
                                  สถานะ
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="lv_name" width="150">
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="lv_name">
                                  ระดับการเข้าถึง
                               </TableHeaderColumn>
-
-                              <TableHeaderColumn width="150" dataField="any" dataFormat={manageButoon}>
+                              <TableHeaderColumn width="150" dataAlign="center" dataField="any" dataFormat={manageButoon}>
                                  การดำเนินการ
                               </TableHeaderColumn>
                            </BootstrapTable>
