@@ -10,6 +10,7 @@ import NavOfficer from "./navbar/NavOfficer";
 export default function Navbar() {
    const [userLv, setUserLv] = useState([]);
    const { user } = useSelector((state) => ({ ...state }));
+   // console.log("user", user);
    useEffect(() => {
       setUserLv(user);
    });
@@ -47,16 +48,47 @@ export default function Navbar() {
                <nav className="mt-2">
                   <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                      <li className="nav-item">
-                        <Link to="/" className="nav-link" onClick={clearLocalStorage}>
-                           {/* <i className="nav-icon fas fa-file" /> */}
-                           <p>หน้าแรก</p>
-                        </Link>
+                        {user ? (
+                           <>
+                              {user.lv_id == 1 ? (
+                                 /* /index-admin */
+                                 <Link to="/index-officer" className="nav-link" onClick={clearLocalStorage}>
+                                    {/* <i className="nav-icon fas fa-file" /> */}
+                                    <p>หน้าแรก</p>
+                                 </Link>
+                              ) : user.lv_id == 2 ? (
+                                 <Link to="/index-officer" className="nav-link" onClick={clearLocalStorage}>
+                                    {/* <i className="nav-icon fas fa-file" /> */}
+                                    <p>หน้าแรก</p>
+                                 </Link>
+                              ) : user.lv_id == 3 ? (
+                                 <Link to="/index-user" className="nav-link" onClick={clearLocalStorage}>
+                                    {/* <i className="nav-icon fas fa-file" /> */}
+                                    <p>หน้าแรก</p>
+                                 </Link>
+                              ) : (
+                                 <></>
+                              )}
+                           </>
+                        ) : (
+                           <Link to="/" className="nav-link" onClick={clearLocalStorage}>
+                              {/* <i className="nav-icon fas fa-file" /> */}
+                              <p>หน้าแรก</p>
+                           </Link>
+                        )}
                      </li>
                      <li className="nav-item">
                         <Link to="/about" className="nav-link" onClick={clearLocalStorage}>
                            {/* <i className="nav-icon fas fa-file" /> */}
 
                            <p>เกี่ยวกับระบบ</p>
+                        </Link>
+                     </li>
+                     <li className="nav-item">
+                        <Link to="/FAQ" className="nav-link" onClick={clearLocalStorage}>
+                           {/* <i className="nav-icon fas fa-file" /> */}
+
+                           <p>FAQ</p>
                         </Link>
                      </li>
                      {!user && (

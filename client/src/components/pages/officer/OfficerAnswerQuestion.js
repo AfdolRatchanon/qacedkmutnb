@@ -180,7 +180,7 @@ const OfficerAnswerQuestion = () => {
                                  </div>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-2">ไม่มีไฟล์แนบ</label>
+                                    <label className="col-sm-2">ไฟล์แนบ</label>
                                     {/* <input
                                        type="text"
                                        className="form-control col-sm-6"

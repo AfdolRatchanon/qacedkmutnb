@@ -36,6 +36,19 @@ const NavAdmin = () => {
                            <p>หมวดคำถาม</p>
                         </Link>
                      </li>
+                     <li className="nav-item">
+                        <Link
+                           to="/officer-manage-faq"
+                           className="nav-link"
+                           // onClick={() => {
+                           //    localStorage.setItem("officer_type_id", null);
+                           // }}
+                        >
+                           {/* <i className="nav-icon fas fa-file" /> */}
+                           {" \u00A0\u00A0\u00A0\u00A0"}
+                           <p>จัดการ FAQ</p>
+                        </Link>
+                     </li>
                   </ul>
                </li>
                <li className="nav-item menu-open">

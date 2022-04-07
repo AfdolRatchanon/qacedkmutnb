@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//fucntions
-import { addQuestion } from "../../functions/user";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -9,9 +7,10 @@ import { useSelector } from "react-redux";
 //Query
 import { loadQuestionType } from "../../functions/query";
 
+import { addFAQ } from "../../functions/officer";
 import { toast } from "react-toastify";
 
-const AddQuestion = () => {
+const OfficerAddFAQ = () => {
    const navigate = useNavigate();
    const { user } = useSelector((state) => ({ ...state }));
    const [questionType, setQuestionType] = useState([]);
@@ -19,11 +18,7 @@ const AddQuestion = () => {
       type_id: 0,
       qst_title: "",
       qst_detail: "",
-      qst_name: user.mem_name,
-      qst_mail: user.mem_mail,
    });
-
-   const [file, setFile] = useState("");
 
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token, value)
@@ -44,44 +39,23 @@ const AddQuestion = () => {
    const handleChang = (e) => {
       setValue({
          ...value,
-         qst_name: user.mem_name,
-         qst_mail: user.mem_mail,
          [e.target.name]: e.target.value,
       });
       console.log("Value : ", value);
-   };
-
-   const onChange = (e) => {
-      if (e.target.files[0] != null) {
-         setFile(e.target.files[0]);
-         console.log("File : ", file);
-      } else {
-         setFile("null");
-      }
    };
 
    // console.log(value);
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      console.log("file : ", file);
       console.log("value : ", value);
+      console.log("submit Add Question", value);
 
-      formData.append("type_id", value.type_id);
-      formData.append("qst_title", value.qst_title);
-      formData.append("qst_detail", value.qst_detail);
-      formData.append("qst_name", value.qst_name);
-      formData.append("qst_mail", value.qst_mail);
-      formData.append("file", file);
-
-      console.log("submit Add Question", formData);
-
-      addQuestion(user.token, formData)
+      addFAQ(user.token, value)
          .then((res) => {
             console.log(res.data);
             toast.success(res.data);
-            navigate("/user-question");
+            navigate("/officer-manage-faq");
          })
          .catch((err) => {
             console.log(err.response.data);
@@ -92,7 +66,6 @@ const AddQuestion = () => {
    const handCancel = (e) => {
       setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "", qst_img: "" });
    };
-
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -100,7 +73,7 @@ const AddQuestion = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>เพิ่มคำถาม</h1>
+                     <h1>เพิ่ม FAQ</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -108,9 +81,9 @@ const AddQuestion = () => {
                            <Link to="/">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item float-sm-right">
-                           <Link to="/user-question">คำถามของฉัน</Link>
+                           <Link to="/officer-manage-faq">จัดการ FAQ</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">เพิ่มคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">เพิ่ม FAQ</li>
                      </ol>
                   </div>
                </div>
@@ -165,7 +138,12 @@ const AddQuestion = () => {
                                  />
                                  <div className="col-sm-2"></div>
                               </div>
-
+                              {/* <div className="form-group row">
+                                 <div className="col-sm-2"></div>
+                                 <label className="col-sm-2">แนบไฟล์ (JPEG,JPG,PNG)</label>
+                                 <input type="file" className="form-control-file col-sm-6" name="qst_img" onChange={onChange} />
+                                 <div className="col-sm-2"></div>
+                              </div> */}
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
                                  <label className="col-sm-2">รายละเอียด</label>
@@ -175,44 +153,6 @@ const AddQuestion = () => {
                                     rows="3"
                                     onChange={handleChang}
                                  ></textarea>
-                                 <div className="col-sm-2"></div>
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ผู้ตั้งคำถาม</label>
-                                 <input
-                                    type="text"
-                                    className="form-control col-sm-6"
-                                    name="qst_name"
-                                    placeholder="Input Username 4 characters or more"
-                                    // pattern="\w{4,30}"
-                                    // title="Please input range 4 - 30 alphabet"
-                                    onChange={handleChang}
-                                    defaultValue={user.mem_user}
-                                    disabled={true}
-                                 />
-                                 <div className="col-sm-2"></div>
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">อีเมล</label>
-                                 <input
-                                    type="email"
-                                    className="form-control col-sm-6"
-                                    name="qst_mail"
-                                    placeholder="example@example.com"
-                                    pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
-                                    title="Please input correct format Email"
-                                    defaultValue={user.mem_mail}
-                                    onChange={handleChang}
-                                    disabled={true}
-                                 />
-                                 <div className="col-sm-2"></div>
-                              </div>
-                              <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">แนบไฟล์ (JPEG,JPG,PNG)</label>
-                                 <input type="file" className="form-control-file col-sm-6" name="qst_img" onChange={onChange} />
                                  <div className="col-sm-2"></div>
                               </div>
                               <div className="form-group" align="center">
@@ -246,4 +186,4 @@ const AddQuestion = () => {
    );
 };
 
-export default AddQuestion;
+export default OfficerAddFAQ;

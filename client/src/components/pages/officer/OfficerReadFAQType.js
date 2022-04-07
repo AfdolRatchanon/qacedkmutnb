@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // BootStrap
+import { Modal, Button, Form } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 //Query
 import { loadQuestionTypeName } from "../../functions/query";
-import { officerReadQuestionType } from "../../functions/officer";
+import { officerReadFAQType, deleteFAQ } from "../../functions/officer";
 
 import { toast } from "react-toastify";
 
-const OfficerReadQuestionType = () => {
+const OfficerReadFAQType = () => {
+   const [status, setStatus] = useState(0);
    const [data, setData] = useState([]);
    const type_id = localStorage.officer_type_id;
    const { user } = useSelector((state) => ({ ...state }));
@@ -32,8 +34,9 @@ const OfficerReadQuestionType = () => {
             console.log(err.response);
          });
    };
+
    const loadData = () => {
-      officerReadQuestionType(user.token, { type_id: type_id })
+      officerReadFAQType(user.token, { type_id: type_id })
          .then((res) => {
             console.log(res.data);
             setData(res.data);
@@ -49,7 +52,8 @@ const OfficerReadQuestionType = () => {
    useEffect(() => {
       loadDataTypeQ();
       loadData();
-   }, []);
+      setStatus(0);
+   }, [status]);
 
    const indexN = (cell, row, enumObject, index) => {
       return <div>{index + 1}</div>;
@@ -59,28 +63,82 @@ const OfficerReadQuestionType = () => {
       if (row.type_id) {
          return (
             <div className="position-sticky">
-               {/* <button
-                  type="button"
-                  className="btn btn-warning"
+               <Link
+                  className="btn btn-warning "
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                  to={`/officer-edit-faq`}
                   onClick={() => {
-                     alert("กำลังดำเนินการสร้าง");
+                     localStorage.setItem("faq_id", row.faq_id);
                   }}
                >
                   แก้ไข
-               </button>  */}
-               <Link
-                  to="/officer-answer-question"
-                  className="btn btn-primary"
+               </Link>
+               <button
+                  type="button"
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                  className="btn btn-danger"
                   onClick={() => {
-                     localStorage.setItem("question_id", row.qst_id);
+                     setModalConfirmDeleteValue(row.faq_id);
+                     console.log("ลบ", modalConfirmDeleteValue);
+                     toggleMCDTrueFalse();
                   }}
                >
-                  จัดการข้อมูล
-               </Link>
+                  ลบ
+               </button>
             </div>
          );
       }
    };
+
+   //Modal Bootstrap
+   const [modalConfirmDeleteValue, setModalConfirmDeleteValue] = useState([]);
+   const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
+   const [showMCD, setShowMCD] = useState(false);
+   const handleMCDClose = () => setShowMCD(false);
+   const handleMCDShow = () => setShowMCD(true);
+
+   const handleOK_ModalConfirmDelete = () => {
+      console.log("OK", modalConfirmDeleteValue);
+      deleteFAQ(user.token, { faq_id: modalConfirmDeleteValue })
+         .then((res) => {
+            console.log(res.data);
+            toast.success(res.data);
+            setStatus(1);
+         })
+         .catch((err) => {
+            console.log(err);
+            console.log(err.response);
+            toast.err(err.response.date);
+            console.log(err.response.date);
+         });
+      setShowMCD(false);
+   };
+
+   const toggleMCDTrueFalse = () => {
+      setShowModalConfirmDelete(handleMCDShow);
+   };
+
+   const ModalConfirmDelete = () => {
+      return (
+         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal.Header>
+               <Modal.Title>แจ้งเตือน</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>คุณต้องการลบคำถามของคุณใช่หรือไม่ !!!</Modal.Body>
+            <Modal.Footer>
+               {/* onClick={props.onHide} */}
+               <Button variant="primary" onClick={handleMCDClose}>
+                  ปิด
+               </Button>
+               {/*  onClick={props.onOK} */}
+               <Button variant="danger" onClick={handleOK_ModalConfirmDelete}>
+                  ใช่
+               </Button>
+            </Modal.Footer>
+         </Modal>
+      );
+   };
+
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -88,13 +146,13 @@ const OfficerReadQuestionType = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-4">
-                     <h1>ตอบคำถามตามหมวดคำถาม</h1>
+                     <h1>หมวดคำถาม FAQ</h1>
                   </div>
                   {/* <div className="col-sm-3">
-                     <Link className="btn btn-success btn-sm " to="/user-add-question">
-                        เพิ่มคำถาม
-                     </Link>
-                  </div> */}
+                      <Link className="btn btn-success btn-sm " to="/user-add-question">
+                         เพิ่มคำถาม
+                      </Link>
+                   </div> */}
                   <div className="col-sm-8">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
@@ -107,10 +165,10 @@ const OfficerReadQuestionType = () => {
                                  localStorage.setItem("officer_type_id", null);
                               }}
                            >
-                              หมวดคำถาม
+                              จัดการ FAQ
                            </Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ตอบคำถามตามหมวดคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">หมวดคำถาม FAQ</li>
                      </ol>
                   </div>
                </div>
@@ -135,30 +193,20 @@ const OfficerReadQuestionType = () => {
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="qst_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="200" headerAlign="center" dataField="qst_title">
+                                  ID
+                               </TableHeaderColumn> */}
+                              <TableHeaderColumn dataSort width="200" headerAlign="center" dataField="faq_title">
                                  หัวข้อคำถาม
-                              </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="sta_name">
-                                 สถานะ
-                              </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="date_format">
-                                 วันที่ส่งคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn
                                  dataSort
-                                 width="125"
+                                 width="200"
                                  dataAlign="center"
                                  dataFormat={manageButoon}
                                  dataField="any"
                               >
                                  จัดการ
                               </TableHeaderColumn>
-
-                              {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
-                                 การดำเนินการ
-                              </TableHeaderColumn> */}
                            </BootstrapTable>
                         </div>
                         {/* /.card-body */}
@@ -170,6 +218,7 @@ const OfficerReadQuestionType = () => {
                </div>
             </div>
          </section>
+         {showMCD ? <ModalConfirmDelete /> : null}
          {/* /.content */}
          {/* /modal */}
          {/* <ConfirmDelete /> */}
@@ -178,4 +227,4 @@ const OfficerReadQuestionType = () => {
    );
 };
 
-export default OfficerReadQuestionType;
+export default OfficerReadFAQType;

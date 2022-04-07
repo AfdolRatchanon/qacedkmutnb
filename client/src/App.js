@@ -5,13 +5,14 @@ import Header from "./components/pages/layouts/Header";
 import Navbar from "./components/pages/layouts/Navbar";
 
 // Router
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import ForgotPassword from "./components/pages/auth/ForgotPassword";
 import NewPassword from "./components/pages/auth/NewPassword";
+import FAQ from "./components/pages/FAQ";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
@@ -28,6 +29,10 @@ import HomeOfficer from "./components/pages/officer/Home";
 import OfficerQuestionType from "./components/pages/officer/OfficerQuestionType";
 import OfficerReadQuestionType from "./components/pages/officer/OfficerReadQuestionType";
 import OfficerAnswerQuestion from "./components/pages/officer/OfficerAnswerQuestion";
+import OfficerManageFAQ from "./components/pages/officer/OfficerManageFAQ";
+import OfficerAddFAQ from "./components/pages/officer/OfficerAddFAQ";
+import OfficerReadFAQType from "./components/pages/officer/OfficerReadFAQType";
+import OfficerEditFAQ from "./components/pages/officer/OfficerEditFAQ";
 
 // Page User
 import HomeUser from "./components/pages/user/Home";
@@ -48,8 +53,10 @@ import AdminRoute from "./components/routes/AdminRoute";
 //Toastfy
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function App() {
+   const navigate = useNavigate();
    const dispatch = useDispatch();
    const idtoken = localStorage.token;
 
@@ -79,7 +86,9 @@ function App() {
             // alert(err);
             // localStorage.clear();
             console.log(err.response.data);
-            alert(err.response.data + " โทเค็นหมดอายุกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+            // toast.warning(err.response.data + " โทเค็นหมดอายุกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+
+            // navigate("/Login");
          });
    }
 
@@ -107,6 +116,7 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/ForgotPassword" element={<ForgotPassword />} />
                   <Route path="/NewPassword" element={<NewPassword />} />
+                  <Route path="/FAQ" element={<FAQ />} />
                   {/*NOTE ADMIN */}
                   <Route
                      path="/index-admin"
@@ -204,6 +214,38 @@ function App() {
                      element={
                         <OfficerRoute>
                            <OfficerAnswerQuestion />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-manage-faq"
+                     element={
+                        <OfficerRoute>
+                           <OfficerManageFAQ />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-add-faq"
+                     element={
+                        <OfficerRoute>
+                           <OfficerAddFAQ />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-read-faq-type"
+                     element={
+                        <OfficerRoute>
+                           <OfficerReadFAQType />
+                        </OfficerRoute>
+                     }
+                  />
+                  <Route
+                     path="/officer-edit-faq"
+                     element={
+                        <OfficerRoute>
+                           <OfficerEditFAQ />
                         </OfficerRoute>
                      }
                   />

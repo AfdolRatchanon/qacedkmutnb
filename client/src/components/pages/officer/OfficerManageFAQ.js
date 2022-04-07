@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-// Routert
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Redux
 import { useSelector } from "react-redux";
 
 //function
-import { countQuestionType } from "../../functions/query";
+import { countFAQType } from "../../functions/query";
 
-const OfficerQuestionType = () => {
+const OfficerManageFAQ = () => {
    const [dataQuestionType, setDataQuestionType] = useState([]);
    const [bgSmallBox, setBgSmallBox] = useState({
       0: "bg-primary",
@@ -26,7 +24,7 @@ const OfficerQuestionType = () => {
    const { user } = useSelector((state) => ({ ...state }));
 
    const loadData = () => {
-      countQuestionType(user.token)
+      countFAQType(user.token)
          .then((res) => {
             console.log(res.data);
             setDataQuestionType(res.data);
@@ -39,6 +37,8 @@ const OfficerQuestionType = () => {
    useEffect(() => {
       loadData();
    }, []);
+
+   
 
    const Small_Boxes = (props) => {
       const { type_id, count_type_id, type_name, p_key } = props;
@@ -58,7 +58,7 @@ const OfficerQuestionType = () => {
                   <i className="ion ion-pie-graph" />
                </div> */}
                <Link
-                  to="/officer-read-question-type"
+                  to="/officer-read-faq-type"
                   className="small-box-footer"
                   onClick={() => {
                      console.log("type_id : ", type_id);
@@ -78,15 +78,20 @@ const OfficerQuestionType = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
-                  <div className="col-sm-6">
-                     <h1>หมวดคำถาม</h1>
+                  <div className="col-sm-3">
+                     <h1>จัดการ FAQ</h1>
+                  </div>
+                  <div className="col-sm-3">
+                     <Link className="btn btn-success btn-sm " to="/officer-add-faq">
+                        เพิ่ม FAQ
+                     </Link>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">หมวดคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">จัดการ FAQ</li>
                      </ol>
                   </div>
                </div>
@@ -97,17 +102,22 @@ const OfficerQuestionType = () => {
          <section className="content">
             <div className="container-fluid">
                <div className="row">
-                  {dataQuestionType.map((value, key) => {
-                     return (
-                        <Small_Boxes
-                           type_name={value.type_name}
-                           count_type_id={value.count_type_id}
-                           p_key={key}
-                           type_id={value.type_id}
-                           key={key}
-                        />
-                     );
-                  })}
+                  <div className="col-12">
+                     {/* Default box */}
+                     <div className="row">
+                        {dataQuestionType.map((value, key) => {
+                           return (
+                              <Small_Boxes
+                                 type_name={value.type_name}
+                                 count_type_id={value.count_type_id}
+                                 p_key={key}
+                                 type_id={value.type_id}
+                                 key={key}
+                              />
+                           );
+                        })}
+                     </div>
+                  </div>
                </div>
             </div>
          </section>
@@ -116,4 +126,4 @@ const OfficerQuestionType = () => {
    );
 };
 
-export default OfficerQuestionType;
+export default OfficerManageFAQ;

@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 
 //Zoomimg
 import ImageViewer from "react-simple-image-viewer";
+
 const EditQuestion = () => {
    //IMG ZOOM START
    const [currentImage, setCurrentImage] = useState(0);
@@ -223,63 +224,7 @@ const EditQuestion = () => {
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
-                                 {value.qst_img != 0 && (
-                                    <>
-                                       <div className="form-group row">
-                                          <div className="col-sm-2"></div>
-                                          <label className="col-sm-2">ไฟล์ที่แนบไว้</label>
-                                          {value.qst_img != 0 ? (
-                                             <>
-                                                <button
-                                                   type="button"
-                                                   className="btn btn-success"
-                                                   onClick={() => openImageViewer(0)}
-                                                >
-                                                   มีไฟล์แนบ
-                                                </button>
-                                                {isViewerOpen && (
-                                                   <ImageViewer
-                                                      src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
-                                                      currentIndex={currentImage}
-                                                      zoomScale=""
-                                                      disableScroll={true}
-                                                      closeOnClickOutside={true}
-                                                      onClose={closeImageViewer}
-                                                   />
-                                                )}
-                                             </>
-                                          ) : (
-                                             <>-</>
-                                          )}
-                                          <div className="col-sm-2"></div>
-                                       </div>
-                                       {/* <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
-                                             มีไฟล์แนบ
-                                          </button>
-                                          {isViewerOpen && (
-                                             <ImageViewer
-                                                src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
-                                                currentIndex={currentImage}
-                                                zoomScale=""
-                                                disableScroll={true}
-                                                closeOnClickOutside={true}
-                                                onClose={closeImageViewer}
-                                             />
-                                          )} */}
-                                    </>
-                                 )}
 
-                                 <div className="form-group row">
-                                    <div className="col-sm-2"></div>
-                                    <label className="col-sm-2">แนบไฟล์ใหม่ (JPEG,JPG,PNG)</label>
-                                    <input
-                                       type="file"
-                                       className="form-control-file col-sm-6"
-                                       name="qst_img_test"
-                                       onChange={onChange}
-                                    />
-                                    <div className="col-sm-2"></div>
-                                 </div>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
                                     <label className="col-sm-2">รายละเอียด</label>
@@ -302,6 +247,7 @@ const EditQuestion = () => {
                                        defaultValue={value.qst_name}
                                        placeholder="Input Username 4 characters or more"
                                        onChange={handleChang}
+                                       disabled={true}
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
@@ -317,11 +263,57 @@ const EditQuestion = () => {
                                        pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
                                        title="Please input correct format Email"
                                        onChange={handleChang}
+                                       disabled={true}
+                                    />
+                                    <div className="col-sm-2"></div>
+                                 </div>
+                                 {value.qst_img != 0 && (
+                                    <>
+                                       <div className="form-group row">
+                                          <div className="col-sm-2"></div>
+                                          <label className="col-sm-2">ไฟล์ที่แนบไว้</label>
+                                          {value.qst_img != 0 ? (
+                                             <>
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-success"
+                                                   onClick={() => openImageViewer(0)}
+                                                >
+                                                   เปิดไฟล์
+                                                </button>
+                                                {isViewerOpen && (
+                                                   <ImageViewer
+                                                      src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
+                                                      currentIndex={currentImage}
+                                                      zoomScale=""
+                                                      disableScroll={true}
+                                                      closeOnClickOutside={true}
+                                                      onClose={closeImageViewer}
+                                                   />
+                                                )}
+                                             </>
+                                          ) : (
+                                             <>-</>
+                                          )}
+                                          <div className="col-sm-2"></div>
+                                       </div>
+                                    </>
+                                 )}
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">แนบไฟล์ใหม่ (JPEG,JPG,PNG)</label>
+                                    <input
+                                       type="file"
+                                       className="form-control-file col-sm-6"
+                                       name="qst_img_test"
+                                       onChange={onChange}
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
                                  <div className="form-group" align="center">
-                                    <button className="btn btn-success">ยืนยัน</button>
+                                    <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                       ยืนยัน
+                                    </button>
                                  </div>
                               </form>
                            ))}

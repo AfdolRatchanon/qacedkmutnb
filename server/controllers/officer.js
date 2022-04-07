@@ -1,3 +1,4 @@
+const { collapseToast } = require("react-toastify");
 const db = require("../configs/DB");
 
 exports.officerReadQuestionType = async (req, res) => {
@@ -121,6 +122,193 @@ exports.replyQuestion = async (req, res) => {
       });
 
       // res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.addFAQ = async (req, res) => {
+   try {
+      // Check user
+      const { type_id, qst_title, qst_detail } = req.body;
+      // console.log(req.body);
+      // res.send(req.body);
+
+      if (type_id === 0 || type_id === null) {
+         return res.status(400).send("กรุณาเลือกหมวดคำถาม");
+      } else {
+         if (qst_title === "" || qst_title === null) {
+            return res.status(400).send("กรุณากรอก หัวข้อคำถาม");
+         } else {
+            if (qst_detail === "" || qst_detail === null) {
+               return res.status(400).send("กรุณากรอก รายละเอียด");
+            }
+            console.log(req.body);
+            db.query(
+               "INSERT INTO tbl_faq (faq_title, faq_detail, type_id) VALUES (?, ?, ?);",
+               [qst_title, qst_detail, type_id],
+               (err, result) => {
+                  if (err) {
+                     console.log(err);
+                  } else {
+                     res.send("บันทึกสำเร็จ");
+                  }
+               }
+            );
+         }
+      }
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.officerReadFAQType = async (req, res) => {
+   try {
+      // Check user
+      const { type_id } = req.body;
+      console.log(req.body, req.user);
+      db.query("SELECT  * FROM tbl_faq WHERE type_id = ? ", [type_id], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            if (result[0] == null) {
+               // Username มีข้อมูลหรือไม่
+               //console.log(result);
+               return res.status(400).send("ไม่พบข้อมูล");
+            } else {
+               return res.send(result);
+            }
+         }
+      });
+      //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+exports.officerReadFAQ = async (req, res) => {
+   try {
+      // Check user
+      const { faq_id } = req.body;
+      console.log(req.body, req.user);
+      db.query("SELECT * FROM tbl_faq WHERE faq_id = ? ", [faq_id], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            if (result[0] == null) {
+               // Username มีข้อมูลหรือไม่
+               //console.log(result);
+               return res.status(400).send("ไม่พบข้อมูล");
+            } else {
+               console.log(result[0]);
+               return res.send(result);
+            }
+         }
+      });
+      //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.officerUpdateFAQ = async (req, res) => {
+   try {
+      // Check user
+      const { faq_id, faq_title, faq_detail, type_id } = req.body;
+      console.log(req.body, req.user);
+      db.query(
+         "UPDATE tbl_faq SET faq_title = ? , faq_detail = ? , type_id = ? WHERE faq_id = ?;",
+         [faq_title, faq_detail, type_id, faq_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               console.log(result[0]);
+               return res.send("แก้ไขสำเร็จ");
+            }
+         }
+      );
+      //res.send("adminListUser");
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.officerDeleteFAQ = async (req, res) => {
+   try {
+      // Check user
+      const { faq_id } = req.body;
+      // console.log("delete FAQ : ", req.body);
+      db.query("DELETE FROM tbl_faq WHERE faq_id = ?", [faq_id], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            res.send("ลบข้อมูลสำเร็จ");
+         }
+      });
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+exports.officerCountReply = async (req, res) => {
+   try {
+      // Check user
+      const { mem_id } = req.body;
+      console.log("officerCountReply : ", req.body);
+      db.query(
+         "SELECT COUNT(q.qst_id) as allQst, COUNT(IF(q.sta_id = 4,1,null)) as successQst, COUNT(IF(q.sta_id = 3,1,null)) as waitReply, a.ownReply FROM tbl_question q , (SELECT COUNT(reply_id) as ownReply FROM tbl_reply r WHERE mem_id = ?) as a",
+         [mem_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("ไม่พบข้อมูล");
+               } else {
+                  console.log(result[0]);
+                  return res.send(result);
+               }
+            }
+         }
+      );
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.countQuestionTypeAll = async (req, res) => {
+   try {
+      // console.log(req.body);
+      db.query(
+         "SELECT t.type_id, t.type_name, COUNT(q.sta_id) AS count_type_All FROM tbl_type t LEFT JOIN tbl_question q on t.type_id = q.type_id  GROUP BY t.type_id  ORDER BY t.type_id  ASC;",
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("This username does not exist. ");
+               } else {
+                  return res.send(result);
+               }
+            }
+         }
+      );
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");

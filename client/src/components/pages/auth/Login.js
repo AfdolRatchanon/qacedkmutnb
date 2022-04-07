@@ -26,7 +26,8 @@ const Login = () => {
    const roleBaseRedirect = (lv_id) => {
       console.log("lv_id : ", lv_id);
       if (lv_id === 1) {
-         navigate("/index-admin");
+         /* /index-admin */
+         navigate("/index-officer");
       } else if (lv_id === 2) {
          navigate("/index-officer");
       } else if (lv_id === 3) {

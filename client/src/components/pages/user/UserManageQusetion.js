@@ -265,24 +265,28 @@ const UserManageQusetion = () => {
                      </tr>
 
                      <tr>
+                        <th>รายละเอียด</th>
+                        <td>{modalViewValue.qst_detail}</td>
+                     </tr>
+                     <tr>
+                        <th>วันที่ตั้งคำถาม</th>
+                        <td>{modalViewValue.date_q}</td>
+                     </tr>
+                     <tr>
+                        <th>ผู้ตั้งคำถาม</th>
+                        <td>{modalViewValue.qst_name}</td>
+                     </tr>
+                     <tr>
+                        <th>อีเมล</th>
+                        <td>{modalViewValue.qst_mail}</td>
+                     </tr>
+                     <tr>
                         <th>ไฟล์แนบ</th>
                         <td>
                            {modalViewValue.qst_img != 0 ? (
-                              // <img src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img} width="200" />
-                              // <InnerImageZoom
-                              //    src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
-                              //    zoomType="hover"
-                              //    zoomPreload={true}
-                              // />
                               <>
-                                 {/* <img
-                                    src={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
-                                    onClick={() => openImageViewer(0)}
-                                    alt=""
-                                    width="200"
-                                 /> */}
                                  <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
-                                    มีไฟล์แนบ
+                                    เปิดไฟล์
                                  </button>
                                  {isViewerOpen && (
                                     <ImageViewer
@@ -299,22 +303,6 @@ const UserManageQusetion = () => {
                               <>-</>
                            )}
                         </td>
-                     </tr>
-                     <tr>
-                        <th>รายละเอียด</th>
-                        <td>{modalViewValue.qst_detail}</td>
-                     </tr>
-                     <tr>
-                        <th>วันที่ตั้งคำถาม</th>
-                        <td>{modalViewValue.date_q}</td>
-                     </tr>
-                     <tr>
-                        <th>ผู้ตั้งคำถาม</th>
-                        <td>{modalViewValue.qst_name}</td>
-                     </tr>
-                     <tr>
-                        <th>อีเมล</th>
-                        <td>{modalViewValue.qst_mail}</td>
                      </tr>
                      <tr className="table-success">
                         <th width="125">วันที่ตอบ</th>

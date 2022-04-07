@@ -151,19 +151,20 @@ exports.updateQuestion = async (req, res) => {
                return res.status(400).send("ไฟล์รูปไม่ถูกต้อง");
             } else {
                img_Dname = `${Date.now()}${path.extname(file2.name)}`;
-               console.log(req.user);
-               console.log("files : ", req.files);
-               console.log("body : ", req.body);
-               console.log("img_Dname : ", img_Dname);
+               // console.log(req.user);
+               // console.log("files : ", req.files);
+               // console.log("body : ", req.body);
+               // console.log("img_Dname : ", img_Dname);
                qst_img_new = img_Dname;
                req2Path = path.join(__dirname, "../");
             }
          }
       }
+
       // console.log(req.body, req.user);
 
-      console.log("img : ", img_Dname);
-      console.log("qst_img : ", qst_img);
+      // console.log("img : ", img_Dname);
+      // console.log("qst_img : ", qst_img);
       //NOTE res.send(req.body);
 
       if (sta_id === 4 || sta_id == null) {
