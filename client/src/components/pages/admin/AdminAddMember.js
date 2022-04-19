@@ -26,7 +26,7 @@ const AdminAddMember = () => {
    const loadDataLevel = async () => {
       loadLevel(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setQuestionLevel(res.data);
          })
          .catch((err) => {
@@ -47,13 +47,13 @@ const AdminAddMember = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("submit", value);
+      // console.log("submit", value);
       if (value.mem_pwd !== value.con_mem_pwd) {
          toast.error("รหัสผ่าน และ ยืนยันรหัสผ่านไม่ตรงกัน");
       } else {
          register(value)
             .then((res) => {
-               console.log(res.data);
+               // console.log(res.data);
                toast.success(res.data);
                navigate("/admin-manage-user");
             })
@@ -76,7 +76,7 @@ const AdminAddMember = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to="/admin-manage-user">ข้อมูลสมาชิก</Link>

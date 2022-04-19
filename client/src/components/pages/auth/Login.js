@@ -24,10 +24,10 @@ const Login = () => {
    // console.log(value);
 
    const roleBaseRedirect = (lv_id) => {
-      console.log("lv_id : ", lv_id);
+      // console.log("lv_id : ", lv_id);
       if (lv_id === 1) {
          /* /index-admin */
-         navigate("/index-officer");
+         navigate("/index-admin");
       } else if (lv_id === 2) {
          navigate("/index-officer");
       } else if (lv_id === 3) {
@@ -47,11 +47,11 @@ const Login = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("submit", value);
+      // console.log("submit", value);
 
       login(value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + " เข้าสู่เว็บไซต์");
             dispatch({
                type: "LOGIN",

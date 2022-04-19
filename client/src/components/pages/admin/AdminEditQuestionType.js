@@ -23,7 +23,7 @@ const AdminEditQuestionType = () => {
    const loadDataQuestionType = async () => {
       adminReadQuestionType(user.token, { type_id: type_id })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setEditValue(res.data);
          })
          .catch((err) => {
@@ -36,7 +36,7 @@ const AdminEditQuestionType = () => {
          navigate("/admin-manage-question-type");
       } else {
          loadDataQuestionType();
-         console.log("editValue : ", type_id);
+         // console.log("editValue : ", type_id);
       }
    }, []);
 
@@ -52,15 +52,15 @@ const AdminEditQuestionType = () => {
       if (value.type_id === 0) {
          toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
-         console.log("submit Edit Level", value);
+         // console.log("submit Edit Level", value);
          adminUpdateQuestionType(user.token, value)
             .then((res) => {
-               console.log(res.data);
+               // console.log(res.data);
                toast.success(res.data);
                navigate("/admin-manage-question-type");
             })
             .catch((err) => {
-               console.log(err.response.data);
+               // console.log(err.response.data);
                toast.warning(err.response.data);
             });
       }
@@ -78,7 +78,7 @@ const AdminEditQuestionType = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link

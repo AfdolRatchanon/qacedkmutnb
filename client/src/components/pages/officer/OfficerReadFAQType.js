@@ -27,7 +27,7 @@ const OfficerReadFAQType = () => {
    const loadDataTypeQ = async () => {
       loadQuestionTypeName(user.token, { type_id: type_id })
          .then((res) => {
-            console.log(res.data[0]);
+            // console.log(res.data[0]);
             setQst_Type_Name(res.data[0]);
          })
          .catch((err) => {
@@ -38,7 +38,7 @@ const OfficerReadFAQType = () => {
    const loadData = () => {
       officerReadFAQType(user.token, { type_id: type_id })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
@@ -79,7 +79,7 @@ const OfficerReadFAQType = () => {
                   className="btn btn-danger"
                   onClick={() => {
                      setModalConfirmDeleteValue(row.faq_id);
-                     console.log("ลบ", modalConfirmDeleteValue);
+                     // console.log("ลบ", modalConfirmDeleteValue);
                      toggleMCDTrueFalse();
                   }}
                >
@@ -98,10 +98,10 @@ const OfficerReadFAQType = () => {
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
-      console.log("OK", modalConfirmDeleteValue);
+      // console.log("OK", modalConfirmDeleteValue);
       deleteFAQ(user.token, { faq_id: modalConfirmDeleteValue })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success(res.data);
             setStatus(1);
          })
@@ -156,7 +156,20 @@ const OfficerReadFAQType = () => {
                   <div className="col-sm-8">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item">
                            <Link

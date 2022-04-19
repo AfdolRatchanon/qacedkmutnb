@@ -45,7 +45,7 @@ const OfficerAnswerQuestion = () => {
    const loadDataQuestion = async () => {
       officerReadQuestion(user.token, { qst_id: question_id })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setEditValue(res.data);
          })
          .catch((err) => {
@@ -58,7 +58,7 @@ const OfficerAnswerQuestion = () => {
          navigate("/officer-read-question-type");
       } else {
          loadDataQuestion();
-         console.log("editValue : ", question_id);
+         // console.log("editValue : ", question_id);
       }
    }, []);
 
@@ -77,10 +77,10 @@ const OfficerAnswerQuestion = () => {
       if (value.type_id === 0) {
          toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
-         console.log("submit Edit Question", value);
+         // console.log("submit Edit Question", value);
          replyQuestion(user.token, value)
             .then((res) => {
-               console.log(res.data);
+               // console.log(res.data);
                toast.success(res.data);
                navigate("/officer-read-question-type");
             })
@@ -98,12 +98,25 @@ const OfficerAnswerQuestion = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>แก้ไขคำถาม</h1>
+                     <h1>ตอบคำถาม</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link
@@ -125,7 +138,7 @@ const OfficerAnswerQuestion = () => {
                               ตอบคำถามตามหมวดคำถาม
                            </Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">แก้ไขคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">ตอบคำถาม</li>
                      </ol>
                   </div>
                </div>

@@ -149,7 +149,7 @@ const EditQuestion = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-user">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link
@@ -272,24 +272,43 @@ const EditQuestion = () => {
                                        <div className="form-group row">
                                           <div className="col-sm-2"></div>
                                           <label className="col-sm-2">ไฟล์ที่แนบไว้</label>
+
                                           {value.qst_img != 0 ? (
                                              <>
-                                                <button
-                                                   type="button"
-                                                   className="btn btn-success"
-                                                   onClick={() => openImageViewer(0)}
-                                                >
-                                                   เปิดไฟล์
-                                                </button>
-                                                {isViewerOpen && (
-                                                   <ImageViewer
-                                                      src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
-                                                      currentIndex={currentImage}
-                                                      zoomScale=""
-                                                      disableScroll={true}
-                                                      closeOnClickOutside={true}
-                                                      onClose={closeImageViewer}
-                                                   />
+                                                {value.qst_img.match(/\.(pdf|PDF)$/) ? (
+                                                   <>
+                                                      {/* <h1>/user-read-pdf</h1> */}
+                                                      {/* <Link to="/user-read-pdf" className="btn btn-success">
+                                                         อ่านไฟล์ PDF
+                                                      </Link> */}
+                                                      <a
+                                                         className="btn btn-success"
+                                                         href={process.env.REACT_APP_API_IMG + "/" + value.qst_img}
+                                                         target="_blank"
+                                                      >
+                                                         อ่านไฟล์ PDF
+                                                      </a>
+                                                   </>
+                                                ) : (
+                                                   <>
+                                                      <button
+                                                         type="button"
+                                                         className="btn btn-success"
+                                                         onClick={() => openImageViewer(0)}
+                                                      >
+                                                         เปิดไฟล์
+                                                      </button>
+                                                      {isViewerOpen && (
+                                                         <ImageViewer
+                                                            src={[process.env.REACT_APP_API_IMG + "/" + value.qst_img]}
+                                                            currentIndex={currentImage}
+                                                            zoomScale=""
+                                                            disableScroll={true}
+                                                            closeOnClickOutside={true}
+                                                            onClose={closeImageViewer}
+                                                         />
+                                                      )}
+                                                   </>
                                                 )}
                                              </>
                                           ) : (

@@ -22,11 +22,11 @@ const OfficerEditFAQ = () => {
       faq_title: "",
       faq_detail: "",
    });
-   
+
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token, value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setQuestionType(res.data);
          })
          .catch((err) => {
@@ -38,7 +38,7 @@ const OfficerEditFAQ = () => {
       officerReadFAQ(user.token, { faq_id: frequently_asked_question_ID })
          .then((res) => {
             setEditValue(res.data);
-            console.log("EditValue: ", res.data);
+            // console.log("EditValue: ", res.data);
          })
          .catch((err) => {
             console.log(err.response);
@@ -49,27 +49,27 @@ const OfficerEditFAQ = () => {
       loadDataTypeQ().then(() => {
          loadDataFAQ();
       });
-      console.log(user);
-      console.log(value);
+      // console.log(user);
+      // console.log(value);
    }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
       setValue({ ...editValue[0], [e.target.name]: e.target.value });
-      console.log("Value : ", value);
+      // console.log("Value : ", value);
    };
 
    // console.log(value);
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("submit Add Question", value);
+      // console.log("submit Add Question", value);
       if (value.type_id === 0) {
          toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
       } else {
          officerUpdateFAQ(user.token, value)
             .then((res) => {
-               console.log(res.data);
+               // console.log(res.data);
                toast.success(res.data);
                navigate("/officer-read-faq-type");
             })
@@ -95,7 +95,20 @@ const OfficerEditFAQ = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link to="/officer-manage-faq">จัดการ FAQ</Link>

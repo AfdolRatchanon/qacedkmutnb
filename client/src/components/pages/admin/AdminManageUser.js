@@ -118,7 +118,7 @@ const AdminManageUser = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
                      </ol>

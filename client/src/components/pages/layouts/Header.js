@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //Route
 import { Link, useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 
+import { countQstNoAns } from "../../functions/query";
+
 export default function Header() {
    const { user } = useSelector((state) => ({ ...state }));
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const [qst, setQst] = useState(0);
    // คำสั่ง Logout
    const logout = () => {
       dispatch({
@@ -16,13 +19,31 @@ export default function Header() {
       navigate("/");
    };
 
+   const loadData = async () => {
+      if (user) {
+         if (user.lv_id != 3) {
+            countQstNoAns(user.token)
+               .then((res) => {
+                  // console.log("Qst Count : ", res.data[0].qst_num);
+                  setQst(res.data[0].qst_num);
+               })
+               .catch((err) => {
+                  console.log("Qst Count : ");
+                  console.log(err.response);
+               });
+         }
+      }
+   };
+
    const clearLocalStorage = () => {
       localStorage.setItem("officer_type_id", null);
       localStorage.setItem("question_id", null);
       localStorage.setItem("level_id", null);
       localStorage.setItem("question_type_id", null);
    };
-
+   useEffect(() => {
+      loadData();
+   }, [user]);
    return (
       <div>
          <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -78,6 +99,25 @@ export default function Header() {
                      <i className="fas fa-expand-arrows-alt" />
                   </a>
                </li>
+               {user ? (
+                  user.lv_id != 3 ? (
+                     <>
+                        <Link to="/officer-question-type">
+                           <li class="nav-item dropdown">
+                              <div class="nav-link">
+                                 <i class="far fa-comments"></i>
+                                 <span class="badge badge-danger navbar-badge">{qst}</span>
+                              </div>
+                           </li>
+                        </Link>
+                     </>
+                  ) : (
+                     <></>
+                  )
+               ) : (
+                  <></>
+               )}
+
                {!user && (
                   <>
                      <li className="nav-item d-sm-inline-block">

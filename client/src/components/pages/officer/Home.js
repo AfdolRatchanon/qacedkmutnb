@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { officerCountReply } from "../../functions/officer";
 
 // import chart
-import ChartDoughnutComponent from "./Chart/ChartDoughnutComponent";
-import ChartBarComponent from "./Chart/ChartBarComponent";
+import ChartDoughnutComponent from "./chart/ChartDoughnutComponent";
+import ChartBarComponent from "./chart/ChartBarComponent";
 
 const Home = () => {
    const { user } = useSelector((state) => ({ ...state }));
@@ -105,7 +105,7 @@ const Home = () => {
                            <section className="content">
                               <div className="container-fluid">
                                  <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-xl-6">
                                        <div className="card card-warning">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
@@ -145,7 +145,7 @@ const Home = () => {
                                        </div>
                                        <div className="card card-primary">
                                           <div className="card-header">
-                                             <h3 className="card-title">Bar Chart</h3>
+                                             <h3 className="card-title">{/* Bar Chart */}</h3>
                                              <div className="card-tools">
                                                 <button type="button" className="btn btn-tool" data-card-widget="collapse">
                                                    <i className="fas fa-minus" />
@@ -165,11 +165,11 @@ const Home = () => {
                                        {/* /.card */}
                                     </div>
                                     {/* /.col (LEFT) */}
-                                    <div className="col-md-6">
+                                    <div className="col-xl-6">
                                        {/* BAR CHART */}
                                        <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">Donut Chart</h3>
+                                             <h3 className="card-title">{/* Donut Chart */}</h3>
                                              <div className="card-tools">
                                                 <button type="button" className="btn btn-tool" data-card-widget="collapse">
                                                    <i className="fas fa-minus" />

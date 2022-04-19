@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import InnerImageZoom from "react-inner-image-zoom";
 import ImageViewer from "react-simple-image-viewer";
 // BootStrap
 import { Modal, Button, Form } from "react-bootstrap";
@@ -52,7 +51,7 @@ const UserManageQusetion = () => {
    const loadData = () => {
       loadQuestionType(user.token, value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setQuestionType(res.data);
          })
          .catch((err) => {
@@ -61,7 +60,7 @@ const UserManageQusetion = () => {
 
       listQuestion(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
@@ -85,7 +84,7 @@ const UserManageQusetion = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       setValue({ ...value, [e.target.name]: e.target.value });
-      console.log("submit Add Question", value);
+      // console.log("submit Add Question", value);
       // addQuestion(user.token, value)
       //    .then((res) => {
       //       console.log(res.data);
@@ -117,7 +116,7 @@ const UserManageQusetion = () => {
                      style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
                      onClick={() => {
                         setModalViewValue(row);
-                        console.log("รายละเอียด", modalViewValue);
+                        // console.log("รายละเอียด", modalViewValue);
                         toggleMVTrueFalse();
                      }}
                   >
@@ -139,7 +138,7 @@ const UserManageQusetion = () => {
                      className="btn btn-danger"
                      onClick={() => {
                         setModalConfirmDeleteValue(row.qst_id);
-                        console.log("ลบ", modalConfirmDeleteValue);
+                        // console.log("ลบ", modalConfirmDeleteValue);
                         toggleMCDTrueFalse();
                      }}
                   >
@@ -155,7 +154,7 @@ const UserManageQusetion = () => {
                      className="btn btn-success"
                      onClick={() => {
                         setModalViewValue(row);
-                        console.log("รายละเอียด", modalViewValue);
+                        // console.log("รายละเอียด", modalViewValue);
                         toggleMVTrueFalse();
                      }}
                   >
@@ -181,10 +180,10 @@ const UserManageQusetion = () => {
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
-      console.log("OK", modalConfirmDeleteValue);
+      // console.log("OK", modalConfirmDeleteValue);
       deleteQuestion(user.token, { qst_id: modalConfirmDeleteValue })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success(res.data);
             setStatus(1);
          })
@@ -231,7 +230,7 @@ const UserManageQusetion = () => {
    const handleMVShow = () => setShowMV(true);
 
    const handleOK_ModalView = () => {
-      console.log("OK", modalViewValue);
+      // console.log("OK", modalViewValue);
       handleSubmit();
       setShowMV(false);
    };
@@ -285,18 +284,36 @@ const UserManageQusetion = () => {
                         <td>
                            {modalViewValue.qst_img != 0 ? (
                               <>
-                                 <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
-                                    เปิดไฟล์
-                                 </button>
-                                 {isViewerOpen && (
-                                    <ImageViewer
-                                       src={[process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img]}
-                                       currentIndex={currentImage}
-                                       zoomScale=""
-                                       disableScroll={true}
-                                       closeOnClickOutside={true}
-                                       onClose={closeImageViewer}
-                                    />
+                                 {modalViewValue.qst_img.match(/\.(pdf|PDF)$/) ? (
+                                    <>
+                                       {/* <h1>/user-read-pdf</h1> */}
+                                       {/* <Link to="/user-read-pdf" className="btn btn-success">
+                                       อ่านไฟล์ PDF
+                                    </Link> */}
+                                       <a
+                                          className="btn btn-success"
+                                          href={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
+                                          target="_blank"
+                                       >
+                                          อ่านไฟล์ PDF
+                                       </a>
+                                    </>
+                                 ) : (
+                                    <>
+                                       <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                          เปิดไฟล์
+                                       </button>
+                                       {isViewerOpen && (
+                                          <ImageViewer
+                                             src={[process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img]}
+                                             currentIndex={currentImage}
+                                             zoomScale=""
+                                             disableScroll={true}
+                                             closeOnClickOutside={true}
+                                             onClose={closeImageViewer}
+                                          />
+                                       )}
+                                    </>
                                  )}
                               </>
                            ) : (
@@ -338,7 +355,7 @@ const UserManageQusetion = () => {
    const handleMEShow = () => setShowME(true);
 
    const handleOK_ModalEdit = () => {
-      console.log("OK ME : ", modalEditValue);
+      // console.log("OK ME : ", modalEditValue);
       setShowME(false);
    };
 
@@ -433,7 +450,7 @@ const UserManageQusetion = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-user">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">คำถามของฉัน</li>
                      </ol>

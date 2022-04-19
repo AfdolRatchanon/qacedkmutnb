@@ -99,15 +99,15 @@ const AddQuestion = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
-                  <div className="col-sm-6">
+                  <div className="col-md-6">
                      <h1>เพิ่มคำถาม</h1>
                   </div>
-                  <div className="col-sm-6">
-                     <ol className="breadcrumb float-sm-right">
+                  <div className="col-md-6">
+                     <ol className="breadcrumb float-md-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-user">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item float-sm-right">
+                        <li className="breadcrumb-item float-md-right">
                            <Link to="/user-question">คำถามของฉัน</Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">เพิ่มคำถาม</li>
@@ -139,9 +139,9 @@ const AddQuestion = () => {
                            {/* Form Register */}
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
-                                 <select name="type_id" className="form-control col-sm-6" onChange={handleChang}>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2 col-form-label">หมวดคำถาม</label>
+                                 <select name="type_id" className="form-control col-md-6" onChange={handleChang}>
                                     <option value={0}>กรุณาเลือก</option>
                                     {questionType.map((questionType) => (
                                        <option key={questionType.type_id} value={questionType.type_id}>
@@ -149,40 +149,40 @@ const AddQuestion = () => {
                                        </option>
                                     ))}
                                  </select>
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">หัวข้อคำถาม</label>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2">หัวข้อคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-6"
+                                    className="form-control col-md-6"
                                     name="qst_title"
                                     placeholder="กรอกหัวข้อคำถาม"
                                     // pattern="\w{4,30}"
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
                               </div>
 
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">รายละเอียด</label>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2">รายละเอียด</label>
                                  <textarea
-                                    className="form-control col-sm-6"
+                                    className="form-control col-md-6"
                                     name="qst_detail"
                                     rows="3"
                                     onChange={handleChang}
                                  ></textarea>
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ผู้ตั้งคำถาม</label>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2">ผู้ตั้งคำถาม</label>
                                  <input
                                     type="text"
-                                    className="form-control col-sm-6"
+                                    className="form-control col-md-6"
                                     name="qst_name"
                                     placeholder="Input Username 4 characters or more"
                                     // pattern="\w{4,30}"
@@ -191,14 +191,14 @@ const AddQuestion = () => {
                                     defaultValue={user.mem_user}
                                     disabled={true}
                                  />
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">อีเมล</label>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2">อีเมล</label>
                                  <input
                                     type="email"
-                                    className="form-control col-sm-6"
+                                    className="form-control col-md-6"
                                     name="qst_mail"
                                     placeholder="example@example.com"
                                     pattern="^(?=\b[a-zA-Z0-9._-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9]{2,}\b).*$"
@@ -207,13 +207,13 @@ const AddQuestion = () => {
                                     onChange={handleChang}
                                     disabled={true}
                                  />
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
                               </div>
                               <div className="form-group row">
-                                 <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">แนบไฟล์ (JPEG,JPG,PNG)</label>
-                                 <input type="file" className="form-control-file col-sm-6" name="qst_img" onChange={onChange} />
-                                 <div className="col-sm-2"></div>
+                                 <div className="col-md-2"></div>
+                                 <label className="col-md-2">แนบไฟล์ (JPEG, JPG, PNG, PDF)</label>
+                                 <input type="file" className="form-control-file col-md-6" name="qst_img" onChange={onChange} />
+                                 <div className="col-md-2"></div>
                               </div>
                               <div className="form-group" align="center">
                                  <button

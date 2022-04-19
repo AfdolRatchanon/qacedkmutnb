@@ -55,7 +55,7 @@ const FAQ = () => {
    const loadDataTypeQ = async () => {
       loadQuestionTypeFAQ(value)
          .then((res) => {
-            console.log("Data :", res.data);
+            // console.log("Data :", res.data);
             setQuestionType(res.data);
          })
          .catch((err) => {
@@ -65,7 +65,7 @@ const FAQ = () => {
    const loadData = () => {
       readFAQType({ type_id: type_ID_State })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
@@ -111,7 +111,7 @@ const FAQ = () => {
                      <div className="sticky-top mb-3">
                         <div className="card">
                            <div className="card-header">
-                              <h4 className="card-title">โหมดคำถาม</h4>
+                              <h4 className="card-title">หมวดคำถาม</h4>
                            </div>
                            <div className="card-body">
                               {questionType.map((value, key) => (
@@ -120,7 +120,7 @@ const FAQ = () => {
                                     className={"external-event " + bgSmallBox[key % 10]}
                                     onClick={() => {
                                        setType_ID_State(value.type_id);
-                                       console.log(type_ID_State);
+                                       // console.log(type_ID_State);
                                     }}
                                  >
                                     {value.type_name}
@@ -135,7 +135,7 @@ const FAQ = () => {
                   {/* /.col */}
                   <div className="col-md-9">
                      <div class="col-12" id="accordion">
-                        {type_ID_State == 0 ? <>กรูณาเลือกเหมวดคำถาม</> : <></>}
+                        {type_ID_State == 0 ? <>กรูณาเลือกหมวดคำถาม</> : <></>}
                         {data.map((value, key) => (
                            <div class="card card-primary card-outline">
                               <a class="d-block w-100" data-toggle="collapse" href={"#collapse" + key}>

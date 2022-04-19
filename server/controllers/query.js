@@ -147,3 +147,81 @@ exports.readFAQType = async (req, res) => {
       res.status(500).send("Server Error!!!");
    }
 };
+
+exports.countQustOfUser = async (req, res) => {
+   try {
+      const { mem_id } = req.body;
+      console.log(req.body);
+      db.query(
+         "SELECT COUNT(qst_id) as all_qst , COUNT(CASE WHEN sta_id = 4 THEN 1 END) as qst_success, COUNT(CASE WHEN sta_id = 3 THEN 1 END) as qst_wait FROM tbl_question WHERE mem_id = ?",
+         [mem_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("ไม่พบข้อมูล");
+               } else {
+                  console.log(result[0]);
+                  return res.send(result[0]);
+               }
+            }
+         }
+      );
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.countMember = async (req, res) => {
+   try {
+      db.query(
+         "SELECT COUNT(CASE WHEN lv_id = 1 THEN 1 END) as admin_num, COUNT(CASE WHEN lv_id = 2 THEN 1 END) as officer_num, COUNT(CASE WHEN lv_id = 3 THEN 1 END) as user_num, COUNT(CASE WHEN lv_id = 3 and sta_id = 2 THEN 1 END) as user_disble FROM tbl_member;",
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  // console.log(result);
+                  return res.status(400).send("ไม่พบข้อมูล");
+               } else {
+                  // console.log("else : ", result);
+                  return res.send(result);
+               }
+            }
+         }
+      );
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.countQstNoAns = async (req, res) => {
+   try {
+      db.query("SELECT COUNT(mem_id) as qst_num FROM tbl_question WHERE sta_id = 3;", async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            if (result[0] == null) {
+               // Username มีข้อมูลหรือไม่
+               // console.log(result);
+               return res.status(400).send("ไม่พบข้อมูล");
+            } else {
+               // console.log("else : ", result);
+               return res.send(result);
+            }
+         }
+      });
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};

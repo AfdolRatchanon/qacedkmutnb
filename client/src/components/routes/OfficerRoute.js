@@ -14,7 +14,7 @@ const OfficerRoute = ({ children }) => {
          currentOfficer(user.token)
             .then((res) => {
                //res
-               console.log(res);
+               // console.log(res);
                setOk(true);
             })
             .catch((err) => {

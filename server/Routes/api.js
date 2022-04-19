@@ -20,6 +20,9 @@ const {
    countQuestionType,
    countFAQType,
    readFAQType,
+   countMember,
+   countQstNoAns,
+   countQustOfUser,
 } = require("../controllers/query");
 
 //NOTE MiddleWare
@@ -99,6 +102,21 @@ router.get("/query-count-faq-type", countFAQType);
 //@Access   public
 router.post("/query-read-faq-type", readFAQType);
 
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   GET
+//@Access   public
+router.get("/query-count-member", auth, officerCheck, adminCheck, countMember);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   GET
+//@Access   public
+router.get("/query-count-question-no-ans", auth, officerCheck, countQstNoAns);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   POST
+//@Access   public
+router.post("/query-count-question-of-user", auth, countQustOfUser);
+
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET
 // //@Access   private
@@ -107,7 +125,7 @@ router.get("/1", auth, (req, res) => {
 });
 
 router.get("/2", (req, res) => {
-   res.send("hello middleware"); 
+   res.send("hello middleware");
 });
 
 //@Enpoint  http://Localhost:3001/api/auth

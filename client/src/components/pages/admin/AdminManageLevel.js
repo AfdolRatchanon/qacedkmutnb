@@ -18,11 +18,11 @@ const AdminManageLevel = () => {
    const loadData = () => {
       loadLevel(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
-            console.log(err);
+            // console.log(err);
             console.log(err.response);
             console.log(err.response.date);
          });
@@ -71,7 +71,7 @@ const AdminManageLevel = () => {
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
-      console.log("OK", modalConfirmDeleteValue);
+      // console.log("OK", modalConfirmDeleteValue);
       setShowMCD(false);
    };
 
@@ -119,7 +119,7 @@ const AdminManageLevel = () => {
                   <div className="col-sm-8">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">จัดการระดับการเข้าถึง</li>
                      </ol>

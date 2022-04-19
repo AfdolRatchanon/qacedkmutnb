@@ -52,7 +52,7 @@ export default function Navbar() {
                            <>
                               {user.lv_id == 1 ? (
                                  /* /index-admin */
-                                 <Link to="/index-officer" className="nav-link" onClick={clearLocalStorage}>
+                                 <Link to="/index-admin" className="nav-link" onClick={clearLocalStorage}>
                                     {/* <i className="nav-icon fas fa-file" /> */}
                                     <p>หน้าแรก</p>
                                  </Link>

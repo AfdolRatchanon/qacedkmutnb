@@ -44,3 +44,11 @@ export const deleteQuestion = async (authtoken, value) => {
       },
    });
 };
+
+export const countQstOfUser = async (authtoken, value) => {
+   return await axios.post(process.env.REACT_APP_API + "/query-count-question-of-user", value, {
+      headers: {
+         authtoken,
+      },
+   });
+};

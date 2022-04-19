@@ -23,11 +23,11 @@ const AdminManageQuestionType = () => {
    const loadData = () => {
       loadQuestionType(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
-            console.log(err);
+            // console.log(err);
             console.log(err.response);
             console.log(err.response.date);
          });
@@ -70,7 +70,7 @@ const AdminManageQuestionType = () => {
                   className="btn btn-danger"
                   onClick={() => {
                      setModalConfirmDeleteValue(row.type_id);
-                     console.log("ลบ", modalConfirmDeleteValue);
+                     // console.log("ลบ", modalConfirmDeleteValue);
                      toggleMCDTrueFalse();
                   }}
                >
@@ -90,17 +90,17 @@ const AdminManageQuestionType = () => {
    const handleMCDShow = () => setShowMCD(true);
 
    const handleOK_ModalConfirmDelete = () => {
-      console.log("ConfirmDelete OK", modalConfirmDeleteValue);
+      // console.log("ConfirmDelete OK", modalConfirmDeleteValue);
       setShowMCD(false);
       adminDeleteQuestionType(user.token, { type_id: modalConfirmDeleteValue })
          .then((res) => {
-            console.log(res);
+            // console.log(res);
             toast.success(res.data);
             // setData(res.data);
          })
          .catch((err) => {
             toast.error(err.response.data);
-            console.log(err);
+            // console.log(err);
             console.log(err.response);
             console.log(err.response.data);
          });
@@ -148,7 +148,7 @@ const AdminManageQuestionType = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item font-weight-bold">จัดการหมวดคำถาม</li>
                      </ol>

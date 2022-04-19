@@ -41,7 +41,7 @@ export const countQuestionType = async (authtoken, value) => {
    });
 };
 
-export const countFAQType = async (authtoken, value) => {
+export const countFAQType = async (authtoken) => {
    //    console.log("Func", authtoken);
    return await axios.get(process.env.REACT_APP_API + "/query-count-faq-type", {
       headers: {
@@ -53,4 +53,22 @@ export const countFAQType = async (authtoken, value) => {
 export const readFAQType = async (value) => {
    //    console.log("Func", authtoken);
    return await axios.post(process.env.REACT_APP_API + "/query-read-faq-type", value, {});
+};
+
+export const countMember = async (authtoken) => {
+   //    console.log("Func", authtoken);
+   return await axios.get(process.env.REACT_APP_API + "/query-count-member", {
+      headers: {
+         authtoken,
+      },
+   });
+};
+
+export const countQstNoAns = async (authtoken) => {
+   //    console.log("Func", authtoken);
+   return await axios.get(process.env.REACT_APP_API + "/query-count-question-no-ans", {
+      headers: {
+         authtoken,
+      },
+   });
 };

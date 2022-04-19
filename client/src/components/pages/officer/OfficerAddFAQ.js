@@ -23,7 +23,7 @@ const OfficerAddFAQ = () => {
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token, value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setQuestionType(res.data);
          })
          .catch((err) => {
@@ -32,7 +32,7 @@ const OfficerAddFAQ = () => {
    };
    useEffect(() => {
       loadDataTypeQ();
-      console.log(user);
+      // console.log(user);
    }, []);
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
@@ -48,12 +48,12 @@ const OfficerAddFAQ = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("value : ", value);
-      console.log("submit Add Question", value);
+      // console.log("value : ", value);
+      // console.log("submit Add Question", value);
 
       addFAQ(user.token, value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success(res.data);
             navigate("/officer-manage-faq");
          })
@@ -78,7 +78,20 @@ const OfficerAddFAQ = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item float-sm-right">
                            <Link to="/officer-manage-faq">จัดการ FAQ</Link>

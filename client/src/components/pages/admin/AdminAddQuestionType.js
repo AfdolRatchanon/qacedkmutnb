@@ -27,16 +27,16 @@ const AdminAddQuestionType = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("submit", value);
+      // console.log("submit", value);
 
       adminAddQuestionType(user.token, value)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success(res.data);
             navigate("/admin-manage-question-type");
          })
          .catch((err) => {
-            console.log(err.response.data);
+            // console.log(err.response.data);
             toast.warning(err.response.data);
          });
    };
@@ -53,7 +53,7 @@ const AdminAddQuestionType = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           <Link to="/index-admin">หน้าแรก</Link>
                         </li>
                         <li className="breadcrumb-item">
                            <Link to="/admin-manage-user">ข้อมูลสมาชิก</Link>

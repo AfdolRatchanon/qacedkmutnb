@@ -26,7 +26,7 @@ const OfficerManageFAQ = () => {
    const loadData = () => {
       countFAQType(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setDataQuestionType(res.data);
          })
          .catch((err) => {
@@ -37,8 +37,6 @@ const OfficerManageFAQ = () => {
    useEffect(() => {
       loadData();
    }, []);
-
-   
 
    const Small_Boxes = (props) => {
       const { type_id, count_type_id, type_name, p_key } = props;
@@ -61,7 +59,7 @@ const OfficerManageFAQ = () => {
                   to="/officer-read-faq-type"
                   className="small-box-footer"
                   onClick={() => {
-                     console.log("type_id : ", type_id);
+                     // console.log("type_id : ", type_id);
                      localStorage.setItem("officer_type_id", type_id);
                   }}
                >
@@ -89,7 +87,20 @@ const OfficerManageFAQ = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item font-weight-bold">จัดการ FAQ</li>
                      </ol>

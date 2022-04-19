@@ -15,8 +15,8 @@ exports.addQuestion = async (req, res) => {
          // return res.status(400).json({ msg: "No file uploaded" });
       } else {
          file = req.files.file;
-         if (!file.name.match(/\.(png|jpg|jpeg|PNG|JPG|JPEG)$/)) {
-            return res.status(400).send("ไฟล์รูปไม่ถูกต้อง");
+         if (!file.name.match(/\.(png|jpg|jpeg|pdf|PNG|JPG|JPEG|PDF)$/)) {
+            return res.status(400).send("ไฟล์ไม่ถูกต้อง");
          }
 
          file_new_Name = `${Date.now()}${path.extname(file.name)}`;
@@ -147,7 +147,7 @@ exports.updateQuestion = async (req, res) => {
       } else {
          if (req.files != null) {
             file2 = req.files.file;
-            if (!file2.name.match(/\.(png|jpg|jpeg|PNG|JPG|JPEG)$/)) {
+            if (!file2.name.match(/\.(png|jpg|jpeg|pdf|PNG|JPG|JPEG|PDF)$/)) {
                return res.status(400).send("ไฟล์รูปไม่ถูกต้อง");
             } else {
                img_Dname = `${Date.now()}${path.extname(file2.name)}`;
@@ -239,7 +239,7 @@ exports.deleteQuestion = async (req, res) => {
 
       console.log("delete qusetion", req.body);
 
-      db.query("SELECT sta_id FROM tbl_question WHERE qst_id = ?", [qst_id], async (err, result) => {
+      db.query("SELECT sta_id,qst_img FROM tbl_question WHERE qst_id = ?", [qst_id], async (err, result) => {
          if (err) {
             console.log(err);
             return res.status(400).send("Query Database ERROR!!!");
@@ -253,6 +253,16 @@ exports.deleteQuestion = async (req, res) => {
                if (result[0].sta_id != 3) {
                   return res.status(400).send("ไม่สามารถลบข้อมูลได้เนื่องจากมีการตอบคำถามกลับแล้ว");
                } else {
+                  if (result[0].qst_img != 0) {
+                     // console.log("ลบรูป");
+                     const path = "./img/qst/" + result[0].qst_img;
+                     try {
+                        fs.unlinkSync(path);
+                        //file2 removed
+                     } catch (err) {
+                        console.error(err);
+                     }
+                  }
                   db.query("DELETE FROM tbl_question WHERE qst_id = ?", [qst_id], async (err, result) => {
                      if (err) {
                         console.log(err);

@@ -28,7 +28,7 @@ const OfficerQuestionType = () => {
    const loadData = () => {
       countQuestionType(user.token)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setDataQuestionType(res.data);
          })
          .catch((err) => {
@@ -61,7 +61,7 @@ const OfficerQuestionType = () => {
                   to="/officer-read-question-type"
                   className="small-box-footer"
                   onClick={() => {
-                     console.log("type_id : ", type_id);
+                     // console.log("type_id : ", type_id);
                      localStorage.setItem("officer_type_id", type_id);
                   }}
                >
@@ -84,7 +84,20 @@ const OfficerQuestionType = () => {
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
-                           <Link to="/">หน้าแรก</Link>
+                           {user.lv_id == 1 ? (
+                              /* /index-admin */
+                              <Link to="/index-admin">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : user.lv_id == 2 ? (
+                              <Link to="/index-officer">
+                                 {/* <i className="nav-icon fas fa-file" /> */}
+                                 <p>หน้าแรก</p>
+                              </Link>
+                           ) : (
+                              <></>
+                           )}
                         </li>
                         <li className="breadcrumb-item font-weight-bold">หมวดคำถาม</li>
                      </ol>
