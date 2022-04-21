@@ -209,7 +209,14 @@ const OfficerAnswerQuestion = () => {
                                              alt=""
                                              width="200"
                                           /> */}
-                                          <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                          <a
+                                             href={process.env.REACT_APP_API_IMG + "/" + value.qst_img}
+                                             target="_blank"
+                                             className="btn btn-success"
+                                          >
+                                             มีไฟล์แนบ
+                                          </a>
+                                          {/* <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
                                              มีไฟล์แนบ
                                           </button>
                                           {isViewerOpen && (
@@ -221,7 +228,7 @@ const OfficerAnswerQuestion = () => {
                                                 closeOnClickOutside={true}
                                                 onClose={closeImageViewer}
                                              />
-                                          )}
+                                          )} */}
                                        </>
                                     ) : (
                                        <>-</>

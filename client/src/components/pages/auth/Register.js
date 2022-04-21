@@ -95,8 +95,8 @@ const Register = () => {
                                     className="form-control col-sm-5"
                                     name="mem_name"
                                     placeholder="กรอกชื่อ-นามสกุล"
-                                    pattern="^\w(\w|\s){0,30}"
-                                    title="Please input range 1 - 30 alphabet"
+                                    pattern="^\w(\w|\s|\[ก-๙]){0,30}"
+                                    title="กรอกชื่อ - นามสกุล 1 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -134,8 +134,8 @@ const Register = () => {
                                     className="form-control col-sm-5"
                                     name="mem_user"
                                     placeholder="กรอกชื่อผู้ใช้"
-                                    pattern="^(?=.*\d).{6,30}$"
-                                    title="กรอกชื่อผู้ใช้ 4 ตัวอักษรขึ้นไป"
+                                    pattern="^(?=.*\w).{6,30}$"
+                                    title="กรอกชื่อผู้ใช้ 6 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -147,7 +147,7 @@ const Register = () => {
                                     className="form-control col-sm-5"
                                     name="mem_pwd"
                                     placeholder="รหัสผ่าน"
-                                    pattern="^(?=.*\d).{6,30}$"
+                                    pattern="^(?=.*\d|\w).{6,30}$"
                                     title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
                                     onChange={handleChang}
                                  />

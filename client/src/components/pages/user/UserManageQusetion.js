@@ -66,13 +66,15 @@ const UserManageQusetion = () => {
          .catch((err) => {
             console.log(err);
             console.log(err.response);
-            console.log(err.response.date);
+            // console.log(err.response.date);
          });
    };
 
    useEffect(() => {
+      // console.log("useEffect Status : ", status);
       loadData();
       setStatus(0);
+      // console.log(user);
    }, [status]);
 
    const handleChang = (e) => {
@@ -183,9 +185,10 @@ const UserManageQusetion = () => {
       // console.log("OK", modalConfirmDeleteValue);
       deleteQuestion(user.token, { qst_id: modalConfirmDeleteValue })
          .then((res) => {
+            // console.log(status);
+            setStatus(1);
             // console.log(res.data);
             toast.success(res.data);
-            setStatus(1);
          })
          .catch((err) => {
             console.log(err);
@@ -467,7 +470,7 @@ const UserManageQusetion = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">ข้อมูลคำถาม - ..................</h3>
+                           <h3 className="card-title">ข้อมูลคำถาม - {user.mem_name}</h3>
                         </div>
                         <div className="card-body">
                            <h1>คำถามของฉัน</h1>

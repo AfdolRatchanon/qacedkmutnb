@@ -45,7 +45,22 @@
       <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
       <!-- summernote -->
       <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css" />
-
+      <!-- Start Single Page Apps for GitHub Pages -->
+      <script type="text/javascript">
+         (function (l) {
+            if (l.search[1] === "/") {
+               var decoded = l.search
+                  .slice(1)
+                  .split("&")
+                  .map(function (s) {
+                     return s.replace(/~and~/g, "&");
+                  })
+                  .join("?");
+               window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+            }
+         })(window.location);
+      </script>
+      <!-- End Single Page Apps for GitHub Pages -->
       <title>Q&A CED KMUTNB</title>
    </head>
    <body class="control-sidebar-slide-open layout-navbar-fixed hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -75,7 +90,7 @@
       </script>
       <!-- Bootstrap 4 -->
       <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- ChartJS -->
+      <!-- ChartJS -->
       <script src="plugins/chart.js/Chart.min.js"></script>
       <!-- Sparkline -->
       <script src="plugins/sparklines/sparkline.js"></script>

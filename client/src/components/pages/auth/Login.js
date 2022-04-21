@@ -158,19 +158,25 @@ const Login = () => {
                               </div>
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    // style={{ margin: " 0px 5px 0px 5px" }}
+                                    // width: "110px",
                                     type="reset"
-                                    className="btn btn-danger"
+                                    className="btn btn-danger col-sm-3 mx-1 my-1"
                                     onClick={handCancel}
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                 <button
+                                    // style={{ margin: " 0px 5px 0px 5px" }}
+                                    // width: "110px",
+                                    className="btn btn-success col-sm-3 mx-1 my-1"
+                                 >
                                     เข้าสู่ระบบ
                                  </button>
                                  <Link
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
-                                    className="btn btn-primary"
+                                    // style={{ margin: " 0px 5px 0px 5px" }}
+                                    // width: "110px",
+                                    className="btn btn-primary col-sm-3 mx-1 my-1"
                                     to="/Register"
                                  >
                                     สมัครสมาชิก

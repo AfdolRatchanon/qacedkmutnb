@@ -1,4 +1,4 @@
-const { collapseToast } = require("react-toastify");
+// const { collapseToast } = require("react-toastify");
 const db = require("../configs/DB");
 
 exports.officerReadQuestionType = async (req, res) => {
@@ -265,7 +265,7 @@ exports.officerCountReply = async (req, res) => {
       const { mem_id } = req.body;
       console.log("officerCountReply : ", req.body);
       db.query(
-         "SELECT COUNT(q.qst_id) as allQst, COUNT(IF(q.sta_id = 4,1,null)) as successQst, COUNT(IF(q.sta_id = 3,1,null)) as waitReply, a.ownReply FROM tbl_question q , (SELECT COUNT(reply_id) as ownReply FROM tbl_reply r WHERE mem_id = ?) as a",
+         "SELECT COUNT(q.qst_id) as allQst, COUNT(IF(q.sta_id = 4,1,null)) as successQst, COUNT(IF(q.sta_id = 3,1,null)) as waitReply,(SELECT COUNT(reply_id) as ownReply FROM tbl_reply r WHERE mem_id = ? ) as ownReply FROM tbl_question q",
          [mem_id],
          async (err, result) => {
             if (err) {

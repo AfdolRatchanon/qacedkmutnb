@@ -6,6 +6,11 @@ const { readdirSync } = require("fs");
 
 // TriMerge
 const cors = require("cors");
+const corsOptions = {
+   // origin: "https://comeduqanda.web.app",
+   origin: "*",
+   credentials: true,
+};
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
@@ -18,7 +23,7 @@ const port = process.env.PORT;
 //NOTE MIDDLEWARE
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "20mb" }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(fileUpload());
 
 app.use("/qst_img", express.static("img/qst"));

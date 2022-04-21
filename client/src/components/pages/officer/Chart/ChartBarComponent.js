@@ -55,6 +55,7 @@ const ChartBarComponent = () => {
    });
 
    const charBar = () => {
+      // console.log("mem_id", user.mem_id);
       officerCountReply(user.token, { mem_id: user.mem_id })
          .then((res) => {
             setCountQst(res.data[0]);
