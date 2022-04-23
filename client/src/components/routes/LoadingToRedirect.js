@@ -43,14 +43,15 @@ const LoadingToRedirect = () => {
                <h2 className="headline text-warning"> 404 </h2>
                <div className="error-content">
                   <h3>
-                     <i className="fas fa-exclamation-triangle text-warning" /> Oops! Page not found. redirect in {count}
+                     <i className="fas fa-exclamation-triangle text-warning" /> ตรวจสอบสิทธิ์การเข้าถึง
                   </h3>
-                  <p>
-                     We could not find the page you were looking for. Meanwhile, you may <Link to="/">return to HomePage</Link> or
-                     try using the search form.
-                  </p>
-                  <form className="search-form">
-                     {/* <div className="input-group">
+                  <h5>หากคุณไม่มีสิทธิ์เข้าถึงจะถูกส่งไป หน้าแรกในอีก {count}</h5>
+
+                  <h6>
+                     <Link to="/">กลับไปที่หน้าแรก</Link>
+                  </h6>
+                  {/* <form className="search-form"> */}
+                  {/* <div className="input-group">
                         <input type="text" name="search" className="form-control" placeholder="Search" />
                         <div className="input-group-append">
                            <button type="submit" name="submit" className="btn btn-warning">
@@ -58,8 +59,8 @@ const LoadingToRedirect = () => {
                            </button>
                         </div>
                      </div> */}
-                     {/* /.input-group */}
-                  </form>
+                  {/* /.input-group */}
+                  {/* </form> */}
                </div>
                {/* /.error-content */}
             </div>

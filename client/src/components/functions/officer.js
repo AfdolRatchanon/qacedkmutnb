@@ -82,7 +82,7 @@ export const officerCountReply = async (authtoken, value) => {
 };
 export const officerCountQuestionTypeAll = async (authtoken) => {
    //    console.log("Func", authtoken);
-   return await axios.get(process.env.REACT_APP_API + "/officer-count-qusetion-type-all", {
+   return await axios.get(process.env.REACT_APP_API + "/query-count-qusetion-type-all", {
       headers: {
          authtoken,
       },

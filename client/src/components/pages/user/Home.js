@@ -7,7 +7,6 @@ import ChartBarQst from "./chart/ChartBarQst";
 const Home = () => {
    const { user } = useSelector((state) => ({ ...state }));
    const [countQst, setCountQst] = useState({ all_qst: 0, qst_success: 0, qst_wait: 0 });
-   const [countMem, setCountMem] = useState({});
 
    const [bgSmallBox, setBgSmallBox] = useState({
       0: "rgba(0, 255, 64, 0.5)",
@@ -17,7 +16,7 @@ const Home = () => {
    });
 
    const Small_Boxes = (props) => {
-      const { type_id, count, name, p_key } = props;
+      const { count, name, p_key } = props;
 
       return (
          <div className="col-lg-6 col-6">

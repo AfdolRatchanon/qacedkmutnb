@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { countQstNoAns } from "../../functions/query";
+import { countQuestionType } from "../../functions/query";
 
 export default function Header() {
    const { user } = useSelector((state) => ({ ...state }));
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const [qst, setQst] = useState(0);
+   const [qstTypeNum, setQstTypeNum] = useState([]);
    // คำสั่ง Logout
    const logout = () => {
       dispatch({
@@ -28,7 +30,16 @@ export default function Header() {
                   setQst(res.data[0].qst_num);
                })
                .catch((err) => {
-                  console.log("Qst Count : ");
+                  // console.log("Qst Count : ");
+                  console.log(err.response);
+               });
+            countQuestionType()
+               .then((res) => {
+                  // console.log("Qst Type : ", res.data);
+                  setQstTypeNum(res.data);
+               })
+               .catch((err) => {
+                  // console.log("Qst Type : ");
                   console.log(err.response);
                });
          }
@@ -102,14 +113,74 @@ export default function Header() {
                {user ? (
                   user.lv_id != 3 ? (
                      <>
-                        <Link to="/officer-question-type">
+                        {/* <Link to="/officer-question-type">
                            <li class="nav-item dropdown">
                               <div class="nav-link">
                                  <i class="far fa-comments"></i>
                                  <span class="badge badge-danger navbar-badge">{qst}</span>
                               </div>
                            </li>
-                        </Link>
+                        </Link> */}
+
+                        {/* Messages Dropdown Menu */}
+
+                        <li className="nav-item dropdown">
+                           <a className="nav-link" data-toggle="dropdown" href="#">
+                              <i class="far fa-comments"></i>
+                              <span class="badge badge-danger navbar-badge">{qst}</span>
+                           </a>
+                           <div
+                              className="dropdown-menu dropdown-menu-lg dropdown-menu-right"
+                              style={{ overflowY: "scroll", height: "500px" }}
+                           >
+                              <Link to="/officer-question-type">
+                                 <li className="dropdown-item dropdown-header">
+                                    <div class="">ดูคำถามทั้งหมด</div>
+                                 </li>
+                              </Link>
+                              {qstTypeNum.map((item) => (
+                                 <>
+                                    <Link
+                                       to="/officer-read-question-type"
+                                       className="dropdown-item"
+                                       onClick={() => {
+                                          // console.log("type_id : ", type_id);
+                                          localStorage.setItem("officer_type_id", item.type_id);
+                                          if (window.location.pathname == "/officer-read-question-type") {
+                                             window.location.reload(false);
+                                          }
+                                       }}
+                                    >
+                                       {/* Message Start */}
+                                       <div className="media">
+                                          <div className="media-body">
+                                             <p className="dropdown-item-title" style={{ wordBreak: "break-word" }}>
+                                                {item.type_name}
+                                                {/* <span className="float-right text-sm text-danger">
+                                                   <i className="fas fa-star" />
+                                                </span> */}
+                                             </p>
+                                             <p className="text-sm">
+                                                จำนวน <pred style={{ color: "red" }}>{item.count_type_id}</pred> คำถาม
+                                             </p>
+                                             {/* <p className="text-sm text-muted">
+                                                <i className="far fa-clock mr-1" /> 4 Hours Ago
+                                             </p> */}
+                                          </div>
+                                       </div>
+                                       {/* Message End */}
+                                    </Link>
+                                    <div className="dropdown-divider" />
+                                 </>
+                              ))}
+
+                              <Link to="/officer-question-type">
+                                 <li className="dropdown-item dropdown-header">
+                                    <div class="">ดูคำถามทั้งหมด</div>
+                                 </li>
+                              </Link>
+                           </div>
+                        </li>
                      </>
                   ) : (
                      <></>
@@ -129,18 +200,20 @@ export default function Header() {
                )}
                {user && (
                   <>
-                     <li className="nav-item dropdown">
+                     {/* <li className="nav-item dropdown d-sm-inline-block">
                         <a className="nav-link" data-toggle="dropdown" href="#">
                            {user.mem_user}
                         </a>
 
                         <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                            <span className=" dropdown-header">
-                              <i className="nav-icon far fa-envelope ">{" \u00A0\u00A0" + user.mem_mail}</i>
+                              <i className="nav-icon far fa-envelope "></i>
+                              {" \u00A0\u00A0" + user.mem_mail}
                            </span>
                            <div className="dropdown-divider" />
                            <span className=" dropdown-header">
-                              <i class="nav-icon far fa-address-card">{" \u00A0\u00A0" + user.lv_name}</i>
+                              <i class="nav-icon far fa-address-card "></i>
+                              {" \u00A0\u00A0" + user.lv_name}
                            </span>
                            <div className="dropdown-divider" />
                            <a href="#" className="dropdown-item dropdown-footer" onClick={logout}>
@@ -149,9 +222,66 @@ export default function Header() {
                               </p>
                            </a>
                         </div>
-                     </li>
-                     <li className="nav-item">
-                        <img src="../../dist/img/AdminLTELogo.png" height={38} className="img-circle elevation-1" />
+                     </li> */}
+                     <li className="nav-item dropdown">
+                        {user.mem_img != null && user.mem_img != "null" ? (
+                           <img
+                              src={process.env.REACT_APP_API_MEM_IMG + "/" + user.mem_img}
+                              height={35}
+                              width={35}
+                              className="img-circle elevation-1"
+                              data-toggle="dropdown"
+                           />
+                        ) : (
+                           <img
+                              src="../../dist/img/AdminLTELogo.png"
+                              height={38}
+                              className="img-circle elevation-1"
+                              data-toggle="dropdown"
+                           />
+                        )}
+                        {/* <img
+                           src="../../dist/img/AdminLTELogo.png"
+                           height={38}
+                           className="img-circle elevation-1"
+                           data-toggle="dropdown"
+                        /> */}
+
+                        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                           <span class="dropdown-item dropdown-header ">ข้อมูลสมาชิก</span>
+                           <div class="dropdown-divider" />
+                           {/* <span className="dropdown-item">
+                              <i className="nav-icon far fa-envelope " />
+                              ชื่อผู้ใช้ :{" \u00A0\u00A0" + user.mem_user}
+                           </span>
+                           <div className="dropdown-divider" /> */}
+                           <span className="dropdown-item">
+                              {/* <i className="nav-icon far fa-envelope " /> */}
+                              ชื่อ - นามสกุล :{" \u00A0\u00A0" + user.mem_name}
+                           </span>
+                           <div className="dropdown-divider" />
+                           {/* <span className="dropdown-item">
+                              <i className="nav-icon far fa-envelope " />
+                              อีเมล :{" \u00A0\u00A0" + user.mem_mail}
+                           </span>
+                           <div className="dropdown-divider" /> */}
+                           <span className="dropdown-item">
+                              {/* <i class="nav-icon far fa-address-card " /> */}
+                              สิทธิ์การเข้าถึง :{" \u00A0\u00A0" + user.lv_name}
+                           </span>
+                           <div className="dropdown-divider" />
+                           <Link to="/edit-information" className="dropdown-item dropdown-footer">
+                              <p className="nav-link" role="button">
+                                 แก้ใขข้อมูลส่วนตัว
+                              </p>
+                           </Link>
+                           <div className="dropdown-divider" />
+                           <div href="#" className="dropdown-item dropdown-footer" onClick={logout}>
+                              <p className="nav-link" role="button">
+                                 ออกจากระบบ
+                              </p>
+                           </div>
+                        </div>
                      </li>
                   </>
                )}

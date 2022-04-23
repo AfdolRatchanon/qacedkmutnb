@@ -1,5 +1,5 @@
 // const { collapseToast } = require("react-toastify");
-const db = require("../configs/DB");
+const db = require("../configs/db");
 
 exports.officerReadQuestionType = async (req, res) => {
    try {
@@ -289,28 +289,4 @@ exports.officerCountReply = async (req, res) => {
    }
 };
 
-exports.countQuestionTypeAll = async (req, res) => {
-   try {
-      // console.log(req.body);
-      db.query(
-         "SELECT t.type_id, t.type_name, COUNT(q.sta_id) AS count_type_All FROM tbl_type t LEFT JOIN tbl_question q on t.type_id = q.type_id  GROUP BY t.type_id  ORDER BY t.type_id  ASC;",
-         async (err, result) => {
-            if (err) {
-               console.log(err);
-               return res.status(400).send("Query Database ERROR!!!");
-            } else {
-               if (result[0] == null) {
-                  // Username มีข้อมูลหรือไม่
-                  //console.log(result);
-                  return res.status(400).send("This username does not exist. ");
-               } else {
-                  return res.send(result);
-               }
-            }
-         }
-      );
-   } catch (error) {
-      console.log(error);
-      res.status(500).send("Server Error!!!");
-   }
-};
+

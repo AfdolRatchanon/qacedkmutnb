@@ -188,7 +188,7 @@ const AddQuestion = () => {
                                     // pattern="\w{4,30}"
                                     // title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
-                                    defaultValue={user.mem_user}
+                                    defaultValue={user.mem_name}
                                     disabled={true}
                                  />
                                  <div className="col-md-2"></div>
@@ -209,10 +209,27 @@ const AddQuestion = () => {
                                  />
                                  <div className="col-md-2"></div>
                               </div>
+
                               <div className="form-group row">
                                  <div className="col-md-2"></div>
                                  <label className="col-md-2">แนบไฟล์ (JPEG, JPG, PNG, PDF)</label>
-                                 <input type="file" className="form-control-file col-md-6" name="qst_img" onChange={onChange} />
+                                 <div className="form-group">
+                                    <div className="btn btn-default btn-file">
+                                       <i className="fas fa-paperclip" /> แนบไฟล์
+                                       <input
+                                          type="file"
+                                          className="form-control-file col-md-6"
+                                          name="qst_img"
+                                          onChange={onChange}
+                                       />
+                                    </div>
+                                    <pi style={{ wordBreak: "break-word" }}>
+                                       {" \u00A0\u00A0"}
+                                       {file ? file.name : <></>}
+                                    </pi>
+                                    {/* <p className="help-block">Max. 32MB</p> */}
+                                 </div>
+
                                  <div className="col-md-2"></div>
                               </div>
                               <div className="form-group" align="center">

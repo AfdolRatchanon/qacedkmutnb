@@ -16,11 +16,7 @@ const OfficerReadQuestionType = () => {
    const type_id = localStorage.officer_type_id;
    const { user } = useSelector((state) => ({ ...state }));
    const [qst_type_name, setQst_Type_Name] = useState("");
-   const [value, setValue] = useState({
-      type_id: 0,
-      qst_title: "",
-      qst_detail: "",
-   });
+   
 
    const loadDataTypeQ = async () => {
       loadQuestionTypeName(user.token, { type_id: type_id })

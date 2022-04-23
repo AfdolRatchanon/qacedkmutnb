@@ -1,4 +1,4 @@
-const db = require("../configs/DB");
+const db = require("../configs/db");
 const path = require("path");
 const fs = require("fs");
 
@@ -278,6 +278,110 @@ exports.deleteQuestion = async (req, res) => {
          }
       });
    } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.updateInformation = async (req, res) => {
+   try {
+      // Check user
+      const { mem_id, mem_name, mem_mail, mem_tal, mem_img } = req.body;
+      var mem_img_new = mem_img;
+      var img_Dname = "0";
+      var req2Path = "";
+      var file2;
+      console.log("body : ", req.body);
+
+      //ตรวจสอบเพื่อนเปลี่ยนชื่อไฟล์
+      if (req.files === null) {
+         img_Dname = mem_img;
+         console.log("img_Dname : ", mem_img_new);
+         // console.log("body : ", req.body);
+      } else {
+         if (req.files != null) {
+            file2 = req.files.file;
+            console.log(file2);
+            if (!file2.name.match(/\.(png|jpg|jpeg|PNG|JPG|JPEG)$/)) {
+               return res.status(400).send("ไฟล์รูปไม่ถูกต้อง");
+            } else {
+               img_Dname = `${Date.now()}${path.extname(file2.name)}`;
+               // console.log(req.user);
+               // console.log("files : ", req.files);
+               // console.log("body : ", req.body);
+               // console.log("img_Dname : ", img_Dname);
+               mem_img_new = img_Dname;
+               req2Path = path.join(__dirname, "../");
+            }
+         }
+      }
+
+      // console.log(req.body, req.user);
+
+      // console.log("img : ", img_Dname);
+      // console.log("mem_img : ", mem_img);
+      //NOTE res.send(req.body);
+
+      db.query(
+         "SELECT * FROM (SELECT * FROM tbl_member WHERE NOT mem_id = ?) as a WHERE mem_mail = ? OR mem_tal = ?",
+         [mem_id, mem_mail, mem_tal],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(500).send("Query Database ERROR!!!");
+            } else {
+               if (result.length > 0) {
+                  // ถ้ามีคนใช้ Username นี้แล้วไม่ออก
+                  return res.status(400).send("ชื่อผู้ใช้ หรือ อีเมล หรือ เบอร์โทรศัพท์ มีผู้ใช้งานแล้ว");
+               }
+
+               if (mem_name === "" || mem_name === null) {
+                  return res.status(400).send("กรุณากรอก ชื่อ - สกุล ");
+               } else {
+                  if (mem_mail === "" || mem_mail === null) {
+                     return res.status(400).send("กรุณากรอก อีเมล ");
+                  } else {
+                     if (mem_tal === "" || mem_tal === null) {
+                        return res.status(400).send("กรุณากรอก เบอร์โทรศัพท์");
+                     } else {
+                        // console.log("ผ่านไม่มีอะไรซ้ำ");
+                        if (req.files != null) {
+                           file2.mv(`${req2Path}/img/user/${img_Dname}`, (err) => {
+                              if (err) {
+                                 console.error(err);
+                                 return res.status(500).send(err);
+                              }
+                           });
+                        // delete img
+                           const path = "./img/user/" + mem_img;
+                           try {
+                              fs.unlinkSync(path);
+                              //file2 removed
+                           } catch (err) {
+                              console.error(err);
+                           }
+                        }
+                        console.log("img on check : ", img_Dname);
+                        db.query(
+                           "UPDATE tbl_member SET mem_name = ?, mem_mail = ?, mem_tal = ?, mem_img = ? WHERE mem_id = ?",
+                           [mem_name, mem_mail, mem_tal, img_Dname, mem_id],
+                           (err, result) => {
+                              if (err) {
+                                 console.log("ERR");
+                                 console.log(err);
+                              } else {
+                                 res.send("บันทึกคำถามสำเร็จ");
+                              }
+                           }
+                        );
+                     }
+                  }
+               }
+            }
+         }
+      );
+   } catch (error) {
+      console.log("Server Error!!!");
       console.log(error);
       res.status(500).send("Server Error!!!");
    }

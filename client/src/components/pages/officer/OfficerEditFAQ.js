@@ -38,6 +38,13 @@ const OfficerEditFAQ = () => {
       officerReadFAQ(user.token, { faq_id: frequently_asked_question_ID })
          .then((res) => {
             setEditValue(res.data);
+            // console.log(res.data);
+            setValue({
+               faq_id: res.data[0].faq_id,
+               type_id: res.data[0].type_id,
+               faq_title: res.data[0].faq_title,
+               faq_detail: res.data[0].faq_detail,
+            });
             // console.log("EditValue: ", res.data);
          })
          .catch((err) => {
@@ -55,8 +62,8 @@ const OfficerEditFAQ = () => {
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
-      setValue({ ...editValue[0], [e.target.name]: e.target.value });
-      // console.log("Value : ", value);
+      setValue({ ...value, [e.target.name]: e.target.value });
+      console.log("Value : ", value);
    };
 
    // console.log(value);
@@ -64,20 +71,20 @@ const OfficerEditFAQ = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
       // console.log("submit Add Question", value);
-      if (value.type_id === 0) {
-         toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
-      } else {
-         officerUpdateFAQ(user.token, value)
-            .then((res) => {
-               // console.log(res.data);
-               toast.success(res.data);
-               navigate("/officer-read-faq-type");
-            })
-            .catch((err) => {
-               console.log(err.response.data);
-               toast.error(err.response.data);
-            });
-      }
+      // if (value.type_id === 0) {
+      //    toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
+      // } else {
+      officerUpdateFAQ(user.token, value)
+         .then((res) => {
+            // console.log(res.data);
+            toast.success(res.data);
+            navigate("/officer-read-faq-type");
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+            toast.error(err.response.data);
+         });
+      // }
    };
 
    // const handCancel = (e) => {

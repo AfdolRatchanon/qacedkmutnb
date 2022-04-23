@@ -125,8 +125,8 @@ const Login = () => {
                                        className="form-control"
                                        name="mem_user"
                                        placeholder="ชื่อผู้ใช้"
-                                       pattern="\w{4,30}"
-                                       title="Please input range 4 - 30 alphabet"
+                                       pattern="^(?=.*\w).{4,30}$"
+                                       title="กรอกชื่อผู้ใช้ 6 ตัวอักษรขึ้นไป"
                                        onChange={handleChang}
                                     />
                                     <div className="col-sm-4"></div>
@@ -141,20 +141,19 @@ const Login = () => {
                                        className="form-control"
                                        name="mem_pwd"
                                        placeholder="รหัสผ่าน"
-                                       pattern="\w{6,30}"
-                                       title="Please input range 6 - 30 alphabet"
+                                       pattern="^(?=.*\d|\w).{6,30}$"
+                                       title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
                                        onChange={handleChang}
                                     />
                                  </div>
-                                 <div className="col-sm-1"></div>
+
                                  <Link
-                                    style={{ width: "110px", margin: " 5px 5px 5px 5px" }}
-                                    className="btn btn-warning"
+                                    // style={{ width: "110px", margin: " 5px 5px 5px 5px" }}
+                                    className="btn btn-warning col-sm-3 mx-2 my-1"
                                     to="/ForgotPassword"
                                  >
                                     ลืมรหัสผ่าน
                                  </Link>
-                                 <div className="col-sm-1"></div>
                               </div>
                               <div className="form-group" align="center">
                                  <button

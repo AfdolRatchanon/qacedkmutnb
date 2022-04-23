@@ -23,7 +23,7 @@ const ChartBarMember = () => {
          },
          title: {
             display: true,
-            text: "ข้อมูลการตอบคำถาม",
+            text: "ข้อมูลการสมาชิก",
          },
       },
    });

@@ -23,6 +23,7 @@ const {
    countMember,
    countQstNoAns,
    countQustOfUser,
+   countQuestionTypeAll,
 } = require("../controllers/query");
 
 //NOTE MiddleWare
@@ -116,6 +117,11 @@ router.get("/query-count-question-no-ans", auth, officerCheck, countQstNoAns);
 //@Method   POST
 //@Access   public
 router.post("/query-count-question-of-user", auth, countQustOfUser);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   GET
+//@Access   private
+router.get("/query-count-qusetion-type-all", countQuestionTypeAll);
 
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET

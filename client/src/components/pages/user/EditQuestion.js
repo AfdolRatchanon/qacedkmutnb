@@ -69,6 +69,16 @@ const EditQuestion = () => {
                navigate("/user-question");
             } else {
                setEditValue(res.data);
+               setValue({
+                  sta_id: res.data[0].sta_id,
+                  type_id: res.data[0].type_id,
+                  qst_title: res.data[0].qst_title,
+                  qst_img: res.data[0].qst_img,
+                  qst_detail: res.data[0].qst_detail,
+                  qst_name: res.data[0].qst_name,
+                  qst_mail: res.data[0].qst_mail,
+                  qst_id: res.data[0].qst_id,
+               });
             }
          })
          .catch((err) => {
@@ -89,7 +99,7 @@ const EditQuestion = () => {
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
-      setValue({ ...editValue[0], [e.target.name]: e.target.value });
+      setValue({ ...value, [e.target.name]: e.target.value });
    };
 
    // console.log(value);
@@ -97,7 +107,7 @@ const EditQuestion = () => {
       if (e.target.files[0] != null) {
          setFile(e.target.files[0]);
          console.log("File : ", file);
-         setValue({ ...editValue[0], [e.target.name]: e.target.value });
+         setValue({ ...value, [e.target.name]: e.target.value });
       } else {
          setFile("null");
       }
@@ -106,35 +116,36 @@ const EditQuestion = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
 
-      if (value.type_id === 0 && file == "") {
-         toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
-      } else {
-         const formData = new FormData();
-         console.log("file : ", file);
-         console.log("value : ", value);
+      // if (value.type_id === 0 && file == "") {
+      //    toast.warning("คุณยังไม่ได้แก้ไขข้อมูล");
+      // } else {
+      const formData = new FormData();
+      //    console.log("file : ", file);
+      //    console.log("value : ", value);
 
-         formData.append("sta_id", value.sta_id);
-         formData.append("type_id", value.type_id);
-         formData.append("qst_title", value.qst_title);
-         formData.append("qst_img", value.qst_img);
-         formData.append("qst_detail", value.qst_detail);
-         formData.append("qst_name", value.qst_name);
-         formData.append("qst_mail", value.qst_mail);
-         formData.append("qst_id", value.qst_id);
-         formData.append("file", file);
-         console.log("submit Edit Question", value);
-
-         updateQuestion(user.token, formData)
-            .then((res) => {
-               console.log(res.data);
-               toast.success(res.data);
-               navigate("/user-question");
-            })
-            .catch((err) => {
-               console.log(err.response.data);
-               toast.warning(err.response.data);
-            });
-      }
+      formData.append("sta_id", value.sta_id);
+      formData.append("type_id", value.type_id);
+      formData.append("qst_title", value.qst_title);
+      formData.append("qst_img", value.qst_img);
+      formData.append("qst_detail", value.qst_detail);
+      formData.append("qst_name", value.qst_name);
+      formData.append("qst_mail", value.qst_mail);
+      formData.append("qst_id", value.qst_id);
+      formData.append("file", file);
+      console.log("submit Edit Question", value);
+      console.log("submit Edit Question", value.sta_id);
+      console.log("submit Edit Question", value.type_id);
+      updateQuestion(user.token, formData)
+         .then((res) => {
+            console.log(res.data);
+            toast.success(res.data);
+            navigate("/user-question");
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+            toast.warning(err.response.data);
+         });
+      // }
    };
 
    return (
@@ -318,8 +329,29 @@ const EditQuestion = () => {
                                        </div>
                                     </>
                                  )}
+
                                  <div className="form-group row">
-                                    <div className="col-sm-2"></div>
+                                    <div className="col-md-2"></div>
+                                    <label className="col-md-2">แนบไฟล์ใหม่ (JPEG, JPG, PNG, PDF)</label>
+                                    <div className="form-group">
+                                       <div className="btn btn-default btn-file">
+                                          <i className="fas fa-paperclip" /> แนบไฟล์
+                                          <input
+                                             type="file"
+                                             className="form-control-file col-sm-6"
+                                             name="qst_img_test"
+                                             onChange={onChange}
+                                          />
+                                       </div>
+                                       <pi style={{ wordBreak: "break-word" }}>
+                                          {" \u00A0\u00A0"}
+                                          {file ? file.name : <></>}
+                                       </pi>
+                                       {/* <p className="help-block">Max. 32MB</p> */}
+                                    </div>
+
+                                    <div className="col-md-2"></div>
+                                    {/* <div className="col-sm-2"></div>
                                     <label className="col-sm-2">แนบไฟล์ใหม่ (JPEG,JPG,PNG)</label>
                                     <input
                                        type="file"
@@ -327,7 +359,7 @@ const EditQuestion = () => {
                                        name="qst_img_test"
                                        onChange={onChange}
                                     />
-                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-2"></div> */}
                                  </div>
                                  <div className="form-group" align="center">
                                     <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">

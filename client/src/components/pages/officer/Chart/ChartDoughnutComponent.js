@@ -6,12 +6,12 @@ import { Doughnut } from "react-chartjs-2";
 import { officerCountQuestionTypeAll } from "../../../functions/officer";
 
 //React Redux
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ChartDoughnutComponent = () => {
-   const { user } = useSelector((state) => ({ ...state }));
+   // const { user } = useSelector((state) => ({ ...state }));
    const [data, setData] = useState({
       labels: [],
       datasets: [
@@ -29,7 +29,7 @@ const ChartDoughnutComponent = () => {
       let countType = [];
       let nameType = [];
 
-      officerCountQuestionTypeAll(user.token)
+      officerCountQuestionTypeAll()
          .then((res) => {
             // console.log("res.data", res.data);
             for (const dataObj of res.data) {

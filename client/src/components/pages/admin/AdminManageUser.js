@@ -146,47 +146,6 @@ const AdminManageUser = () => {
                            </div>
                         </div>
                         <div className="card-body">
-                           <h1>ข้อมูลสมาชิก</h1>
-                           {/* <table className="table table-hover table-bordered">
-                              <thead className="thead-dark">
-                                 <tr>
-                                    <th scope="col">ลำดับ</th>
-                                    <th scope="col">ชื่อ - สกุล</th>
-                                    <th scope="col">สถานะ</th>
-                                    <th scope="col">ระดับการเข้าถึงข้อมูล</th>
-                                    <th scope="col">การดำเนินการ</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 {data.map((val, key) => (
-                                    <tr>
-                                       <th scope="row">{key + 1}</th>
-                                       <td>{val.mem_name}</td>
-                                       <td>{val.sta_name}</td>
-                                       <td>{val.lv_name}</td>
-                                       <td>
-                                          <div className="dropdown">
-                                             <button
-                                                className="btn btn-secondary dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                             >
-                                                จัดการข้อมูล
-                                             </button>
-                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a className="dropdown-item">Action</a>
-                                                <a className="dropdown-item">Another action</a>
-                                                <a className="dropdown-item">Something else here</a>
-                                             </div>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                 ))}
-                              </tbody>
-                           </table> */}
                            <BootstrapTable data={data} bordered={false} hover pagination search>
                               {/*  bordered={false} */}
                               <TableHeaderColumn dataSort isKey width="150" dataAlign="center" dataField="num_row">

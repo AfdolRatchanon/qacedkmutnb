@@ -2,10 +2,17 @@
 const express = require("express");
 const router = express.Router();
 //Controller
-const { addQuestion, listQuestion, readQuestion, updateQuestion, deleteQuestion } = require("../controllers/user");
+const {
+   addQuestion,
+   listQuestion,
+   readQuestion,
+   updateQuestion,
+   deleteQuestion,
+   updateInformation,
+} = require("../controllers/user");
 
 //NOTE MiddleWare
-const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 //@Enpoint  http://Localhost:3001/api/query-question-type
 //@Method   POST
@@ -32,5 +39,10 @@ router.post("/user-update-question", auth, updateQuestion);
 //@Method   POST
 //@Access   private
 router.post("/user-delete-question", auth, deleteQuestion);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   POST
+//@Access   private
+router.post("/user-update-information", auth, updateInformation);
 
 module.exports = router;

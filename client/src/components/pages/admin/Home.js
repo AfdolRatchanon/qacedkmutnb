@@ -10,6 +10,7 @@ import { countMember } from "../../functions/query";
 import ChartDoughnutComponent from "../officer/chart/ChartDoughnutComponent";
 import ChartBarComponent from "../officer/chart/ChartBarComponent";
 import ChartBarMember from "./chart/ChartBarMember";
+import TableComponent from "../tables/TableComponent";
 // import ChartBarMember from "./chart/ChartBarMember";
 
 const Home = () => {
@@ -222,17 +223,45 @@ const Home = () => {
                                           </div>
                                        </div>
                                     </div>
-                                    <div className="col-xl-6">
-                                       {/* /.card */}
-                                       {/* DONUT CHART */}
+                                    {/* <div className="col-xl-6"> */}
+                                    {/* /.card */}
+                                    {/* DONUT CHART */}
 
-                                       {/* /.card */}
-                                    </div>
+                                    {/* /.card */}
+                                    {/* </div> */}
                                     {/* /.col (LEFT) */}
-                                    <div className="col-xl-12">
-                                       <div className="card card-success">
+                                    {/* /.col (RIGHT) */}
+                                 </div>
+                                 {/* /.row */}
+                              </div>
+                              {/* /.container-fluid */}
+                           </section>
+                           <h1>คำถามทั้งหมด แบ่งตามประเภท</h1>
+                           <section className="content">
+                              <div className="container-fluid">
+                                 <div className="row">
+                                    <div className="col-xl-6">
+                                       <div className="card card-warning">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Donut Chart */}</h3>
+                                             <h3 className="card-title"></h3>
+                                             <div className="card-tools">
+                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                   <i className="fas fa-minus" />
+                                                </button>
+                                             </div>
+                                          </div>
+                                          <div className="card-body">
+                                             <div className="chart">
+                                                <TableComponent />
+                                             </div>
+                                          </div>
+                                          {/* /.card-body */}
+                                       </div>
+                                    </div>
+                                    <div className="col-xl-6">
+                                       <div className="card card-primary">
+                                          <div className="card-header">
+                                             <h3 className="card-title">{/* Bar Chart */}</h3>
                                              <div className="card-tools">
                                                 <button type="button" className="btn btn-tool" data-card-widget="collapse">
                                                    <i className="fas fa-minus" />
@@ -244,10 +273,15 @@ const Home = () => {
                                                 <ChartDoughnutComponent />
                                              </div>
                                           </div>
-                                          {/* /.card-body */}
                                        </div>
-                                       {/* /.card */}
                                     </div>
+                                    {/* <div className="col-xl-6"> */}
+                                    {/* /.card */}
+                                    {/* DONUT CHART */}
+
+                                    {/* /.card */}
+                                    {/* </div> */}
+                                    {/* /.col (LEFT) */}
                                     {/* /.col (RIGHT) */}
                                  </div>
                                  {/* /.row */}

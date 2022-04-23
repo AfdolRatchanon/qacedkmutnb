@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 //function
 import { countFAQType } from "../../functions/query";
 
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+
 const OfficerManageFAQ = () => {
    const [dataQuestionType, setDataQuestionType] = useState([]);
    const [bgSmallBox, setBgSmallBox] = useState({
@@ -38,36 +40,68 @@ const OfficerManageFAQ = () => {
       loadData();
    }, []);
 
-   const Small_Boxes = (props) => {
-      const { type_id, count_type_id, type_name, p_key } = props;
+   // const Small_Boxes = (props) => {
+   //    const { type_id, count_type_id, type_name, p_key } = props;
 
-      return (
-         <div className="col-lg-3 col-6">
-            <div className={"small-box " + bgSmallBox[p_key % 10]}>
-               <div className="inner">
-                  <div className="row">
-                     <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1>
-                     <h4 style={{ margin: " auto 5px auto 5px" }}> คำถาม</h4>
-                  </div>
+   //    return (
+   //       <div className="col-lg-3 col-6">
+   //          <div className={"small-box " + bgSmallBox[p_key % 10]}>
+   //             <div className="inner">
+   //                <div className="row">
+   //                   <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1>
+   //                   <h4 style={{ margin: " auto 5px auto 5px" }}> คำถาม</h4>
+   //                </div>
 
-                  <h6 style={{ height: "60px" }}>หมวด {type_name}</h6>
-               </div>
-               {/* <div className="icon">
-                  <i className="ion ion-pie-graph" />
-               </div> */}
-               <Link
-                  to="/officer-read-faq-type"
-                  className="small-box-footer"
+   //                <h6 style={{ height: "60px" }}>หมวด {type_name}</h6>
+   //             </div>
+   //             {/* <div className="icon">
+   //                <i className="ion ion-pie-graph" />
+   //             </div> */}
+   //             <Link
+   //                to="/officer-read-faq-type"
+   //                className="small-box-footer"
+   //                onClick={() => {
+   //                   // console.log("type_id : ", type_id);
+   //                   localStorage.setItem("officer_type_id", type_id);
+   //                }}
+   //             >
+   //                ดูข้อมูล <i className="fas fa-arrow-circle-right" />
+   //             </Link>
+   //          </div>
+   //       </div>
+   //    );
+   // };
+
+   const indexN = (cell, row, enumObject, index) => {
+      return <div>{index + 1}</div>;
+   };
+
+   const manageButoon = (cell, row) => {
+      if (row.type_id) {
+         return (
+            <div className="position-sticky">
+               {/* <Link
+                  to="/admin-edit-level"
+                  className="btn btn-warning"
                   onClick={() => {
-                     // console.log("type_id : ", type_id);
-                     localStorage.setItem("officer_type_id", type_id);
+                     localStorage.setItem("level_id", row.lv_id);
                   }}
                >
-                  ดูข้อมูล <i className="fas fa-arrow-circle-right" />
+                  แก้ไข
+               </Link> */}
+               <Link
+                  to="/officer-read-faq-type"
+                  className=" btn btn-primary"
+                  onClick={() => {
+                     // console.log("type_id : ", type_id);
+                     localStorage.setItem("officer_type_id", row.type_id);
+                  }}
+               >
+                  จัดการข้อมูล
                </Link>
             </div>
-         </div>
-      );
+         );
+      }
    };
 
    return (
@@ -115,7 +149,7 @@ const OfficerManageFAQ = () => {
                <div className="row">
                   <div className="col-12">
                      {/* Default box */}
-                     <div className="row">
+                     {/* <div className="row">
                         {dataQuestionType.map((value, key) => {
                            return (
                               <Small_Boxes
@@ -127,6 +161,53 @@ const OfficerManageFAQ = () => {
                               />
                            );
                         })}
+                     </div> */}
+
+                     <div className="card">
+                        <div className="card-header">
+                           <h3 className="card-title">จัดการ FAQ</h3>
+                        </div>
+                        <div className="card-body">
+                           {/* <h1>คำถามของฉัน</h1> */}
+
+                           <BootstrapTable data={dataQuestionType} hover pagination search>
+                              <TableHeaderColumn isKey dataSort width="65" dataAlign="center" dataField="any" dataFormat={indexN}>
+                                 ลำดับ
+                              </TableHeaderColumn>
+                              {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
+                                 ID
+                              </TableHeaderColumn> */}
+                              <TableHeaderColumn dataSort width="450" headerAlign="center" dataField="type_name">
+                                 ชื่อระดับการเข้าถึง
+                              </TableHeaderColumn>
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="115"
+                                 headerAlign="center"
+                                 dataAlign="center"
+                                 dataField="count_type_id"
+                              >
+                                 จำนวนคำถาม
+                              </TableHeaderColumn>
+
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 dataAlign="center"
+                                 dataFormat={manageButoon}
+                                 dataField="any"
+                              >
+                                 จัดการ
+                              </TableHeaderColumn>
+
+                              {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
+                                 การดำเนินการ
+                              </TableHeaderColumn> */}
+                           </BootstrapTable>
+                        </div>
+                        {/* /.card-body */}
+                        <div className="card-footer"></div>
+                        {/* /.card-footer*/}
                      </div>
                   </div>
                </div>

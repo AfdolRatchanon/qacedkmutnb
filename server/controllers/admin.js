@@ -1,6 +1,6 @@
 //IMPORT
 const bcrypt = require("bcryptjs");
-const db = require("../configs/DB");
+const db = require("../configs/db");
 const jwt = require("jsonwebtoken");
 
 exports.adminListUser = async (req, res) => {

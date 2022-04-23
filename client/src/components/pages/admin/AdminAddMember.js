@@ -71,7 +71,7 @@ const AdminAddMember = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>หน้าแรก</h1>
+                     <h1>เพิ่มข้อมูลสมาชิก</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -186,7 +186,7 @@ const AdminAddMember = () => {
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
+                                 <label className="col-sm-2 col-form-label">ระดับการเข้าถึงข้อมูล</label>
                                  <select name="lv_id" className="form-control col-sm-5" onChange={handleChang}>
                                     <option value={0}>กรุณาเลือก</option>
                                     {questionLevel.map((questionLevel) => (

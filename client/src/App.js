@@ -13,6 +13,7 @@ import About from "./components/pages/About";
 import ForgotPassword from "./components/pages/auth/ForgotPassword";
 import NewPassword from "./components/pages/auth/NewPassword";
 import FAQ from "./components/pages/FAQ";
+import EditInformation from "./components/pages/auth/EditInformation";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
@@ -39,7 +40,6 @@ import HomeUser from "./components/pages/user/Home";
 import UserManageQusetion from "./components/pages/user/UserManageQusetion";
 import AddQuestion from "./components/pages/user/AddQuestion";
 import EditQuestion from "./components/pages/user/EditQuestion";
-
 
 import { currentUser } from "./components/functions/auth";
 
@@ -76,6 +76,8 @@ function App() {
                   mem_mail: res.data.mem_mail,
                   mem_user: res.data.mem_user,
                   mem_name: res.data.mem_name,
+                  mem_tal: res.data.mem_tal,
+                  mem_img: res.data.mem_img,
                   lv_id: res.data.lv_id,
                   lv_name: res.data.lv_name,
                },
@@ -284,7 +286,14 @@ function App() {
                         </UserRoute>
                      }
                   />
-                 
+                  <Route
+                     path="/edit-information"
+                     element={
+                        <UserRoute>
+                           <EditInformation />
+                        </UserRoute>
+                     }
+                  />
                </Routes>
             </div>
             <Footer />

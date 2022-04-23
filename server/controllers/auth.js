@@ -1,6 +1,6 @@
 //IMPORT
 const bcrypt = require("bcryptjs");
-const db = require("../configs/DB");
+const db = require("../configs/db");
 const jwt = require("jsonwebtoken");
 
 //POST
@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
       // Check user
       const { mem_user, mem_pwd, mem_name, mem_mail, mem_tal, mem_img, lv_id } = req.body;
       //res.send(req.body);
-      db.query(
+      zdb.query(
          "SELECT * FROM tbl_member WHERE mem_user = ? OR mem_mail = ? OR mem_tal = ? ",
          [mem_user, mem_mail, mem_tal],
          async (err, result) => {
@@ -132,6 +132,8 @@ exports.login = async (req, res) => {
                               mem_user: result[0].mem_user,
                               mem_name: result[0].mem_name,
                               mem_mail: result[0].mem_mail,
+                              mem_tal: result[0].mem_tal,
+                              mem_img: result[0].mem_img,
                               lv_id: result[0].lv_id,
                               lv_name: result[0].lv_name,
                            },

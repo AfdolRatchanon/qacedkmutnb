@@ -1,4 +1,4 @@
-const db = require("../configs/DB");
+const db = require("../configs/db");
 
 exports.question_Type = async (req, res) => {
    try {
@@ -220,6 +220,32 @@ exports.countQstNoAns = async (req, res) => {
             }
          }
       });
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};
+
+exports.countQuestionTypeAll = async (req, res) => {
+   try {
+      // console.log(req.body);
+      db.query(
+         "SELECT ROW_NUMBER() OVER(ORDER BY t.type_id) AS num_row,t.type_id, t.type_name, COUNT(q.sta_id) AS count_type_All FROM tbl_type t LEFT JOIN tbl_question q on t.type_id = q.type_id  GROUP BY t.type_id  ORDER BY t.type_id  ASC;",
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("This username does not exist. ");
+               } else {
+                  return res.send(result);
+               }
+            }
+         }
+      );
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");

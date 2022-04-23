@@ -12,11 +12,10 @@ const {
    officerUpdateFAQ,
    officerDeleteFAQ,
    officerCountReply,
-   countQuestionTypeAll,
 } = require("../controllers/officer");
 
 //NOTE MiddleWare
-const { auth, officerCheck, adminCheck } = require("../middlewares/auth");
+const { auth, officerCheck } = require("../middlewares/auth");
 
 //@Enpoint  http://Localhost:3001/api/query-question-type
 //@Method   POST
@@ -62,10 +61,5 @@ router.post("/officer-delete-FAQ", auth, officerCheck, officerDeleteFAQ);
 //@Method   POST
 //@Access   private
 router.post("/officer-count-reply", auth, officerCheck, officerCountReply);
-
-//@Enpoint  http://Localhost:3001/api/query-question-type
-//@Method   GET
-//@Access   private
-router.get("/officer-count-qusetion-type-all", auth, officerCheck, countQuestionTypeAll);
 
 module.exports = router;
