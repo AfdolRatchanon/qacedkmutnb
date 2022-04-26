@@ -234,7 +234,7 @@ export default function Header() {
                            />
                         ) : (
                            <img
-                              src="../../dist/img/AdminLTELogo.png"
+                              src="../../dist/img/avatar6.jpg"
                               height={38}
                               className="img-circle elevation-1"
                               data-toggle="dropdown"
@@ -270,14 +270,20 @@ export default function Header() {
                               สิทธิ์การเข้าถึง :{" \u00A0\u00A0" + user.lv_name}
                            </span>
                            <div className="dropdown-divider" />
-                           <Link to="/edit-information" className="dropdown-item dropdown-footer">
-                              <p className="nav-link" role="button">
-                                 แก้ใขข้อมูลส่วนตัว
+                           <Link to="/change-password" className="dropdown-item dropdown-footer">
+                              <p className="nav-link text-warning" role="button">
+                                 เปลี่ยนรหัสผ่าน
                               </p>
                            </Link>
                            <div className="dropdown-divider" />
-                           <div href="#" className="dropdown-item dropdown-footer" onClick={logout}>
-                              <p className="nav-link" role="button">
+                           <Link to="/edit-information" className="dropdown-item dropdown-footer">
+                              <p className="nav-link text-warning" role="button">
+                                 แก้ใขข้อมูลส่วนตัว
+                              </p>
+                           </Link>
+                           <div className="dropdown-divider " />
+                           <div href="#" className="dropdown-item dropdown-footer " onClick={logout}>
+                              <p className="nav-link text-danger" role="button">
                                  ออกจากระบบ
                               </p>
                            </div>

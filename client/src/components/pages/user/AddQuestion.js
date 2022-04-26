@@ -91,6 +91,7 @@ const AddQuestion = () => {
 
    const handCancel = (e) => {
       setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "", qst_img: "" });
+      setFile("null");
    };
 
    return (

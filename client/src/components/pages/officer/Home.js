@@ -14,10 +14,16 @@ const Home = () => {
    const [countQst, setCountQst] = useState({});
 
    const [bgSmallBox, setBgSmallBox] = useState({
-      0: "rgba(0, 255, 64, 0.5)",
-      1: "rgba(53, 162, 235, 0.5)",
-      2: "rgba(255, 99, 132, 0.5)",
-      3: "rgba(255, 240, 0, 0.5)",
+      0: "bg-success",
+      1: "bg-primary",
+      2: "bg-danger",
+      3: "bg-warning",
+      4: "bg-secondary",
+      5: "bg-info",
+      6: "bg-light",
+      7: "bg-purple",
+      8: "bg-indigo",
+      9: "bg-orange",
    });
 
    const Small_Boxes = (props) => {
@@ -25,7 +31,8 @@ const Home = () => {
 
       return (
          <div className="col-lg-6 col-6">
-            <div className={"small-box "} style={{ backgroundColor: bgSmallBox[p_key] }}>
+            <div className={"small-box " + bgSmallBox[p_key]}>
+               {/* style={{ backgroundColor: bgSmallBox[p_key] }} */}
                <div className="inner">
                   <div className="row">
                      <h1 style={{ margin: " auto 5px auto 5px" }}>{count}</h1>
@@ -133,7 +140,7 @@ const Home = () => {
                                                       p_key={2}
                                                    />
                                                    <Small_Boxes
-                                                      name={"คำถามที่เจ้าหน้าที่ตอบ"}
+                                                      name={"คำถามที่ (" + user.mem_name + ") ตอบ"}
                                                       count={countQst.ownReply}
                                                       p_key={3}
                                                    />

@@ -11,6 +11,8 @@ const {
    updateInformation,
 } = require("../controllers/user");
 
+const { change_password } = require("../controllers/auth");
+
 //NOTE MiddleWare
 const { auth } = require("../middlewares/auth");
 
@@ -44,5 +46,10 @@ router.post("/user-delete-question", auth, deleteQuestion);
 //@Method   POST
 //@Access   private
 router.post("/user-update-information", auth, updateInformation);
+
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   POST
+//@Access   private
+router.post("/change-password", auth, change_password);
 
 module.exports = router;

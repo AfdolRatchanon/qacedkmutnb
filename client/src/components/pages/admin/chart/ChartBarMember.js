@@ -33,24 +33,24 @@ const ChartBarMember = () => {
       labels,
       datasets: [
          {
-            label: "คำถามทั้งหมด",
+            label: "ผู้ใช้",
             data: labels.map(() => 40),
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            backgroundColor: "rgba(92, 184, 92, 1)",
          },
          {
-            label: "คำถามทั้งหมดที่ตอบแล้ว",
+            label: "เจ้าหน้าที่",
             data: labels.map(() => 30),
-            backgroundColor: "rgba(53, 162, 235, 0.5)",
+            backgroundColor: "rgba(2, 117, 216, 1)",
          },
          {
-            label: "คำถามทั้งหมดที่ยังไม่ได้ตอบ",
+            label: "ผู้ดูแลระบบ",
             data: labels.map(() => 20),
-            backgroundColor: "rgba(53, 255, 235, 0.5)",
+            backgroundColor: "rgba(255, 193, 7, 1)",
          },
          {
-            label: "คำถามที่เจ้าหน้าที่ตอบ",
+            label: "ถูกปิดการใช้",
             data: labels.map(() => 10),
-            backgroundColor: "rgba(255, 162, 255, 0.5)",
+            backgroundColor: "rgba(220, 53, 69, 1)",
          },
       ],
    });
@@ -65,22 +65,22 @@ const ChartBarMember = () => {
                   {
                      label: "ผู้ใช้",
                      data: labels.map(() => res.data[0].user_num),
-                     backgroundColor: "rgba(0, 255, 64, 0.5)",
+                     backgroundColor: "rgba(92, 184, 92, 1)",
                   },
                   {
                      label: "เจ้าหน้าที่",
                      data: labels.map(() => res.data[0].officer_num),
-                     backgroundColor: "rgba(53, 162, 235, 0.5)",
+                     backgroundColor: "rgba(2, 117, 216, 1)",
                   },
                   {
                      label: "ผู้ดูแลระบบ",
                      data: labels.map(() => res.data[0].admin_num),
-                     backgroundColor: "rgba(255, 99, 132, 0.5)",
+                     backgroundColor: "rgba(255, 193, 7, 1)",
                   },
                   {
                      label: "ถูกปิดการใช้",
                      data: labels.map(() => res.data[0].user_disble),
-                     backgroundColor: "rgba(255, 240, 0, 0.5)",
+                     backgroundColor: "rgba(220, 53, 69, 1)",
                   },
                ],
             });

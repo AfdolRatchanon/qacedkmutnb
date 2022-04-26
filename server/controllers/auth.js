@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
       // Check user
       const { mem_user, mem_pwd, mem_name, mem_mail, mem_tal, mem_img, lv_id } = req.body;
       //res.send(req.body);
-      zdb.query(
+      db.query(
          "SELECT * FROM tbl_member WHERE mem_user = ? OR mem_mail = ? OR mem_tal = ? ",
          [mem_user, mem_mail, mem_tal],
          async (err, result) => {
@@ -202,7 +202,7 @@ exports.currentUser = async (req, res) => {
 
 exports.forgot_password = async (req, res) => {
    try {
-      console.log("Forgot_Password : ", req.body);
+      // console.log("Forgot_Password : ", req.body);
       db.query("SELECT mem_tal FROM tbl_member WHERE mem_mail = ?", [req.body.mem_mail], async (err, result) => {
          if (err) {
             console.log(err);
@@ -222,6 +222,44 @@ exports.forgot_password = async (req, res) => {
                }
                console.log(result[0]);
                res.send(result[0]);
+            }
+         }
+      });
+   } catch (err) {
+      console.log(err);
+      res.status(500).send("Server Error!");
+   }
+};
+
+exports.change_password = async (req, res) => {
+   try {
+      const mem_user = req.body.mem_user;
+      const mem_pwd = req.body.mem_pwd;
+      console.log("change_password : ", req.body);
+      db.query("SELECT mem_pwd,mem_tal FROM tbl_member WHERE mem_user = ?", [mem_user], async (err, result) => {
+         if (err) {
+            console.log(err);
+            return res.status(400).send("Query Database ERROR!!!");
+         } else {
+            // console.log(result[0]);
+            // res.send(result[0]);
+            if (result[0] == null) {
+               // Username มีข้อมูลหรือไม่
+               console.log(result);
+               return res.status(400).send("กรุณากรอกข้อมูล");
+            } else {
+               // Username ไม่ได้ถูกปิดการใช้งาน
+               // FIXME อาจมีการแก้ไขในอนาคต
+               if (result[0].sta_id === 2) {
+                  return res.status(400).send("ผู้ใช้ถูกปิดการใช้งาน ");
+               }
+               console.log(result[0]);
+               const isMatch = await bcrypt.compare(mem_pwd, result[0].mem_pwd);
+               console.log(isMatch);
+               if (!isMatch) {
+                  return res.status(400).send("รหัสผ่านไม่ถูกต้อง!!!");
+               }
+               res.send(result[0].mem_tal);
             }
          }
       });

@@ -53,13 +53,21 @@ export const countQstOfUser = async (authtoken, value) => {
    });
 };
 
-
 export const updateInformation = async (authtoken, value) => {
    //    console.log("Func", authtoken);
    return await axios.post(process.env.REACT_APP_API + "/user-update-information", value, {
       headers: {
          authtoken,
          "Content-Type": "multipart/form-data",
+      },
+   });
+};
+
+export const changePassword = async (authtoken, value) => {
+   //    console.log("Func", authtoken);
+   return await axios.post(process.env.REACT_APP_API + "/change-password", value, {
+      headers: {
+         authtoken,
       },
    });
 };

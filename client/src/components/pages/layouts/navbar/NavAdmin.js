@@ -8,6 +8,7 @@ const NavAdmin = () => {
    const clearLocalStoreNull = () => {
       localStorage.setItem("level_id", null);
       localStorage.setItem("question_type_id", null);
+      localStorage.setItem("fp_tal", null);
    };
 
    if (user) {
@@ -29,6 +30,7 @@ const NavAdmin = () => {
                            className="nav-link"
                            onClick={() => {
                               localStorage.setItem("officer_type_id", null);
+                              localStorage.setItem("fp_tal", null);
                            }}
                         >
                            {/* <i className="nav-icon fas fa-file" /> */}
@@ -40,9 +42,10 @@ const NavAdmin = () => {
                         <Link
                            to="/officer-manage-faq"
                            className="nav-link"
-                           // onClick={() => {
-                           //    localStorage.setItem("officer_type_id", null);
-                           // }}
+                           onClick={() => {
+                              // localStorage.setItem("officer_type_id", null);
+                              localStorage.setItem("fp_tal", null);
+                           }}
                         >
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}

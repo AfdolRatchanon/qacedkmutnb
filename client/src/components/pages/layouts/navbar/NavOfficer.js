@@ -23,6 +23,7 @@ const NavOfficer = () => {
                         className="nav-link"
                         onClick={() => {
                            localStorage.setItem("officer_type_id", null);
+                           localStorage.setItem("fp_tal", null);
                         }}
                      >
                         {/* <i className="nav-icon fas fa-file" /> */}
@@ -34,9 +35,10 @@ const NavOfficer = () => {
                      <Link
                         to="/officer-manage-faq"
                         className="nav-link"
-                        // onClick={() => {
-                        //    localStorage.setItem("officer_type_id", null);
-                        // }}
+                        onClick={() => {
+                           // localStorage.setItem("officer_type_id", null);
+                           localStorage.setItem("fp_tal", null);
+                        }}
                      >
                         {/* <i className="nav-icon fas fa-file" /> */}
                         {" \u00A0\u00A0\u00A0\u00A0"}

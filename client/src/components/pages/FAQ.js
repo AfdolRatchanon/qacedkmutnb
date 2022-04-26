@@ -18,16 +18,17 @@ const FAQ = () => {
       faq_detail: "",
    });
    const [bgSmallBox, setBgSmallBox] = useState({
-      0: "bg-primary",
-      1: "bg-secondary",
-      2: "bg-info",
-      3: "bg-success",
-      4: "bg-warning",
-      5: "bg-danger",
-      6: "bg-light",
-      7: "bg-purple",
-      8: "bg-indigo",
-      9: "bg-orange",
+      0: "bg-success",
+      // 0: "bg-primary",
+      // 1: "bg-secondary",
+      // 2: "bg-info",
+      // 3: "bg-success",
+      // 4: "bg-warning",
+      // 5: "bg-danger",
+      // 6: "bg-light",
+      // 7: "bg-purple",
+      // 8: "bg-indigo",
+      // 9: "bg-orange",
    });
    // const [numEng, setNumEng] = useState({
    //    0: "One",
@@ -89,14 +90,14 @@ const FAQ = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>FAQ</h1>
+                     <h1>คำถามที่พบบ่อย (FAQ)</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item active">FAQ</li>
+                        <li className="breadcrumb-item active">คำถามที่พบบ่อย (FAQ)</li>
                      </ol>
                   </div>
                </div>
@@ -117,7 +118,9 @@ const FAQ = () => {
                               {questionType.map((value, key) => (
                                  <div
                                     key={key}
-                                    className={"external-event " + bgSmallBox[key % 10]}
+                                    // className={"external-event " + bgSmallBox[key % 1]}
+                                    className={"btn btn-md btn-block btn-outline-success text-left"}
+                                    // className={"btn btn-block btn-outline-dark text-success text-left"}
                                     onClick={() => {
                                        setType_ID_State(value.type_id);
                                        // console.log(type_ID_State);
@@ -137,14 +140,16 @@ const FAQ = () => {
                      <div class="col-12" id="accordion">
                         {type_ID_State == 0 ? <>กรูณาเลือกหมวดคำถาม</> : <></>}
                         {data.map((value, key) => (
-                           <div class="card card-primary card-outline">
-                              <a class="d-block w-100" data-toggle="collapse" href={"#collapse" + key}>
-                                 <div class="card-header">
-                                    <h4 class="card-title w-100">{value.faq_title}</h4>
+                           <div className="card card-success card-outline">
+                              <a className="d-block w100" data-toggle="collapse" href={"#collapse" + key}>
+                                 <div className="card-header">
+                                    <h6 className="card-title w100 text-success" style={{ fontSize: 26 }}>
+                                       {value.faq_title}
+                                    </h6>
                                  </div>
                               </a>
                               <div id={"collapse" + key} class={key == 0 ? "collapse show" : "collapse"} data-parent="#accordion">
-                                 <div class="card-body">{value.faq_detail + key}</div>
+                                 <div className="card-body">{value.faq_detail + key}</div>
                               </div>
                            </div>
                         ))}

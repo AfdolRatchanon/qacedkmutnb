@@ -167,13 +167,13 @@ const Register = () => {
                               </div>
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "75px", margin: " 0px 5px 5px 0px" }}
+                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
                                     type="reset"
                                     className="btn btn-danger"
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "75px", margin: " 0px 5px 5px 0px" }} className="btn btn-success">
+                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
                                     ยืนยัน
                                  </button>
                               </div>

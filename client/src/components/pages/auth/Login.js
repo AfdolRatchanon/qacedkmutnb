@@ -48,7 +48,7 @@ const Login = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       // console.log("submit", value);
-
+      localStorage.clear();
       login(value)
          .then((res) => {
             // console.log(res.data);

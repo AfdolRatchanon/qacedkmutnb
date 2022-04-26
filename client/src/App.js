@@ -14,6 +14,7 @@ import ForgotPassword from "./components/pages/auth/ForgotPassword";
 import NewPassword from "./components/pages/auth/NewPassword";
 import FAQ from "./components/pages/FAQ";
 import EditInformation from "./components/pages/auth/EditInformation";
+import ChangePassword from "./components/pages/auth/ChangePassword";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
@@ -294,6 +295,15 @@ function App() {
                         </UserRoute>
                      }
                   />
+                  <Route
+                     path="/change-password"
+                     element={
+                        <UserRoute>
+                           <ChangePassword />
+                        </UserRoute>
+                     }
+                  />
+                  
                </Routes>
             </div>
             <Footer />

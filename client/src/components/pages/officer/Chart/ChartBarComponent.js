@@ -34,22 +34,22 @@ const ChartBarComponent = () => {
          {
             label: "คำถามทั้งหมด",
             data: labels.map(() => 40),
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            backgroundColor: "rgba(92, 184, 92, 1)",
          },
          {
             label: "คำถามทั้งหมดที่ตอบแล้ว",
             data: labels.map(() => 30),
-            backgroundColor: "rgba(53, 162, 235, 0.5)",
+            backgroundColor: "rgba(2, 117, 216, 1)",
          },
          {
             label: "คำถามทั้งหมดที่ยังไม่ได้ตอบ",
             data: labels.map(() => 20),
-            backgroundColor: "rgba(53, 255, 235, 0.5)",
+            backgroundColor: "rgba(220, 53, 69, 1)",
          },
          {
             label: "คำถามที่เจ้าหน้าที่ตอบ",
             data: labels.map(() => 10),
-            backgroundColor: "rgba(255, 162, 255, 0.5)",
+            backgroundColor: "rgba(255, 193, 7, 1)",
          },
       ],
    });
@@ -65,22 +65,22 @@ const ChartBarComponent = () => {
                   {
                      label: "คำถามทั้งหมด",
                      data: labels.map(() => res.data[0].allQst),
-                     backgroundColor: "rgba(0, 255, 64, 0.5)",
+                     backgroundColor: "rgba(92, 184, 92, 1)",
                   },
                   {
                      label: "คำถามทั้งหมดที่ตอบแล้ว",
                      data: labels.map(() => res.data[0].successQst),
-                     backgroundColor: "rgba(53, 162, 235, 0.5)",
+                     backgroundColor: "rgba(0, 123, 255, 1)",
                   },
                   {
                      label: "คำถามทั้งหมดที่ยังไม่ได้ตอบ",
                      data: labels.map(() => res.data[0].waitReply),
-                     backgroundColor: "rgba(255, 99, 132, 0.5)",
+                     backgroundColor: "rgba(220, 53, 69, 1)",
                   },
                   {
-                     label: "คำถามที่เจ้าหน้าที่ตอบ",
+                     label: "คำถามที่ (" + user.mem_name + ") ตอบ",
                      data: labels.map(() => res.data[0].ownReply),
-                     backgroundColor: "rgba(255, 240, 0, 0.5)",
+                     backgroundColor: "rgba(255, 193, 7, 1)",
                   },
                ],
             });

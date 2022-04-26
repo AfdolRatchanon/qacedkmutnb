@@ -20,7 +20,9 @@ export default function Navbar() {
       localStorage.setItem("question_id", null);
       localStorage.setItem("level_id", null);
       localStorage.setItem("question_type_id", null);
+      localStorage.setItem("fp_tal", null);
    };
+  
 
    //console.log("admin");
 
@@ -34,11 +36,17 @@ export default function Navbar() {
          <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* Brand Logo */}
             <Link to="/" className="brand-link elevation-4">
-               <img
+               {/* <img
                   src="../../dist/img/AdminLTELogo.png"
                   alt="AdminLTE Logo"
                   className="brand-image img-circle elevation-3"
                   style={{ opacity: ".8" }}
+               /> */}
+               <img
+                  src="../../dist/img/Logo_Kraru.png"
+                  alt="Logo_Kraru"
+                  className="brand-image"
+                  // style={{ background: "white" }}
                />
                <span className="brand-text font-weight-light">ComEdu Q&A</span>
             </Link>
@@ -88,7 +96,7 @@ export default function Navbar() {
                         <Link to="/FAQ" className="nav-link" onClick={clearLocalStorage}>
                            {/* <i className="nav-icon fas fa-file" /> */}
 
-                           <p>FAQ</p>
+                           <p>คำถามที่พบบ่อย (FAQ)</p>
                         </Link>
                      </li>
                      {!user && (

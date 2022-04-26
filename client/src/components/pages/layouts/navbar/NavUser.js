@@ -24,6 +24,7 @@ const NavUser = () => {
                         className="nav-link"
                         onClick={() => {
                            localStorage.setItem("question_id", null);
+                           localStorage.setItem("fp_tal", null);
                            dispatch({
                               type: "REMOVEQUESTION",
                            });
