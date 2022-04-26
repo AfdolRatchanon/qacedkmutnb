@@ -25,7 +25,7 @@ const Home = () => {
       const { count, name, p_key } = props;
 
       return (
-         <div className="col-lg-4 col-6">
+         <div className="col-lg-4 col-md-4 col-12">
             <div className={"small-box " + bgSmallBox[p_key]}>
                {/* style={{ backgroundColor: bgSmallBox[p_key] }} */}
                <div className="inner">

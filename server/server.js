@@ -5,12 +5,13 @@ const fileUpload = require("express-fileupload");
 const { readdirSync } = require("fs");
 
 //NOTE VALIABLE
-const PORT = process.env.PORT || 3300;
+const PORT = 3300;
 
 // TriMerge
 const cors = require("cors");
 const corsOptions = {
    // origin: "https://comeduqanda.web.app",
+   // origin: "http://202.44.34.110/",
    origin: "*",
    credentials: true,
 };
@@ -23,7 +24,7 @@ const app = express();
 //NOTE MIDDLEWARE
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "20mb" }));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(fileUpload());
 
 app.use("/qst_img", express.static("img/qst"));

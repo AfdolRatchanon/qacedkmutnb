@@ -20,11 +20,12 @@ const mysql_npm = require("mysql");
 // };
 
 var db_config = {
-   user: "9wPq3x3qG3",
-   password: "5S8Hrlhh0t",
-   host: "remotemysql.com",
-   database: "9wPq3x3qG3",
+   user: "root",
+   password: "",
+   host: "localhost",
+   database: "comedu_q_&_a",
 };
+
 
 //-
 //- Create the connection variable
