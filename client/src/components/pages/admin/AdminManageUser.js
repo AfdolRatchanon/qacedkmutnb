@@ -18,10 +18,32 @@ const AdminManageUser = () => {
       sta_id: null,
    });
 
+   const handleEnable = (token, id) => {
+      setDataEnableAndDisable({ sta_id: 1 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 1 })
+         .then((res) => {
+            toast.success(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+         });
+   };
+
+   const handleDisable = (token, id) => {
+      setDataEnableAndDisable({ sta_id: 2 });
+      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 2 })
+         .then((res) => {
+            toast.success(res.data);
+         })
+         .catch((err) => {
+            console.log(err.response.data);
+         });
+   };
+
    const loadData = () => {
       adminListUser(user.token)
          .then((res) => {
-            // console.log(res);
+            console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
@@ -29,10 +51,7 @@ const AdminManageUser = () => {
          });
    };
 
-   useEffect(() => {
-      loadData();
-   }, [dataEnableAndDisable]);
-   // dataEnableAndDisable
+   
 
    //BootStrap Table
 
@@ -79,27 +98,11 @@ const AdminManageUser = () => {
       }
    };
 
-   const handleEnable = (token, id) => {
-      setDataEnableAndDisable({ sta_id: 1 });
-      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 1 })
-         .then((res) => {
-            toast.success(res.data);
-         })
-         .catch((err) => {
-            console.log(err.response.data);
-         });
-   };
-
-   const handleDisable = (token, id) => {
-      setDataEnableAndDisable({ sta_id: 2 });
-      adminEnableAndDisenableMember(token, { mem_id: id, sta_id: 2 })
-         .then((res) => {
-            toast.success(res.data);
-         })
-         .catch((err) => {
-            console.log(err.response.data);
-         });
-   };
+   useEffect(() => {
+      loadData();
+   }, [dataEnableAndDisable]);
+   // dataEnableAndDisable
+   
 
    return (
       <div className="content-wrapper">

@@ -115,9 +115,9 @@ const AdminAddMember = () => {
                                     type="text"
                                     className="form-control col-sm-5"
                                     name="mem_name"
-                                    placeholder="Input Your Name 1 characters or more"
-                                    pattern="^\w(\w|\s){0,30}"
-                                    title="Please input range 1 - 30 alphabet"
+                                    placeholder="ชื่อผู้ใช้"
+                                    pattern="^(?=.*\w|\d|@|$|!|%|*|#|?|&).{6,30}$}"
+                                    title="กรอกชื่อผู้ใช้ 6 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
                               </div>

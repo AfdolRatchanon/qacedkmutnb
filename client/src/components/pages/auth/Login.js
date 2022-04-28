@@ -141,7 +141,7 @@ const Login = () => {
                                        className="form-control"
                                        name="mem_pwd"
                                        placeholder="รหัสผ่าน"
-                                       pattern="^(?=.*\d|\w).{6,30}$"
+                                       pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{6,30}$"
                                        title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
                                        onChange={handleChang}
                                     />

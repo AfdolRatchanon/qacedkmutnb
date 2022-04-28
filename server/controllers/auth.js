@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../configs/db");
 const jwt = require("jsonwebtoken");
 
+
 //POST
 /* Pattern Data JSON
 {

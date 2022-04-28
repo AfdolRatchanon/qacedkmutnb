@@ -249,7 +249,7 @@ export default function Header() {
                         {/* <img
                            src="../../dist/img/AdminLTELogo.png"
                            height={38}
-                           className="img-circle elevation-1"
+                           className="img-circle elevation-1" 
                            data-toggle="dropdown"
                         /> */}
 

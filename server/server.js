@@ -25,7 +25,12 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "20mb" }));
 app.use(cors());
-app.use(fileUpload());
+app.use(fileUpload({
+   // limits: {
+   //     fileSize: 2000000 //2mb
+   // },
+   // abortOnLimit: true
+}));
 
 app.use("/qst_img", express.static("img/qst"));
 app.use("/mem_img", express.static("img/user"));

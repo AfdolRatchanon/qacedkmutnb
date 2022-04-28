@@ -308,14 +308,15 @@ const OfficerAnswerQuestion = () => {
                         {/* onClick={handCancel} */}
                         {/* {value.sta_id == 3 && (
                                        <> */}
-                        <button
+                        <Link
+                          to="/officer-read-question-type"
                           style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
                           type="reset"
                           className="btn btn-danger"
                           onClick={handCancel}
                         >
                           ยกเลิก
-                        </button>
+                        </Link>
                         <button
                           style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
                           className="btn btn-success"

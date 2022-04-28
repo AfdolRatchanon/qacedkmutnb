@@ -66,7 +66,7 @@ const GeneralQuestions = () => {
                                        data.map((value, key) => (
                                           <div key={key} className="post col-10 col-md-10 col-lg-10 col-xl-5 mx-5">
                                              <hr />
-                                             <div className="user-block">
+                                             {value.mem_img != null ? <div className="user-block">
                                                 <img
                                                    className="img-circle img-bordered-sm"
                                                    src={process.env.REACT_APP_API_MEM_IMG + "/" + value.mem_img}
@@ -76,7 +76,18 @@ const GeneralQuestions = () => {
                                                    <h5 className="text-primary">{value.mem_name}</h5>
                                                 </span>
                                                 <span className="description">{value.date}</span>
-                                             </div>
+                                             </div> : <div className="user-block">
+                                                <img
+                                                   className="img-circle img-bordered-sm"
+                                                   src={"../../dist/img/avatar6.jpg"}
+                                                   // alt="user image"
+                                                />
+                                                <span className="username">
+                                                   <h5 className="text-primary">{value.mem_name}</h5>
+                                                </span>
+                                                <span className="description">{value.date}</span>
+                                             </div>}
+                                             
                                              {/* /.user-block */}
                                              <h4>{value.qst_title}</h4>
                                              <p>{value.qst_detail}</p>

@@ -106,8 +106,8 @@ const NewPassword = () => {
                                        className="form-control"
                                        name="mem_pwd"
                                        placeholder="รหัสผ่าน"
-                                       pattern="^(?=.*\d|\w).{6,30}$"
-                                       title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+                                       pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
+                                       title="กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร"
                                        onChange={handleChang}
                                     />
                                  </div>
@@ -122,8 +122,8 @@ const NewPassword = () => {
                                        className="form-control"
                                        name="con_mem_pwd"
                                        placeholder="ยืนยันรหัสผ่าน"
-                                       pattern="^(?=.*\d|\w).{6,30}$"
-                                       title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+                                       pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
+                                       title="กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร"
                                        onChange={handleChang}
                                     />
                                  </div>

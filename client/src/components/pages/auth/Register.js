@@ -7,6 +7,9 @@ import { register } from "../../functions/auth";
 
 import { Link, useNavigate } from "react-router-dom";
 
+//Toastfy
+import { toast } from "react-toastify";
+
 const Register = () => {
    const [value, setValue] = useState({
       mem_user: "",
@@ -30,17 +33,17 @@ const Register = () => {
       e.preventDefault();
       console.log("submit", value);
       if (value.mem_pwd !== value.con_mem_pwd) {
-         alert("รหัสผ่านไม่ตรงกัน");
+         toast.error("รหัสผ่านไม่ตรงกัน");
       } else {
          register(value)
             .then((res) => {
                console.log(res.data);
-               alert(res.data);
+               toast.success("สมัครเป็นสมาชิกสำเร็จ");
                navigate("/login");
             })
             .catch((err) => {
                console.log(err.response.data);
-               alert(err.response.data);
+               toast.error(err.response.data);
             });
       }
    };
@@ -134,7 +137,7 @@ const Register = () => {
                                     className="form-control col-sm-5"
                                     name="mem_user"
                                     placeholder="กรอกชื่อผู้ใช้"
-                                    pattern="^(?=.*\w).{6,30}$"
+                                    pattern="^(?=.*\w|\d|@|$|!|%|*|#|?|&).{6,30}$"
                                     title="กรอกชื่อผู้ใช้ 6 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
@@ -147,8 +150,8 @@ const Register = () => {
                                     className="form-control col-sm-5"
                                     name="mem_pwd"
                                     placeholder="รหัสผ่าน"
-                                    pattern="^(?=.*\d|\w).{6,30}$"
-                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+                                    pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
+                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร"
                                     onChange={handleChang}
                                  />
                               </div>
@@ -159,9 +162,9 @@ const Register = () => {
                                     type="password"
                                     className="form-control col-sm-5"
                                     name="con_mem_pwd"
-                                    pattern="^(?=.*\d).{6,30}$"
+                                    pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
                                     placeholder="ยืนยันรหัสผ่าน"
-                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร"
+                                    title="กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร"
                                     onChange={handleChang}
                                  />
                               </div>

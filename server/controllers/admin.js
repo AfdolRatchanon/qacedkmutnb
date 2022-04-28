@@ -38,6 +38,7 @@ exports.adminEnableAndDisenableMember = async (req, res) => {
             console.log(err);
             return res.status(400).send("Query Database ERROR!!!");
          } else {
+            console.log("เปลี่ยนสถานะสำเร็จ : " , sta_id);
             return res.send("เปลี่ยนสถานะสำเร็จ");
          }
       });
