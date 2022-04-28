@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import ChartDoughnutCompent from './officer/Chart/ChartDoughnutComponent'
-import TableComponent from './tables/TableComponent'
-// import { officerCountQuestionTypeAll } from "../functions/officer";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import ChartDoughnutCompent from "./officer/Chart/ChartDoughnutComponent";
+import TableComponent from "./tables/TableComponent";
+import { loadAllQuestion } from "../functions/query";
 
 const Home = () => {
-  // const [data, setData] = useState();
+  const [data, setData] = useState();
 
-  // const loadData = () => {
-  //    officerCountQuestionTypeAll()
-  //       .then((res) => {
-  //          // console.log(res.data);
-  //          setData(res.data);
-  //       })
-  //       .catch((err) => {
-  //          console.log(err);
-  //          console.log(err.response);
-  //          // console.log(err.response.date);
-  //       });
-  // };
-  // useEffect(() => {
-  //    loadData();
-  // }, []);
+  const loadData = () => {
+    loadAllQuestion()
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+        // console.log(err.response.date);
+      });
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <div className="content-wrapper">
       {/* Content Header (Page header) */}
@@ -67,6 +67,36 @@ const Home = () => {
                   <section className="content">
                     <div className="container-fluid">
                       <div className="row">
+                      {data.map((value, key) => (
+                        <div></div>
+                      ))}
+                        <div className="post">
+                          <div className="user-block">
+                            <img
+                              className="img-circle img-bordered-sm"
+                              src="../../dist/img/user1-128x128.jpg"
+                              alt="user image"
+                            />
+                            <span className="username">
+                              <a href="#">Jonathan Burke Jr.</a>
+                            </span>
+                            <span className="description">
+                              Shared publicly - 7:45 PM today
+                            </span>
+                          </div>
+                          {/* /.user-block */}
+                          <p>
+                            Lorem ipsum represents a long-held tradition for
+                            designers, typographers and the like. Some people
+                            hate it and argue for its demise, but others ignore.
+                          </p>
+                          <p>
+                            <a href="#" className="link-black text-sm">
+                              <i className="fas fa-link mr-1" /> Demo File 1 v2
+                            </a>
+                          </p>
+                        </div>
+
                         <div className="col-xl-6">
                           <div className="card card-primary">
                             <div className="card-header">
@@ -138,7 +168,7 @@ const Home = () => {
       </section>
       {/* /.content */}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

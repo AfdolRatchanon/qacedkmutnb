@@ -251,3 +251,29 @@ exports.countQuestionTypeAll = async (req, res) => {
       res.status(500).send("Server Error!!!");
    }
 };
+
+exports.allQuestion = async (req, res) => {
+   try {
+      // console.log(req.body);
+      db.query(
+         "SELECT ROW_NUMBER() OVER(ORDER BY q.qst_id) AS num_row, qst_title, qst_detail, qst_name, qst_mail,q.sta_id, DATE_FORMAT(qst_date, '%d-%m-%Y') as date, m.mem_name, m.mem_img FROM tbl_question q INNER JOIN tbl_member m WHERE q.mem_id = m.mem_id ORDER BY qst_date DESC;",
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("This username does not exist. ");
+               } else {
+                  return res.send(result);
+               }
+            }
+         }
+      );
+   } catch (error) {
+      console.log(error);
+      res.status(500).send("Server Error!!!");
+   }
+};

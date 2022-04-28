@@ -3,27 +3,28 @@ const express = require("express");
 const router = express.Router();
 
 const {
-   register,
-   login,
-   listUser,
-   editUser,
-   deleteUser,
-   currentUser,
-   forgot_password,
-   new_password,
+  register,
+  login,
+  listUser,
+  editUser,
+  deleteUser,
+  currentUser,
+  forgot_password,
+  new_password,
 } = require("../controllers/auth.js");
 
 const {
-   question_Type,
-   question_Type_Name,
-   level,
-   countQuestionType,
-   countFAQType,
-   readFAQType,
-   countMember,
-   countQstNoAns,
-   countQustOfUser,
-   countQuestionTypeAll,
+  question_Type,
+  question_Type_Name,
+  level,
+  countQuestionType,
+  countFAQType,
+  readFAQType,
+  countMember,
+  countQstNoAns,
+  countQustOfUser,
+  countQuestionTypeAll,
+  allQuestion,
 } = require("../controllers/query");
 
 //NOTE MiddleWare
@@ -123,15 +124,20 @@ router.post("/query-count-question-of-user", auth, countQustOfUser);
 //@Access   private
 router.get("/query-count-qusetion-type-all", countQuestionTypeAll);
 
+//@Enpoint  http://Localhost:3001/api/query-question-type
+//@Method   GET
+//@Access   private
+router.get("/query-all-qusetion", allQuestion);
+
 //@Enpoint  http://Localhost:3001/api/auth
 //@Method   GET
 // //@Access   private
 router.get("/1", auth, (req, res) => {
-   res.send("hello middleware");
+  res.send("hello middleware");
 });
 
 router.get("/2", (req, res) => {
-   res.send("hello middleware");
+  res.send("hello middleware");
 });
 
 //@Enpoint  http://Localhost:3001/api/auth
