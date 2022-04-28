@@ -14,9 +14,9 @@ export const loadQuestionTypeFAQ = async () => {
    return await axios.get(process.env.REACT_APP_API + "/query-question-type-faq", {});
 };
 
-export const loadAllQuestion = async () => {
+export const loadAllQuestion = async (value) => {
    //    console.log("Func", authtoken);
-   return await axios.get(process.env.REACT_APP_API + "/query-all-qusetion", {});
+   return await axios.post(process.env.REACT_APP_API + "/query-all-qusetion", value, {});
 };
 
 export const loadQuestionTypeName = async (authtoken, value) => {
