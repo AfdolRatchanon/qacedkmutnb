@@ -56,7 +56,7 @@ const Home = () => {
    const loadDataCount = () => {
       countQstOfUser(user.token, { mem_id: user.mem_id })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setCountQst(res.data);
          })
          .catch((err) => {

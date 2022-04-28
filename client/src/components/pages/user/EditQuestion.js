@@ -53,7 +53,7 @@ const EditQuestion = () => {
    const loadDataTypeQ = async () => {
       loadQuestionType(user.token)
          .then((res) => {
-            console.log("EditQ Type :", res.data);
+            // console.log("EditQ Type :", res.data);
             setQuestionType(res.data);
          })
          .catch((err) => {
@@ -64,7 +64,7 @@ const EditQuestion = () => {
    const loadDataQuestion = async () => {
       readQuestion(user.token, { qst_id: question_id })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data[0].sta_id != 3) {
                navigate("/user-question");
             } else {
@@ -92,7 +92,7 @@ const EditQuestion = () => {
       } else {
          loadDataTypeQ().then(() => {
             loadDataQuestion();
-            console.log("editValue : ", question_id);
+            // console.log("editValue : ", question_id);
          });
       }
    }, []);
@@ -106,7 +106,7 @@ const EditQuestion = () => {
    const onChange = (e) => {
       if (e.target.files[0] != null) {
          setFile(e.target.files[0]);
-         console.log("File : ", file);
+         // console.log("File : ", file);
          setValue({ ...value, [e.target.name]: e.target.value });
       } else {
          setFile("null");
@@ -132,17 +132,17 @@ const EditQuestion = () => {
       formData.append("qst_mail", value.qst_mail);
       formData.append("qst_id", value.qst_id);
       formData.append("file", file);
-      console.log("submit Edit Question", value);
-      console.log("submit Edit Question", value.sta_id);
-      console.log("submit Edit Question", value.type_id);
+      // console.log("submit Edit Question", value);
+      // console.log("submit Edit Question", value.sta_id);
+      // console.log("submit Edit Question", value.type_id);
       updateQuestion(user.token, formData)
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             toast.success(res.data);
             navigate("/user-question");
          })
          .catch((err) => {
-            console.log(err.response.data);
+            // console.log(err.response.data);
             toast.warning(err.response.data);
          });
       // }

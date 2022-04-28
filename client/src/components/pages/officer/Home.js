@@ -61,7 +61,7 @@ const Home = () => {
    const loadDataCount = () => {
       officerCountReply(user.token, { mem_id: user.mem_id })
          .then((res) => {
-            console.log(res.data[0]);
+            // console.log(res.data[0]);
             setCountQst(res.data[0]);
          })
          .catch((err) => {

@@ -6,7 +6,7 @@ const GeneralQuestions = () => {
    const loadData = () => {
       loadAllQuestion({ limit: limit })
          .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setData(res.data);
          })
          .catch((err) => {
@@ -17,7 +17,6 @@ const GeneralQuestions = () => {
    };
    useEffect(() => {
       loadData();
-      console.log(limit);
    }, [limit]);
    return (
       <div className="content-wrapper">
