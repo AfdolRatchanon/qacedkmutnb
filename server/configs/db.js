@@ -19,19 +19,19 @@ const mysql_npm = require("mysql");
 //    database: process.env.DATABASE,
 // };
 
-var db_config = {
-   user: "root",
-   password: "",
-   host: "localhost",
-   database: "qacedkmutnb",
-};
-
 // var db_config = {
 //    user: "root",
 //    password: "",
 //    host: "localhost",
-//    database: "comedu_q_&_a",
+//    database: "qacedkmutnb",
 // };
+
+var db_config = {
+   user: "root",
+   password: "",
+   host: "localhost",
+   database: "comedu_q_&_a",
+};
 
 //-
 //- Create the connection variable

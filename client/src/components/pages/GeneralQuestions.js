@@ -70,7 +70,7 @@ const GeneralQuestions = () => {
                                              <div className="user-block">
                                                 <img
                                                    className="img-circle img-bordered-sm"
-                                                   src={value.mem_img}
+                                                   src={process.env.REACT_APP_API_MEM_IMG + "/" + value.mem_img}
                                                    // alt="user image"
                                                 />
                                                 <span className="username">
