@@ -7,7 +7,7 @@ exports.officerReadQuestionType = async (req, res) => {
       const { type_id } = req.body;
       console.log(req.body, req.user);
       db.query(
-         'SELECT  *, DATE_FORMAT(qst_date, "%d-%m-%Y") AS date_format  FROM tbl_question INNER JOIN tbl_status ON tbl_question.sta_id = tbl_status.sta_id WHERE type_id = ? ORDER BY tbl_status.sta_name , date_format ASC;',
+         'SELECT *, DATE_FORMAT(qst_date, "%d-%m-%Y") AS date_format FROM tbl_question INNER JOIN tbl_status ON tbl_question.sta_id = tbl_status.sta_id WHERE type_id = ? ORDER BY tbl_status.sta_id ASC, qst_date ASC;',
          [type_id],
          async (err, result) => {
             if (err) {
@@ -288,5 +288,3 @@ exports.officerCountReply = async (req, res) => {
       res.status(500).send("Server Error!!!");
    }
 };
-
-

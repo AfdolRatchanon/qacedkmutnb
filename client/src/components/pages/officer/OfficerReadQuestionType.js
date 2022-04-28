@@ -16,7 +16,6 @@ const OfficerReadQuestionType = () => {
    const type_id = localStorage.officer_type_id;
    const { user } = useSelector((state) => ({ ...state }));
    const [qst_type_name, setQst_Type_Name] = useState("");
-   
 
    const loadDataTypeQ = async () => {
       loadQuestionTypeName(user.token, { type_id: type_id })
@@ -45,7 +44,7 @@ const OfficerReadQuestionType = () => {
    useEffect(() => {
       loadDataTypeQ();
       loadData();
-   }, []);
+   }, [localStorage.officer_type_id]);
 
    const indexN = (cell, row, enumObject, index) => {
       return <div>{index + 1}</div>;

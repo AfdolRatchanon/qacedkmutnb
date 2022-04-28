@@ -22,7 +22,6 @@ export default function Navbar() {
       localStorage.setItem("question_type_id", null);
       localStorage.setItem("fp_tal", null);
    };
-  
 
    //console.log("admin");
 
@@ -90,6 +89,13 @@ export default function Navbar() {
                            {/* <i className="nav-icon fas fa-file" /> */}
 
                            <p>เกี่ยวกับระบบ</p>
+                        </Link>
+                     </li>
+                     <li className="nav-item">
+                        <Link to="/GeneralQuestion" className="nav-link" onClick={clearLocalStorage}>
+                           {/* <i className="nav-icon fas fa-file" /> */}
+
+                           <p>คำถามทั่วไป</p>
                         </Link>
                      </li>
                      <li className="nav-item">

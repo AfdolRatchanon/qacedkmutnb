@@ -131,7 +131,7 @@ export default function Header() {
                            </a>
                            <div
                               className="dropdown-menu dropdown-menu-lg dropdown-menu-right"
-                              style={{ overflowY: "scroll", height: "500px" }}
+                              style={{ overflowY: "scroll", maxHeight: "500px" }}
                            >
                               <Link to="/officer-question-type">
                                  <li className="dropdown-item dropdown-header">
@@ -140,37 +140,43 @@ export default function Header() {
                               </Link>
                               {qstTypeNum.map((item) => (
                                  <>
-                                    <Link
-                                       to="/officer-read-question-type"
-                                       className="dropdown-item"
-                                       onClick={() => {
-                                          // console.log("type_id : ", type_id);
-                                          localStorage.setItem("officer_type_id", item.type_id);
-                                          if (window.location.pathname == "/officer-read-question-type") {
-                                             window.location.reload(false);
-                                          }
-                                       }}
-                                    >
-                                       {/* Message Start */}
-                                       <div className="media">
-                                          <div className="media-body">
-                                             <p className="dropdown-item-title" style={{ wordBreak: "break-word" }}>
-                                                {item.type_name}
-                                                {/* <span className="float-right text-sm text-danger">
+                                    {item.count_type_id != 0 ? (
+                                       <>
+                                          <Link
+                                             to="/officer-read-question-type"
+                                             className="dropdown-item"
+                                             onClick={() => {
+                                                // console.log("type_id : ", type_id);
+                                                localStorage.setItem("officer_type_id", item.type_id);
+                                                // if (window.location.pathname == "/officer-read-question-type") {
+                                                //    window.location.reload(false);
+                                                // }
+                                             }}
+                                          >
+                                             {/* Message Start */}
+                                             <div className="media">
+                                                <div className="media-body">
+                                                   <p className="dropdown-item-title" style={{ wordBreak: "break-word" }}>
+                                                      {item.type_name}
+                                                      {/* <span className="float-right text-sm text-danger">
                                                    <i className="fas fa-star" />
                                                 </span> */}
-                                             </p>
-                                             <p className="text-sm">
-                                                จำนวน <pred style={{ color: "red" }}>{item.count_type_id}</pred> คำถาม
-                                             </p>
-                                             {/* <p className="text-sm text-muted">
+                                                   </p>
+                                                   <p className="text-sm">
+                                                      จำนวน <pred style={{ color: "red" }}>{item.count_type_id}</pred> คำถาม
+                                                   </p>
+                                                   {/* <p className="text-sm text-muted">
                                                 <i className="far fa-clock mr-1" /> 4 Hours Ago
                                              </p> */}
-                                          </div>
-                                       </div>
-                                       {/* Message End */}
-                                    </Link>
-                                    <div className="dropdown-divider" />
+                                                </div>
+                                             </div>
+                                             {/* Message End */}
+                                          </Link>
+                                          <div className="dropdown-divider" />
+                                       </>
+                                    ) : (
+                                       <></>
+                                    )}
                                  </>
                               ))}
 

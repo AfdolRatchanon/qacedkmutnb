@@ -12,16 +12,17 @@ import { countQuestionType } from "../../functions/query";
 const OfficerQuestionType = () => {
    const [dataQuestionType, setDataQuestionType] = useState([]);
    const [bgSmallBox, setBgSmallBox] = useState({
-      0: "bg-primary",
-      1: "bg-secondary",
-      2: "bg-info",
-      3: "bg-success",
-      4: "bg-warning",
-      5: "bg-danger",
-      6: "bg-light",
-      7: "bg-purple",
-      8: "bg-indigo",
-      9: "bg-orange",
+      0: "bg-success",
+      // 0: "bg-primary",
+      // 1: "bg-secondary",
+      // 2: "bg-info",
+      // 3: "bg-success",
+      // 4: "bg-warning",
+      // 5: "bg-danger",
+      // 6: "bg-light",
+      // 7: "bg-purple",
+      // 8: "bg-indigo",
+      // 9: "bg-orange",
    });
    const { user } = useSelector((state) => ({ ...state }));
 
@@ -45,14 +46,14 @@ const OfficerQuestionType = () => {
 
       return (
          <div className="col-lg-3 col-6">
-            <div className={"small-box " + bgSmallBox[p_key % 10]}>
+            <div className={"small-box " + bgSmallBox[p_key % 1]}>
                <div className="inner">
                   <div className="row">
                      <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1>
                      <h4 style={{ margin: " auto 5px auto 5px" }}> คำถาม</h4>
                   </div>
 
-                  <h6 style={{ height: "60px" }}>หมวด {type_name}</h6>
+                  <h5 style={{ height: "60px" }}>หมวด {type_name}</h5>
                </div>
                {/* <div className="icon">
                   <i className="ion ion-pie-graph" />

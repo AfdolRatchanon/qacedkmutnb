@@ -15,6 +15,7 @@ import NewPassword from "./components/pages/auth/NewPassword";
 import FAQ from "./components/pages/FAQ";
 import EditInformation from "./components/pages/auth/EditInformation";
 import ChangePassword from "./components/pages/auth/ChangePassword";
+import GeneralQuestions from "./components/pages/GeneralQuestions";
 
 // Page Admin
 import HomeAdmin from "./components/pages/admin/Home";
@@ -121,6 +122,7 @@ function App() {
                   <Route path="/ForgotPassword" element={<ForgotPassword />} />
                   <Route path="/NewPassword" element={<NewPassword />} />
                   <Route path="/FAQ" element={<FAQ />} />
+                  <Route path="/GeneralQuestion" element={<GeneralQuestions />} />
                   {/*NOTE ADMIN */}
                   <Route
                      path="/index-admin"
@@ -303,7 +305,6 @@ function App() {
                         </UserRoute>
                      }
                   />
-                  
                </Routes>
             </div>
             <Footer />
