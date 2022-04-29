@@ -29,7 +29,9 @@ const GeneralQuestions = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">หน้าแรก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หน้าแรก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -64,37 +66,63 @@ const GeneralQuestions = () => {
                                  <div className="row">
                                     {data &&
                                        data.map((value, key) => (
-                                          <div key={key} className="post col-10 col-md-10 col-lg-10 col-xl-5 mx-5">
+                                          <div
+                                             key={key}
+                                             className="post col-10 col-md-10 col-lg-10 col-xl-5 mx-5"
+                                          >
                                              <hr />
-                                             {value.mem_img != null ? <div className="user-block">
-                                                <img
-                                                   className="img-circle img-bordered-sm"
-                                                   src={process.env.REACT_APP_API_MEM_IMG + "/" + value.mem_img}
-                                                   // alt="user image"
-                                                />
-                                                <span className="username">
-                                                   <h5 className="text-primary">{value.mem_name}</h5>
-                                                </span>
-                                                <span className="description">{value.date}</span>
-                                             </div> : <div className="user-block">
-                                                <img
-                                                   className="img-circle img-bordered-sm"
-                                                   src={"../../dist/img/avatar6.jpg"}
-                                                   // alt="user image"
-                                                />
-                                                <span className="username">
-                                                   <h5 className="text-primary">{value.mem_name}</h5>
-                                                </span>
-                                                <span className="description">{value.date}</span>
-                                             </div>}
-                                             
+                                             {value.mem_img != null ? (
+                                                <div className="user-block">
+                                                   <img
+                                                      className="img-circle img-bordered-sm"
+                                                      src={
+                                                         process.env
+                                                            .REACT_APP_API_MEM_IMG +
+                                                         "/" +
+                                                         value.mem_img
+                                                      }
+                                                      // alt="user image"
+                                                   />
+                                                   <span className="username">
+                                                      <h5 className="text-primary">
+                                                         {value.mem_name}
+                                                      </h5>
+                                                   </span>
+                                                   <span className="description">
+                                                      {value.date}
+                                                   </span>
+                                                </div>
+                                             ) : (
+                                                <div className="user-block">
+                                                   <img
+                                                      className="img-circle img-bordered-sm"
+                                                      src={
+                                                         "../../dist/img/avatar6.jpg"
+                                                      }
+                                                      // alt="user image"
+                                                   />
+                                                   <span className="username">
+                                                      <h5 className="text-primary">
+                                                         {value.mem_name}
+                                                      </h5>
+                                                   </span>
+                                                   <span className="description">
+                                                      {value.date}
+                                                   </span>
+                                                </div>
+                                             )}
+
                                              {/* /.user-block */}
                                              <h4>{value.qst_title}</h4>
                                              <p>{value.qst_detail}</p>
                                              {value.sta_id == 3 ? (
-                                                <p className="text-warning">กำลังดำเนินการ</p>
+                                                <p className="text-warning">
+                                                   กำลังดำเนินการ
+                                                </p>
                                              ) : (
-                                                <p className="text-success">ตอบแล้ว</p>
+                                                <p className="text-success">
+                                                   ตอบแล้ว
+                                                </p>
                                              )}
                                           </div>
                                        ))}
@@ -103,7 +131,7 @@ const GeneralQuestions = () => {
                                           <div
                                              className="btn btn-primary m-2 col-12"
                                              onClick={() => {
-                                                setLimit(limit + 10);
+                                                setLimit(limit + 6);
                                              }}
                                           >
                                              + โหลดคำถามเพิ่ม
