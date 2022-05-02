@@ -16,7 +16,9 @@ const Home = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">หน้าแรก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หน้าแรก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -49,14 +51,20 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-lg-12 col-xl-6">
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
-                                             <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                             <h3 className="card-title">
+                                                ประเภทคำถาม
+                                             </h3>
+                                             {/* <div className="card-tools">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
-                                             </div>
+                                             </div> */}
                                           </div>
                                           <div className="card-body">
                                              <div className="chart">
@@ -74,12 +82,18 @@ const Home = () => {
                                        {/* BAR CHART */}
                                        <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Donut Chart */}</h3>
-                                             <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                             <h3 className="card-title">
+                                                แผนภูมิโดนัท
+                                             </h3>
+                                             {/* <div className="card-tools">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
-                                             </div>
+                                             </div> */}
                                           </div>
                                           <div className="card-body">
                                              <div className="chart">

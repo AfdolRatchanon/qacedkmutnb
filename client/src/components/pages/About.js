@@ -12,7 +12,9 @@ const About = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">เกี่ยวกับระบบ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           เกี่ยวกับระบบ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -38,14 +40,18 @@ const About = () => {
                  </div>
               </div> */}
                         <div className="card-body">
-                           <h1>Home Page</h1>
+                           <h1>ระบบบริการตอบคำถามนักศึกษา</h1>
                            <p>
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                              and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                              leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                              with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                              publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                              &emsp; &emsp; &emsp; ระบบบริการตอบคำถามนักศึกษา
+                              คือ ระบบที่นักศึกษาหรือบุคคลภายนอก
+                              สามารถติดต่อสอบถามรายละเอียดในหมวดต่าง ๆ
+                              มายังภาควิชาคอมพิวเตอร์ศึกษา
+                              คณะครุศาสตร์อุตสาหกรรม
+                              มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
+                              โดยระบบนี้ถูกออกแบบมาเพื่อรวมศูนย์การติดต่อสอบถาม
+                              และลดภาระงานของอาจารย์และเจ้าหน้าที่จากการตอบคำถามหลายแพลตฟอร์ม
+                              โดยระบบนี้พัฒนาด้วย React JavaScript Library ร่วมกับ
+                              Node.js และ MySQL ซึ่งเป็นแบบ Open Source
                            </p>
                         </div>
                         {/* /.card-body */}

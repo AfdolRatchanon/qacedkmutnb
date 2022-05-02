@@ -6,7 +6,11 @@ import { countQstOfUser } from "../../functions/user";
 import ChartBarQst from "./chart/ChartBarQst";
 const Home = () => {
    const { user } = useSelector((state) => ({ ...state }));
-   const [countQst, setCountQst] = useState({ all_qst: 0, qst_success: 0, qst_wait: 0 });
+   const [countQst, setCountQst] = useState({
+      all_qst: 0,
+      qst_success: 0,
+      qst_wait: 0,
+   });
 
    const [bgSmallBox, setBgSmallBox] = useState({
       0: "bg-success",
@@ -79,7 +83,9 @@ const Home = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">หน้าแรก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หน้าแรก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -108,11 +114,15 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-12">
-                                       <div className="card card-warning">
+                                       <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -121,13 +131,25 @@ const Home = () => {
                                              <div className="chart">
                                                 <div className="row justify-content-center">
                                                    {/* BOX BOX BOX */}
-                                                   <Small_Boxes name={"คำถามทั้งหมด"} count={countQst.all_qst} p_key={0} />
                                                    <Small_Boxes
-                                                      name={"คำถามที่ได้รับคำตอบ"}
-                                                      count={countQst.qst_success}
+                                                      name={"คำถามทั้งหมด"}
+                                                      count={countQst.all_qst}
                                                       p_key={1}
                                                    />
-                                                   <Small_Boxes name={"คำถามที่รอคำตอบ"} count={countQst.qst_wait} p_key={2} />
+                                                   <Small_Boxes
+                                                      name={
+                                                         "คำถามที่ได้รับคำตอบ"
+                                                      }
+                                                      count={
+                                                         countQst.qst_success
+                                                      }
+                                                      p_key={0}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={"คำถามที่รอคำตอบ"}
+                                                      count={countQst.qst_wait}
+                                                      p_key={2}
+                                                   />
                                                    {/* BOX BOX BOX */}
                                                 </div>
                                              </div>
@@ -136,11 +158,17 @@ const Home = () => {
                                        </div>
                                     </div>
                                     <div className="col-xl-12">
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Bar Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>

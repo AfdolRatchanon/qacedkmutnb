@@ -84,7 +84,9 @@ const Home = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">หน้าแรก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หน้าแรก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -113,11 +115,15 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-6">
-                                       <div className="card card-warning">
+                                       <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -128,19 +134,33 @@ const Home = () => {
                                                 {/* <Doughnut data={data} /> */}
                                                 <div className="row">
                                                    {/* BOX BOX BOX */}
-                                                   <Small_Boxes name={"คำถามทั้งหมด"} count={countQst.allQst} p_key={0} />
                                                    <Small_Boxes
-                                                      name={"คำถามทั้งหมดที่ตอบแล้ว"}
-                                                      count={countQst.successQst}
+                                                      name={"คำถามทั้งหมด"}
+                                                      count={countQst.allQst}
+                                                      p_key={0}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={
+                                                         "คำถามทั้งหมดที่ตอบแล้ว"
+                                                      }
+                                                      count={
+                                                         countQst.successQst
+                                                      }
                                                       p_key={1}
                                                    />
                                                    <Small_Boxes
-                                                      name={"คำถามทั้งหมดที่ยังไม่ได้ตอบ"}
+                                                      name={
+                                                         "คำถามทั้งหมดที่ยังไม่ได้ตอบ"
+                                                      }
                                                       count={countQst.waitReply}
                                                       p_key={2}
                                                    />
                                                    <Small_Boxes
-                                                      name={"คำถามที่ (" + user.mem_name + ") ตอบ"}
+                                                      name={
+                                                         "คำถามที่ (" +
+                                                         user.mem_name +
+                                                         ") ตอบ"
+                                                      }
                                                       count={countQst.ownReply}
                                                       p_key={3}
                                                    />
@@ -150,11 +170,17 @@ const Home = () => {
                                           </div>
                                           {/* /.card-body */}
                                        </div>
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Bar Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -176,9 +202,15 @@ const Home = () => {
                                        {/* BAR CHART */}
                                        <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Donut Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Donut Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>

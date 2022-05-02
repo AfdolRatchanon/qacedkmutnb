@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import {
+   Chart as ChartJS,
+   CategoryScale,
+   LinearScale,
+   BarElement,
+   Title,
+   Tooltip,
+   Legend,
+} from "chart.js";
 import { Bar } from "react-chartjs-2";
 import faker from "faker";
 
@@ -10,7 +18,14 @@ import { countQstOfUser } from "../../../functions/user";
 //React Redux
 import { useSelector } from "react-redux";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+   CategoryScale,
+   LinearScale,
+   BarElement,
+   Title,
+   Tooltip,
+   Legend
+);
 
 const ChartBarQst = () => {
    const { user } = useSelector((state) => ({ ...state }));
@@ -35,17 +50,17 @@ const ChartBarQst = () => {
          {
             label: "คำถามทั้งหมด",
             data: labels.map(() => 40),
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            backgroundColor: "rgba(0, 123, 255, 1)",
          },
          {
             label: "คำถามที่ได้รับคำตอบ",
             data: labels.map(() => 30),
-            backgroundColor: "rgba(53, 162, 235, 0.5)",
+            backgroundColor: "rgba(92, 184, 92, 1)",
          },
          {
             label: "คำถามที่รอคำตอบ",
             data: labels.map(() => 20),
-            backgroundColor: "rgba(53, 255, 235, 0.5)",
+            backgroundColor: "rgba(220, 53, 69, 1)",
          },
       ],
    });
@@ -60,17 +75,17 @@ const ChartBarQst = () => {
                   {
                      label: "คำถามทั้งหมด",
                      data: labels.map(() => res.data.all_qst),
-                     backgroundColor: "rgba(0, 255, 64, 0.5)",
+                     backgroundColor: "rgba(0, 123, 255, 1)",
                   },
                   {
                      label: "คำถามที่ได้รับคำตอบ",
                      data: labels.map(() => res.data.qst_success),
-                     backgroundColor: "rgba(53, 162, 235, 0.5)",
+                     backgroundColor: "rgba(92, 184, 92, 1)",
                   },
                   {
                      label: "คำถามที่รอคำตอบ",
                      data: labels.map(() => res.data.qst_wait),
-                     backgroundColor: "rgba(255, 99, 132, 0.5)",
+                     backgroundColor: "rgba(220, 53, 69, 1)",
                   },
                ],
             });

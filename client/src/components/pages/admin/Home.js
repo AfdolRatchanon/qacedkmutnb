@@ -97,7 +97,9 @@ const Home = () => {
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
-                        <li className="breadcrumb-item font-weight-bold">หน้าแรก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หน้าแรก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -126,11 +128,15 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-6">
-                                       <div className="card card-warning">
+                                       <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -139,10 +145,30 @@ const Home = () => {
                                              <div className="chart">
                                                 <div className="row">
                                                    {/* BOX BOX BOX */}
-                                                   <Small_Boxes name={"ผู้ใช้"} count={countMem.user_num} p_key={0} />
-                                                   <Small_Boxes name={"เจ้าหน้าที่"} count={countMem.officer_num} p_key={1} />
-                                                   <Small_Boxes name={"ผู้ดูแลระบบ"} count={countMem.admin_num} p_key={2} />
-                                                   <Small_Boxes name={"ถูกปิดการใช้งาน"} count={countMem.user_disble} p_key={3} />
+                                                   <Small_Boxes
+                                                      name={"ผู้ใช้"}
+                                                      count={countMem.user_num}
+                                                      p_key={0}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={"เจ้าหน้าที่"}
+                                                      count={
+                                                         countMem.officer_num
+                                                      }
+                                                      p_key={1}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={"ถูกปิดการใช้งาน"}
+                                                      count={
+                                                         countMem.user_disble
+                                                      }
+                                                      p_key={2}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={"ผู้ดูแลระบบ"}
+                                                      count={countMem.admin_num}
+                                                      p_key={3}
+                                                   />
                                                    {/* BOX BOX BOX */}
                                                 </div>
                                              </div>
@@ -151,11 +177,17 @@ const Home = () => {
                                        </div>
                                     </div>
                                     <div className="col-xl-6">
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Bar Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -177,11 +209,15 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-6">
-                                       <div className="card card-warning">
+                                       <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -190,19 +226,33 @@ const Home = () => {
                                              <div className="chart">
                                                 <div className="row">
                                                    {/* BOX BOX BOX */}
-                                                   <Small_Boxes name={"คำถามทั้งหมด"} count={countQst.allQst} p_key={0} />
                                                    <Small_Boxes
-                                                      name={"คำถามทั้งหมดที่ตอบแล้ว"}
-                                                      count={countQst.successQst}
+                                                      name={"คำถามทั้งหมด"}
+                                                      count={countQst.allQst}
+                                                      p_key={0}
+                                                   />
+                                                   <Small_Boxes
+                                                      name={
+                                                         "คำถามทั้งหมดที่ตอบแล้ว"
+                                                      }
+                                                      count={
+                                                         countQst.successQst
+                                                      }
                                                       p_key={1}
                                                    />
                                                    <Small_Boxes
-                                                      name={"คำถามทั้งหมดที่ยังไม่ได้ตอบ"}
+                                                      name={
+                                                         "คำถามทั้งหมดที่ยังไม่ได้ตอบ"
+                                                      }
                                                       count={countQst.waitReply}
                                                       p_key={2}
                                                    />
                                                    <Small_Boxes
-                                                      name={"คำถามที่ (" + user.mem_name + ") ตอบ"}
+                                                      name={
+                                                         "คำถามที่ (" +
+                                                         user.mem_name +
+                                                         ") ตอบ"
+                                                      }
                                                       count={countQst.ownReply}
                                                       p_key={3}
                                                    />
@@ -214,11 +264,17 @@ const Home = () => {
                                        </div>
                                     </div>
                                     <div className="col-xl-6">
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Bar Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -248,11 +304,15 @@ const Home = () => {
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-6">
-                                       <div className="card card-warning">
+                                       <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
@@ -266,11 +326,17 @@ const Home = () => {
                                        </div>
                                     </div>
                                     <div className="col-xl-6">
-                                       <div className="card card-primary">
+                                       <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title">{/* Bar Chart */}</h3>
+                                             <h3 className="card-title">
+                                                {/* Bar Chart */}
+                                             </h3>
                                              <div className="card-tools">
-                                                <button type="button" className="btn btn-tool" data-card-widget="collapse">
+                                                <button
+                                                   type="button"
+                                                   className="btn btn-tool"
+                                                   data-card-widget="collapse"
+                                                >
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
