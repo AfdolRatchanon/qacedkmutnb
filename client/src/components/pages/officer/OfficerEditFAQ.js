@@ -121,9 +121,13 @@ const OfficerEditFAQ = () => {
                            <Link to="/officer-manage-faq">จัดการ FAQ</Link>
                         </li>
                         <li className="breadcrumb-item float-sm-right">
-                           <Link to="/officer-read-faq-type">หมวดคำถาม FAQ</Link>
+                           <Link to="/officer-read-faq-type">
+                              หมวดคำถาม FAQ
+                           </Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">แก้ไข FAQ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           แก้ไข FAQ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -155,7 +159,9 @@ const OfficerEditFAQ = () => {
                               <form key={key} onSubmit={handleSubmit}>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
+                                    <label className="col-sm-2 col-form-label">
+                                       หมวดคำถาม
+                                    </label>
                                     <select
                                        name="type_id"
                                        className="form-control col-sm-6"
@@ -164,7 +170,10 @@ const OfficerEditFAQ = () => {
                                     >
                                        <option value={0}>กรุณาเลือก</option>
                                        {questionType.map((questionType) => (
-                                          <option key={questionType.type_id} value={questionType.type_id}>
+                                          <option
+                                             key={questionType.type_id}
+                                             value={questionType.type_id}
+                                          >
                                              {questionType.type_name}
                                           </option>
                                        ))}
@@ -173,7 +182,9 @@ const OfficerEditFAQ = () => {
                                  </div>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-2">หัวข้อคำถาม</label>
+                                    <label className="col-sm-2">
+                                       หัวข้อคำถาม
+                                    </label>
                                     <input
                                        type="text"
                                        className="form-control col-sm-6"
@@ -194,7 +205,9 @@ const OfficerEditFAQ = () => {
                                </div> */}
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-2">รายละเอียด</label>
+                                    <label className="col-sm-2">
+                                       รายละเอียด
+                                    </label>
                                     <textarea
                                        className="form-control col-sm-6"
                                        name="faq_detail"
@@ -205,7 +218,10 @@ const OfficerEditFAQ = () => {
                                     <div className="col-sm-2"></div>
                                  </div>
                                  <div className="form-group" align="center">
-                                    <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                    <button
+                                       // style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                       className="btn btn-success col-sm-3 mx-1"
+                                    >
                                        ยืนยัน
                                     </button>
                                  </div>

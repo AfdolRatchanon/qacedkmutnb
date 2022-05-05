@@ -215,7 +215,7 @@ const AdminAddMember = () => {
                                  </select>
                               </div>
                               <div className="form-group" align="center">
-                                 <button className="btn btn-success col-sm-2">
+                                 <button className="btn btn-success col-sm-3">
                                     บันทึกข้อมูล
                                  </button>
                               </div>

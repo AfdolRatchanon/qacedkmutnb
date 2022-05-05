@@ -81,7 +81,12 @@ const AdminManageLevel = () => {
 
    const ModalConfirmDelete = () => {
       return (
-         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
+         <Modal
+            show={showMCD}
+            onHide={handleMCDClose}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+         >
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
@@ -109,7 +114,7 @@ const AdminManageLevel = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-4">
-                     <h1>จัดการระดับการเข้าถึง</h1>
+                     <h1>จัดการระดับการเข้าถึงข้อมูล</h1>
                   </div>
                   {/* <div className="col-sm-3">
                      <Link className="btn btn-success btn-sm " to="/user-add-question">
@@ -121,7 +126,9 @@ const AdminManageLevel = () => {
                         <li className="breadcrumb-item">
                            <Link to="/index-admin">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">จัดการระดับการเข้าถึง</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           จัดการระดับการเข้าถึงข้อมูล
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -136,22 +143,42 @@ const AdminManageLevel = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">ข้อมูลระดับการเข้าถึง</h3>
+                           <h3 className="card-title">
+                              ข้อมูลระดับการเข้าถึงข้อมูล
+                           </h3>
                         </div>
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="75" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="75"
+                                 isKey
+                                 dataAlign="center"
+                                 dataField="any"
+                                 dataFormat={indexN}
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
                                  ID
                               </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="175" headerAlign="center" dataField="lv_name">
-                                 ชื่อระดับการเข้าถึง
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="175"
+                                 headerAlign="center"
+                                 dataField="lv_name"
+                              >
+                                 ชื่อระดับการเข้าถึงข้อมูล
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="85" dataAlign="center" dataFormat={manageButoon} dataField="any">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="85"
+                                 dataAlign="center"
+                                 dataFormat={manageButoon}
+                                 dataField="any"
+                              >
                                  จัดการ
                               </TableHeaderColumn>
 

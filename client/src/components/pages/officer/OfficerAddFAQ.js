@@ -64,7 +64,15 @@ const OfficerAddFAQ = () => {
    };
 
    const handCancel = (e) => {
-      setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "", qst_img: "" });
+      setValue({
+         type_id: 0,
+         qst_title: "",
+         qst_detail: "",
+         qst_name: "",
+         qst_mail: "",
+         mem_id: "",
+         qst_img: "",
+      });
    };
    return (
       <div className="content-wrapper">
@@ -96,7 +104,9 @@ const OfficerAddFAQ = () => {
                         <li className="breadcrumb-item float-sm-right">
                            <Link to="/officer-manage-faq">จัดการ FAQ</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">เพิ่ม FAQ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           เพิ่ม FAQ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -126,11 +136,20 @@ const OfficerAddFAQ = () => {
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
-                                 <select name="type_id" className="form-control col-sm-6" onChange={handleChang}>
+                                 <label className="col-sm-2 col-form-label">
+                                    หมวดคำถาม
+                                 </label>
+                                 <select
+                                    name="type_id"
+                                    className="form-control col-sm-6"
+                                    onChange={handleChang}
+                                 >
                                     <option value={0}>กรุณาเลือก</option>
                                     {questionType.map((questionType) => (
-                                       <option key={questionType.type_id} value={questionType.type_id}>
+                                       <option
+                                          key={questionType.type_id}
+                                          value={questionType.type_id}
+                                       >
                                           {questionType.type_name}
                                        </option>
                                     ))}
@@ -170,14 +189,23 @@ const OfficerAddFAQ = () => {
                               </div>
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    // style={{
+                                    //    width: "110px",
+                                    //    margin: " 0px 5px 0px 5px",
+                                    // }}
                                     type="reset"
-                                    className="btn btn-danger"
+                                    className="btn btn-danger col-sm-2  m-1"
                                     onClick={handCancel}
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                 <button
+                                    // style={{
+                                    //    width: "110px",
+                                    //    margin: " 0px 5px 0px 5px",
+                                    // }}
+                                    className="btn btn-success col-sm-2 m-1"
+                                 >
                                     ยืนยัน
                                  </button>
                               </div>

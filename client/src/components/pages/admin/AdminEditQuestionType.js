@@ -147,7 +147,7 @@ const AdminEditQuestionType = () => {
                                        //     margin: " 0px 5px 0px 5px",
                                        // }}
                                        type="reset"
-                                       className="btn col-sm-3 m-1 btn-danger"
+                                       className="btn col-sm-2 m-1 btn-danger"
                                        onClick={() => {
                                           setValue({
                                              type_name: null,
@@ -161,7 +161,7 @@ const AdminEditQuestionType = () => {
                                        //     width: "75px",
                                        //     margin: " 0px 5px 0px 5px",
                                        // }}
-                                       className="btn col-sm-3 mx-1 btn-success"
+                                       className="btn col-sm-2 m-1 btn-success"
                                     >
                                        ยืนยัน
                                     </button>

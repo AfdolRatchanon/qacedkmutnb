@@ -389,8 +389,8 @@ const EditQuestion = () => {
                       </div>
                       <div className="form-group" align="center">
                         <button
-                          style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
-                          className="btn btn-success"
+                          // style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                          className="btn btn-success col-sm-2 m-1"
                         >
                           ยืนยัน
                         </button>
