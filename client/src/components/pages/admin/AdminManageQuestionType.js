@@ -112,7 +112,12 @@ const AdminManageQuestionType = () => {
 
    const ModalConfirmDelete = () => {
       return (
-         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
+         <Modal
+            show={showMCD}
+            onHide={handleMCDClose}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+         >
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
@@ -141,7 +146,10 @@ const AdminManageQuestionType = () => {
                      <h1>จัดการหมวดคำถาม</h1>
                   </div>
                   <div className="col-sm-2">
-                     <Link className="btn btn-success btn-sm " to="/admin-add-question-type">
+                     <Link
+                        className="btn btn-success btn-sm col-sm-12 "
+                        to="/admin-add-question-type"
+                     >
                         เพิ่มหมวดคำถาม
                      </Link>
                   </div>
@@ -150,7 +158,9 @@ const AdminManageQuestionType = () => {
                         <li className="breadcrumb-item">
                            <Link to="/index-admin">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">จัดการหมวดคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           จัดการหมวดคำถาม
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -171,14 +181,25 @@ const AdminManageQuestionType = () => {
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="75" isKey dataAlign="center" dataField="num_row">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="75"
+                                 isKey
+                                 dataAlign="center"
+                                 dataField="num_row"
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
                                   ID
                                </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="300" headerAlign="center" dataField="type_name">
-                                 ชื่อระดับการเข้าถึง
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="300"
+                                 headerAlign="center"
+                                 dataField="type_name"
+                              >
+                                 ชื่อหมวดคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn
                                  dataSort

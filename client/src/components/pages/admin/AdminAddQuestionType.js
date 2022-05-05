@@ -48,7 +48,7 @@ const AdminAddQuestionType = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
-                     <h1>หน้าแรก</h1>
+                     <h1>เพิ่มหมวดคำถาม</h1>
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -58,7 +58,9 @@ const AdminAddQuestionType = () => {
                         <li className="breadcrumb-item">
                            <Link to="/admin-manage-user">ข้อมูลสมาชิก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           เพิ่มหมวดคำถาม
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -87,15 +89,25 @@ const AdminAddQuestionType = () => {
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">หมวดคำถาม</label>
-                                 <input type="text" className="form-control col-sm-5" name="type_name" onChange={handleChang} />
+                                 <label className="col-sm-2 col-form-label">
+                                    หมวดคำถาม
+                                 </label>
+                                 <input
+                                    type="text"
+                                    className="form-control col-sm-5"
+                                    name="type_name"
+                                    onChange={handleChang}
+                                 />
                               </div>
 
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    // style={{
+                                    //    width: "110px",
+                                    //    margin: " 0px 5px 0px 5px",
+                                    // }}
                                     type="reset"
-                                    className="btn btn-danger"
+                                    className="btn col-sm-2 mx-1 btn-danger"
                                     onClick={() => {
                                        setValue({
                                           type_name: null,
@@ -104,7 +116,13 @@ const AdminAddQuestionType = () => {
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                 <button
+                                    // style={{
+                                    //    width: "110px",
+                                    //    margin: " 0px 5px 0px 5px",
+                                    // }}
+                                    className="btn col-sm-2 mx-1 btn-success"
+                                 >
                                     บันทึกข้อมูล
                                  </button>
                               </div>

@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 //function
-import { adminListUser, adminEnableAndDisenableMember } from "../../functions/admin";
+import {
+   adminListUser,
+   adminEnableAndDisenableMember,
+} from "../../functions/admin";
 
 //BootStrap Table
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
@@ -51,8 +54,6 @@ const AdminManageUser = () => {
          });
    };
 
-   
-
    //BootStrap Table
 
    const manageButoon = (cell, row) => {
@@ -73,14 +74,17 @@ const AdminManageUser = () => {
                      >
                         จัดการข้อมูล
                      </button>
-                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <div
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                     >
                         <p
                            className="dropdown-item"
                            onClick={() => {
                               handleEnable(user.token, row.mem_id);
                            }}
                         >
-                           อนุญาติ
+                           อนุญาต
                         </p>
                         <p
                            className="dropdown-item"
@@ -88,7 +92,7 @@ const AdminManageUser = () => {
                               handleDisable(user.token, row.mem_id);
                            }}
                         >
-                           ไม่อนุญาติ
+                           ไม่อนุญาต
                         </p>
                      </div>
                   </div>
@@ -102,7 +106,6 @@ const AdminManageUser = () => {
       loadData();
    }, [dataEnableAndDisable]);
    // dataEnableAndDisable
-   
 
    return (
       <div className="content-wrapper">
@@ -114,7 +117,10 @@ const AdminManageUser = () => {
                      <h1>ข้อมูลสมาชิก</h1>
                   </div>
                   <div className="col-sm-3">
-                     <Link className="btn btn-success btn-sm " to="/admin-add-member">
+                     <Link
+                        className="btn btn-success btn-sm col-sm-12 "
+                        to="/admin-add-member"
+                     >
                         เพิ่มข้อมูลสมาชิก
                      </Link>
                   </div>
@@ -123,7 +129,9 @@ const AdminManageUser = () => {
                         <li className="breadcrumb-item">
                            <Link to="/index-admin">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           ข้อมูลสมาชิก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -149,24 +157,56 @@ const AdminManageUser = () => {
                            </div>
                         </div>
                         <div className="card-body">
-                           <BootstrapTable data={data} bordered={false} hover pagination search>
+                           <BootstrapTable
+                              data={data}
+                              bordered={false}
+                              hover
+                              pagination
+                              search
+                           >
                               {/*  bordered={false} */}
-                              <TableHeaderColumn dataSort isKey width="150" dataAlign="center" dataField="num_row">
+                              <TableHeaderColumn
+                                 dataSort
+                                 isKey
+                                 width="150"
+                                 dataAlign="center"
+                                 dataField="num_row"
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataAlign="center" dataField="mem_id">
                                  ID
                               </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="mem_name">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 headerAlign="center"
+                                 dataField="mem_name"
+                              >
                                  ชื่อ - สกุล
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="sta_name">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 dataAlign="center"
+                                 dataField="sta_name"
+                              >
                                  สถานะ
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="lv_name">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 dataAlign="center"
+                                 dataField="lv_name"
+                              >
                                  ระดับการเข้าถึง
                               </TableHeaderColumn>
-                              <TableHeaderColumn width="150" dataAlign="center" dataField="any" dataFormat={manageButoon}>
+                              <TableHeaderColumn
+                                 width="150"
+                                 dataAlign="center"
+                                 dataField="any"
+                                 dataFormat={manageButoon}
+                              >
                                  การดำเนินการ
                               </TableHeaderColumn>
                            </BootstrapTable>

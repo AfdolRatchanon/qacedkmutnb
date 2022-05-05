@@ -120,7 +120,12 @@ const OfficerReadFAQType = () => {
 
    const ModalConfirmDelete = () => {
       return (
-         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
+         <Modal
+            show={showMCD}
+            onHide={handleMCDClose}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+         >
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
@@ -173,7 +178,7 @@ const OfficerReadFAQType = () => {
                         </li>
                         <li className="breadcrumb-item">
                            <Link
-                              to="/officer-question-type"
+                              to="/officer-manage-faq"
                               onClick={() => {
                                  localStorage.setItem("officer_type_id", null);
                               }}
@@ -181,7 +186,9 @@ const OfficerReadFAQType = () => {
                               จัดการ FAQ
                            </Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">หมวดคำถาม FAQ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           หมวดคำถาม FAQ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -196,19 +203,33 @@ const OfficerReadFAQType = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">{qst_type_name.type_name}</h3>
+                           <h3 className="card-title">
+                              {qst_type_name.type_name}
+                           </h3>
                         </div>
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="50"
+                                 isKey
+                                 dataAlign="center"
+                                 dataField="any"
+                                 dataFormat={indexN}
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="qst_id">
                                   ID
                                </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="200" headerAlign="center" dataField="faq_title">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="200"
+                                 headerAlign="center"
+                                 dataField="faq_title"
+                              >
                                  หัวข้อคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn

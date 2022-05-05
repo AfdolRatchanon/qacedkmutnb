@@ -81,7 +81,9 @@ const AdminAddMember = () => {
                         <li className="breadcrumb-item">
                            <Link to="/admin-manage-user">ข้อมูลสมาชิก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ข้อมูลสมาชิก</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           ข้อมูลสมาชิก
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -110,13 +112,15 @@ const AdminAddMember = () => {
                            <form onSubmit={handleSubmit}>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">ชื่อ - นามสกุล</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    ชื่อ - นามสกุล
+                                 </label>
                                  <input
                                     type="text"
                                     className="form-control col-sm-5"
                                     name="mem_name"
                                     placeholder="ชื่อผู้ใช้"
-                                    pattern="^(?=.*\w|\d|@|$|!|%|*|#|?|&).{6,30}$}"
+                                    pattern="^\w(\w|\s|\[ก-๙]){0,30}"
                                     title="กรอกชื่อผู้ใช้ 6 ตัวอักษรขึ้นไป"
                                     onChange={handleChang}
                                  />
@@ -136,7 +140,9 @@ const AdminAddMember = () => {
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">เบอร์โทรศัพท์</label>
+                                 <label className="col-sm-2">
+                                    เบอร์โทรศัพท์
+                                 </label>
                                  <input
                                     type="tel"
                                     className="form-control col-sm-5"
@@ -155,7 +161,7 @@ const AdminAddMember = () => {
                                     className="form-control col-sm-5"
                                     name="mem_user"
                                     placeholder="Input Username 4 characters or more"
-                                    pattern="\w{4,30}"
+                                    pattern="^(?=.*\w|\d|@|$|!|%|*|#|?|&).{6,30}$"
                                     title="Please input range 4 - 30 alphabet"
                                     onChange={handleChang}
                                  />
@@ -168,36 +174,50 @@ const AdminAddMember = () => {
                                     className="form-control col-sm-5"
                                     name="mem_pwd"
                                     placeholder="Input Password 6 characters or more"
-                                    pattern="\w{6,30}"
+                                    pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
                                     title="Please input range 6 - 30 alphabet"
                                     onChange={handleChang}
                                  />
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2">ยืนยันรหัสผ่าน</label>
+                                 <label className="col-sm-2">
+                                    ยืนยันรหัสผ่าน
+                                 </label>
                                  <input
                                     type="password"
                                     className="form-control col-sm-5"
                                     name="con_mem_pwd"
+                                    pattern="^(?=.*[\w|\d|@|$|!|%|*|#|?|&]).{8,30}$"
                                     placeholder="Input like a Password"
                                     onChange={handleChang}
                                  />
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-2"></div>
-                                 <label className="col-sm-2 col-form-label">ระดับการเข้าถึงข้อมูล</label>
-                                 <select name="lv_id" className="form-control col-sm-5" onChange={handleChang}>
+                                 <label className="col-sm-2 col-form-label">
+                                    ระดับการเข้าถึงข้อมูล
+                                 </label>
+                                 <select
+                                    name="lv_id"
+                                    className="form-control col-sm-5"
+                                    onChange={handleChang}
+                                 >
                                     <option value={0}>กรุณาเลือก</option>
                                     {questionLevel.map((questionLevel) => (
-                                       <option key={questionLevel.lv_id} value={questionLevel.lv_id}>
+                                       <option
+                                          key={questionLevel.lv_id}
+                                          value={questionLevel.lv_id}
+                                       >
                                           {questionLevel.lv_name}
                                        </option>
                                     ))}
                                  </select>
                               </div>
                               <div className="form-group" align="center">
-                                 <button className="btn btn-success">บันทึกข้อมูล</button>
+                                 <button className="btn btn-success col-sm-2">
+                                    บันทึกข้อมูล
+                                 </button>
                               </div>
 
                               {/*disabled={checkLength()} */}
