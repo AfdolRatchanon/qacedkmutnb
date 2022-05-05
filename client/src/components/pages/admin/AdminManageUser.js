@@ -118,7 +118,7 @@ const AdminManageUser = () => {
                   </div>
                   <div className="col-sm-3">
                      <Link
-                        className="btn btn-success btn-sm col-sm-12 "
+                        className="btn btn-success btn-sm"
                         to="/admin-add-member"
                      >
                         เพิ่มข้อมูลสมาชิก

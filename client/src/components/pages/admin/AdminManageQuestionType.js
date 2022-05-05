@@ -147,7 +147,7 @@ const AdminManageQuestionType = () => {
                   </div>
                   <div className="col-sm-2">
                      <Link
-                        className="btn btn-success btn-sm col-sm-12 "
+                        className="btn btn-success btn-sm"
                         to="/admin-add-question-type"
                      >
                         เพิ่มหมวดคำถาม

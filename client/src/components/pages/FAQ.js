@@ -97,7 +97,9 @@ const FAQ = () => {
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item active">คำถามที่พบบ่อย (FAQ)</li>
+                        <li className="breadcrumb-item active">
+                           คำถามที่พบบ่อย (FAQ)
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -119,7 +121,9 @@ const FAQ = () => {
                                  <div
                                     key={key}
                                     // className={"external-event " + bgSmallBox[key % 1]}
-                                    className={"btn btn-md btn-block btn-outline-success text-left"}
+                                    className={
+                                       "btn btn-md btn-block btn-outline-success text-left"
+                                    }
                                     // className={"btn btn-block btn-outline-dark text-success text-left"}
                                     onClick={() => {
                                        setType_ID_State(value.type_id);
@@ -141,15 +145,28 @@ const FAQ = () => {
                         {type_ID_State == 0 ? <>กรูณาเลือกหมวดคำถาม</> : <></>}
                         {data.map((value, key) => (
                            <div className="card card-success card-outline">
-                              <a className="d-block w100" data-toggle="collapse" href={"#collapse" + key}>
+                              <a
+                                 className="d-block w100"
+                                 data-toggle="collapse"
+                                 href={"#collapse" + key}
+                              >
                                  <div className="card-header">
-                                    <h6 className="card-title w100 text-success" style={{ fontSize: 26 }}>
+                                    <h6
+                                       className="card-title w100 text-success"
+                                       style={{ fontSize: 26 }}
+                                    >
                                        {value.faq_title}
                                     </h6>
                                  </div>
                               </a>
-                              <div id={"collapse" + key} class={key == 0 ? "collapse show" : "collapse"} data-parent="#accordion">
-                                 <div className="card-body">{value.faq_detail + key}</div>
+                              <div
+                                 id={"collapse" + key}
+                                 class={key == 0 ? "collapse show" : "collapse"}
+                                 data-parent="#accordion"
+                              >
+                                 <div className="card-body">
+                                    {value.faq_detail + key}
+                                 </div>
                               </div>
                            </div>
                         ))}

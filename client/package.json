@@ -12,6 +12,7 @@
     "faker": "^5.5.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
+    "react-autosize-textarea": "^7.1.0",
     "react-bootstrap": "^2.1.2",
     "react-bootstrap-table": "^4.3.1",
     "react-bootstrap-table-next": "^4.0.3",
