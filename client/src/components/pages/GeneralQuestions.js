@@ -73,7 +73,6 @@ const GeneralQuestions = () => {
                                              <hr />
                                              {value.mem_img != null ? (
                                                 <div className="user-block">
-                                                   
                                                    <img
                                                       className="img-circle img-bordered-sm"
                                                       src={
@@ -86,7 +85,7 @@ const GeneralQuestions = () => {
                                                    />
                                                    <span className="username">
                                                       <h5 className="text-primary">
-                                                         {/* {value.mem_name} */}
+                                                         {value.mem_name}
                                                       </h5>
                                                    </span>
                                                    <span className="description">
@@ -104,7 +103,7 @@ const GeneralQuestions = () => {
                                                    />
                                                    <span className="username">
                                                       <h5 className="text-primary">
-                                                         {/* {value.mem_name} */}
+                                                         {value.mem_name}
                                                       </h5>
                                                    </span>
                                                    <span className="description">

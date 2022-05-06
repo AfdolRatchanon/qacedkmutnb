@@ -19,7 +19,11 @@ const NewPassword = () => {
 
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
-      setValue({ ...value, mem_tal: localStorage.fp_tal, [e.target.name]: e.target.value });
+      setValue({
+         ...value,
+         mem_tal: localStorage.fp_tal,
+         [e.target.name]: e.target.value,
+      });
    };
    // console.log(value);
 
@@ -69,7 +73,9 @@ const NewPassword = () => {
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ตั้งรหัสผ่านใหม่</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           ตั้งรหัสผ่านใหม่
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -96,10 +102,15 @@ const NewPassword = () => {
                          </div> */}
                         <div className="card-body">
                            {/* Form Register */}
-                           <form className="form-horizontal" onSubmit={handleSubmit}>
+                           <form
+                              className="form-horizontal"
+                              onSubmit={handleSubmit}
+                           >
                               <div className="form-group row">
                                  <div className="col-sm-1"></div>
-                                 <label className="col-sm-2 col-form-label">รหัสผ่าน</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    รหัสผ่าน
+                                 </label>
                                  <div className="col-sm-8">
                                     <input
                                        type="password"
@@ -115,7 +126,9 @@ const NewPassword = () => {
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-1"></div>
-                                 <label className="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    ยืนยันรหัสผ่าน
+                                 </label>
                                  <div className="col-sm-8">
                                     <input
                                        type="password"
@@ -131,14 +144,23 @@ const NewPassword = () => {
                               </div>
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                                    style={{
+                                       width: "75px",
+                                       margin: " 0px 5px 0px 5px",
+                                    }}
                                     type="reset"
                                     className="btn btn-danger"
                                     onClick={handCancel}
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "75px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                 <button
+                                    style={{
+                                       width: "75px",
+                                       margin: " 0px 5px 0px 5px",
+                                    }}
+                                    className="btn btn-success"
+                                 >
                                     ตกลง
                                  </button>
                               </div>

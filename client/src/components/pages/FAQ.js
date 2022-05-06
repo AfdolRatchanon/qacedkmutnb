@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { loadQuestionTypeFAQ, readFAQType } from "../functions/query";
 
 import { toast } from "react-toastify";
-
+import TextareaAutosize from "react-autosize-textarea";
 const FAQ = () => {
    const frequently_asked_question_ID = localStorage.faq_id;
    const navigate = useNavigate();
@@ -165,7 +165,15 @@ const FAQ = () => {
                                  data-parent="#accordion"
                               >
                                  <div className="card-body">
-                                    {value.faq_detail + key}
+                                    <TextareaAutosize
+                                       className="form-control"
+                                       style={{
+                                          backgroundColor: "white",
+                                          border: "none",
+                                       }}
+                                       value={value.faq_detail}
+                                       disabled
+                                    />
                                  </div>
                               </div>
                            </div>

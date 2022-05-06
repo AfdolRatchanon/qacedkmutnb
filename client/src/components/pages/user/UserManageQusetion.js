@@ -100,7 +100,14 @@ const UserManageQusetion = () => {
    };
 
    const handCancel = (e) => {
-      setValue({ type_id: 0, qst_title: "", qst_detail: "", qst_name: "", qst_mail: "", mem_id: "" });
+      setValue({
+         type_id: 0,
+         qst_title: "",
+         qst_detail: "",
+         qst_name: "",
+         qst_mail: "",
+         mem_id: "",
+      });
    };
 
    const indexN = (cell, row, enumObject, index) => {
@@ -162,10 +169,17 @@ const UserManageQusetion = () => {
                   >
                      รายละเอียด
                   </button>
-                  <button className="btn btn-warning disabled" style={{ width: "75px", margin: " 0px 5px 0px 5px" }}>
+                  <button
+                     className="btn btn-warning disabled"
+                     style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+                  >
                      แก้ไข
                   </button>
-                  <button type="button" className="btn btn-danger disabled" style={{ width: "50px", margin: " 0px 5px 0px 5px" }}>
+                  <button
+                     type="button"
+                     className="btn btn-danger disabled"
+                     style={{ width: "50px", margin: " 0px 5px 0px 5px" }}
+                  >
                      ลบ
                   </button>
                </div>
@@ -205,7 +219,12 @@ const UserManageQusetion = () => {
 
    const ModalConfirmDelete = () => {
       return (
-         <Modal show={showMCD} onHide={handleMCDClose} aria-labelledby="contained-modal-title-vcenter" centered>
+         <Modal
+            show={showMCD}
+            onHide={handleMCDClose}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+         >
             <Modal.Header>
                <Modal.Title>แจ้งเตือน</Modal.Title>
             </Modal.Header>
@@ -244,7 +263,12 @@ const UserManageQusetion = () => {
 
    const ModalView = (val) => {
       return (
-         <Modal show={showMV} onHide={handleMVClose} aria-labelledby="contained-modal-title-vcenter" centered>
+         <Modal
+            show={showMV}
+            onHide={handleMVClose}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+         >
             <Modal.Header>
                <Modal.Title>รายละเอียด</Modal.Title>
             </Modal.Header>
@@ -287,7 +311,9 @@ const UserManageQusetion = () => {
                         <td>
                            {modalViewValue.qst_img != 0 ? (
                               <>
-                                 {modalViewValue.qst_img.match(/\.(pdf|PDF)$/) ? (
+                                 {modalViewValue.qst_img.match(
+                                    /\.(pdf|PDF)$/
+                                 ) ? (
                                     <>
                                        {/* <h1>/user-read-pdf</h1> */}
                                        {/* <Link to="/user-read-pdf" className="btn btn-success">
@@ -295,7 +321,11 @@ const UserManageQusetion = () => {
                                     </Link> */}
                                        <a
                                           className="btn btn-success"
-                                          href={process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img}
+                                          href={
+                                             process.env.REACT_APP_API_IMG +
+                                             "/" +
+                                             modalViewValue.qst_img
+                                          }
                                           target="_blank"
                                        >
                                           อ่านไฟล์ PDF
@@ -303,12 +333,20 @@ const UserManageQusetion = () => {
                                     </>
                                  ) : (
                                     <>
-                                       <button type="button" className="btn btn-success" onClick={() => openImageViewer(0)}>
+                                       <button
+                                          type="button"
+                                          className="btn btn-success"
+                                          onClick={() => openImageViewer(0)}
+                                       >
                                           เปิดไฟล์
                                        </button>
                                        {isViewerOpen && (
                                           <ImageViewer
-                                             src={[process.env.REACT_APP_API_IMG + "/" + modalViewValue.qst_img]}
+                                             src={[
+                                                process.env.REACT_APP_API_IMG +
+                                                   "/" +
+                                                   modalViewValue.qst_img,
+                                             ]}
                                              currentIndex={currentImage}
                                              zoomScale=""
                                              disableScroll={true}
@@ -368,18 +406,34 @@ const UserManageQusetion = () => {
 
    const ModalEdit = (val) => {
       return (
-         <Modal show={showME} onHide={handleMEClose} aria-labelledby="contained-modal-title-vcenter">
+         <Modal
+            show={showME}
+            onHide={handleMEClose}
+            aria-labelledby="contained-modal-title-vcenter"
+         >
             <Modal.Header>
                <Modal.Title>แก้ไขคำถาม</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-               <form onSubmit={handleSubmit} className="col-12 container-fluid ">
+               <form
+                  onSubmit={handleSubmit}
+                  className="col-12 container-fluid "
+               >
                   <div className="form-group row">
-                     <label className="col-sm-4 col-form-label">หมวดคำถาม</label>
-                     <select name="type_id" className="form-control col-sm-8" onChange={handleChang}>
+                     <label className="col-sm-4 col-form-label">
+                        หมวดคำถาม
+                     </label>
+                     <select
+                        name="type_id"
+                        className="form-control col-sm-8"
+                        onChange={handleChang}
+                     >
                         <option value={0}>กรุณาเลือก</option>
                         {questionType.map((questionType) => (
-                           <option key={questionType.type_id} value={questionType.type_id}>
+                           <option
+                              key={questionType.type_id}
+                              value={questionType.type_id}
+                           >
                               {questionType.type_name}
                            </option>
                         ))}
@@ -398,7 +452,12 @@ const UserManageQusetion = () => {
                   </div>
                   <div className="form-group row">
                      <label className="col-sm-4">รายละเอียด</label>
-                     <textarea className="form-control col-sm-8" name="qst_detail" rows="3" onChange={handleChang}></textarea>
+                     <textarea
+                        className="form-control col-sm-8"
+                        name="qst_detail"
+                        rows="3"
+                        onChange={handleChang}
+                     ></textarea>
                   </div>
                   <div className="form-group row">
                      <label className="col-sm-4">ผู้ตั้งคำถาม</label>
@@ -446,7 +505,10 @@ const UserManageQusetion = () => {
                      <h1>คำถามของฉัน</h1>
                   </div>
                   <div className="col-sm-3">
-                     <Link className="btn btn-success btn-sm " to="/user-add-question">
+                     <Link
+                        className="btn btn-success btn-sm "
+                        to="/user-add-question"
+                     >
                         เพิ่มคำถาม
                      </Link>
                   </div>
@@ -455,7 +517,9 @@ const UserManageQusetion = () => {
                         <li className="breadcrumb-item">
                            <Link to="/index-user">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">คำถามของฉัน</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           คำถามของฉัน
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -470,22 +534,37 @@ const UserManageQusetion = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">ข้อมูลคำถาม - {user.mem_name}</h3>
+                           <h3 className="card-title">
+                              ข้อมูลคำถาม - {user.mem_name}
+                           </h3>
                         </div>
                         <div className="card-body">
                            <h1>คำถามของฉัน</h1>
-
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn isKey dataSort width="75" dataAlign="center" dataField="num_row">
+                              <TableHeaderColumn
+                                 isKey
+                                 dataSort
+                                 width="75"
+                                 dataAlign="center"
+                                 dataField="num_row"
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
-                              {/* <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="qst_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="150" headerAlign="center" dataField="qst_title">
+
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 headerAlign="center"
+                                 dataField="qst_title"
+                              >
                                  หัวข้อคำถาม
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="sta_name">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="150"
+                                 dataAlign="center"
+                                 dataField="sta_name"
+                              >
                                  สถานะ
                               </TableHeaderColumn>
                               <TableHeaderColumn
@@ -497,17 +576,10 @@ const UserManageQusetion = () => {
                               >
                                  จัดการ
                               </TableHeaderColumn>
-
-                              {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
-                                 การดำเนินการ
-                              </TableHeaderColumn> */}
                            </BootstrapTable>
                         </div>
-                        {/* /.card-body */}
                         <div className="card-footer"></div>
-                        {/* /.card-footer*/}
                      </div>
-                     {/* /.card */}
                   </div>
                </div>
             </div>

@@ -22,6 +22,7 @@ const ForgotPassword = () => {
       setValue({
          mem_mail: "",
       });
+      navigate("/Login");
    };
 
    const handleSubmit = (e) => {
@@ -56,7 +57,9 @@ const ForgotPassword = () => {
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ลืมรหัสผ่าน</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           ลืมรหัสผ่าน
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -83,10 +86,15 @@ const ForgotPassword = () => {
                      </div> */}
                         <div className="card-body">
                            {/* Form Register */}
-                           <form className="form-horizontal" onSubmit={handleSubmit}>
+                           <form
+                              className="form-horizontal"
+                              onSubmit={handleSubmit}
+                           >
                               <div className="form-group row">
                                  <div className="col-sm-1"></div>
-                                 <label className="col-sm-2 col-form-label">อีเมล</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    อีเมล
+                                 </label>
                                  <div className="col-sm-8">
                                     <input
                                        type="email"
@@ -101,14 +109,23 @@ const ForgotPassword = () => {
                               </div>
                               <div className="form-group" align="center">
                                  <button
-                                    style={{ width: "110px", margin: " 0px 5px 0px 5px" }}
+                                    style={{
+                                       width: "110px",
+                                       margin: " 0px 5px 0px 5px",
+                                    }}
                                     type="reset"
                                     className="btn btn-danger"
                                     onClick={handCancel}
                                  >
                                     ยกเลิก
                                  </button>
-                                 <button style={{ width: "110px", margin: " 0px 5px 0px 5px" }} className="btn btn-success">
+                                 <button
+                                    style={{
+                                       width: "110px",
+                                       margin: " 0px 5px 0px 5px",
+                                    }}
+                                    className="btn btn-success"
+                                 >
                                     ตกลง
                                  </button>
                               </div>

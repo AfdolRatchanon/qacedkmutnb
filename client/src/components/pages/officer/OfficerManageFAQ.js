@@ -114,7 +114,10 @@ const OfficerManageFAQ = () => {
                      <h1>จัดการ FAQ</h1>
                   </div>
                   <div className="col-sm-3">
-                     <Link className="btn btn-success btn-sm " to="/officer-add-faq">
+                     <Link
+                        className="btn btn-success btn-sm "
+                        to="/officer-add-faq"
+                     >
                         เพิ่ม FAQ
                      </Link>
                   </div>
@@ -136,7 +139,9 @@ const OfficerManageFAQ = () => {
                               <></>
                            )}
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">จัดการ FAQ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           จัดการ FAQ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -170,15 +175,32 @@ const OfficerManageFAQ = () => {
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
-                           <BootstrapTable data={dataQuestionType} hover pagination search>
-                              <TableHeaderColumn isKey dataSort width="65" dataAlign="center" dataField="any" dataFormat={indexN}>
+                           <BootstrapTable
+                              data={dataQuestionType}
+                              hover
+                              pagination
+                              search
+                           >
+                              <TableHeaderColumn
+                                 isKey
+                                 dataSort
+                                 width="65"
+                                 dataAlign="center"
+                                 dataField="any"
+                                 dataFormat={indexN}
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
                                  ID
                               </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="450" headerAlign="center" dataField="type_name">
-                                 ชื่อระดับการเข้าถึง
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="450"
+                                 headerAlign="center"
+                                 dataField="type_name"
+                              >
+                                 ชื่อหมวดคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn
                                  dataSort

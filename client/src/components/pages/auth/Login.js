@@ -52,7 +52,11 @@ const Login = () => {
       login(value)
          .then((res) => {
             // console.log(res.data);
-            toast.success("ยินดีต้อนรับคุณ " + res.data.payLoad.user.mem_user + " เข้าสู่เว็บไซต์");
+            toast.success(
+               "ยินดีต้อนรับคุณ " +
+                  res.data.payLoad.user.mem_user +
+                  " เข้าสู่เว็บไซต์"
+            );
             dispatch({
                type: "LOGIN",
                payload: {
@@ -88,7 +92,9 @@ const Login = () => {
                         <li className="breadcrumb-item">
                            <Link to="/">หน้าแรก</Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">เข้าสู่ระบบ</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           เข้าสู่ระบบ
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -115,10 +121,15 @@ const Login = () => {
                    </div> */}
                         <div className="card-body">
                            {/* Form Register */}
-                           <form className="form-horizontal" onSubmit={handleSubmit}>
+                           <form
+                              className="form-horizontal"
+                              onSubmit={handleSubmit}
+                           >
                               <div className="form-group row">
                                  <div className="col-sm-1"></div>
-                                 <label className="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    ชื่อผู้ใช้
+                                 </label>
                                  <div className="col-sm-5">
                                     <input
                                        type="text"
@@ -134,7 +145,9 @@ const Login = () => {
                               </div>
                               <div className="form-group row">
                                  <div className="col-sm-1"></div>
-                                 <label className="col-sm-2 col-form-label">รหัสผ่าน</label>
+                                 <label className="col-sm-2 col-form-label">
+                                    รหัสผ่าน
+                                 </label>
                                  <div className="col-sm-5">
                                     <input
                                        type="password"
