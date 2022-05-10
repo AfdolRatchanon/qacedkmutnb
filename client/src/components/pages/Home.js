@@ -54,7 +54,7 @@ const Home = () => {
                                        <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title">
-                                                ประเภทคำถาม
+                                                สถิติคำถามแยกตามหมวด
                                              </h3>
                                              {/* <div className="card-tools">
                                                 <button
@@ -83,7 +83,7 @@ const Home = () => {
                                        <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title">
-                                                แผนภูมิโดนัท
+                                                สถิติคำถามทั้งหมด
                                              </h3>
                                              {/* <div className="card-tools">
                                                 <button

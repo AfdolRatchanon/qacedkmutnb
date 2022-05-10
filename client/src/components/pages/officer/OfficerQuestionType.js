@@ -41,29 +41,27 @@ const OfficerQuestionType = () => {
       loadData();
    }, []);
 
-   const Small_Boxes = (props) => {
-      const { type_id, count_type_id, type_name, p_key } = props;
+   const Small_Boxes = (props) => { //component กล่องแสดงจำนวนคำถามที่ยังไม่ได้ตอบ
+      const { type_id, count_type_id, type_name, p_key } = props; //สกัดตัวแปรจาก props
 
       return (
          <div className="col-lg-3 col-6">
-            <div className={"small-box " + bgSmallBox[p_key % 1]}>
+            <div className={"small-box " + bgSmallBox[p_key % 1]}> 
                <div className="inner">
                   <div className="row">
-                     <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1>
+                     <h1 style={{ margin: " auto 5px auto 5px" }}>{count_type_id}</h1> 
+                     {/* นำข้อมูลจำนวนคำถามที่ยังไม่ได้ตอบแสดงตัวเลข */}
                      <h4 style={{ margin: " auto 5px auto 5px" }}> คำถาม</h4>
                   </div>
 
                   <h5 style={{ height: "60px" }}>หมวด {type_name}</h5>
                </div>
-               {/* <div className="icon">
-                  <i className="ion ion-pie-graph" />
-               </div> */}
-               <Link
-                  to="/officer-read-question-type"
+               <Link // มีหน้าที่เหมือน Tag a <a></a>
+                  to="/officer-read-question-type" //ส่งไป Page ตอบคำถามตามหมวด ...
                   className="small-box-footer"
-                  onClick={() => {
+                  onClick={() => {//เมื่อคลิกปุ่ม
                      // console.log("type_id : ", type_id);
-                     localStorage.setItem("officer_type_id", type_id);
+                     localStorage.setItem("officer_type_id", type_id); //เก็บ รหัสหมวดคำถาม ไว้ใน browser
                   }}
                >
                   ดูข้อมูล <i className="fas fa-arrow-circle-right" />

@@ -64,10 +64,14 @@ const NavAdmin = () => {
                   </a>
                   <ul className="nav nav-treeview">
                      <li className="nav-item">
-                        <Link to="/admin-manage-question-type" className="nav-link" onClick={clearLocalStoreNull}>
+                        <Link
+                           to="/admin-manage-question-type"
+                           className="nav-link"
+                           onClick={clearLocalStoreNull}
+                        >
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
-                           <p>หมวดคำถาม</p>
+                           <p>จัดการหมวดคำถาม</p>
                         </Link>
                      </li>
                   </ul>
@@ -82,14 +86,22 @@ const NavAdmin = () => {
                   </a>
                   <ul className="nav nav-treeview">
                      <li className="nav-item">
-                        <Link to="/admin-manage-user" className="nav-link" onClick={clearLocalStoreNull}>
+                        <Link
+                           to="/admin-manage-user"
+                           className="nav-link"
+                           onClick={clearLocalStoreNull}
+                        >
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>ข้อมูลสมาชิก</p>
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link to="/admin-manage-level" className="nav-link" onClick={clearLocalStoreNull}>
+                        <Link
+                           to="/admin-manage-level"
+                           className="nav-link"
+                           onClick={clearLocalStoreNull}
+                        >
                            {/* <i className="nav-icon fas fa-file" /> */}
                            {" \u00A0\u00A0\u00A0\u00A0"}
                            <p>ระดับการเข้าถึงข้อมูล</p>

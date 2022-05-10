@@ -139,13 +139,14 @@ const FAQ = () => {
                         {/* /.card */}
                      </div>
                   </div>
-                  {/* /.col */}
+
                   <div className="col-md-9">
+
                      <div class="col-12" id="accordion">
-                        {type_ID_State == 0 ? <>กรูณาเลือกหมวดคำถาม</> : <></>}
-                        {data.map((value, key) => (
+                        {type_ID_State == 0 ? <h2>กรุณาเลือกหมวดคำถาม</h2> : <></>} {/*ตรวจสอบการการเลือกหมวดคำถาม*/}
+                        {data.map((value, key) => ( // เมื่อเลือกหมวดคำถามจะวนซ้ำข้อมูลเพื่อแสดงผล
                            <div className="card card-success card-outline">
-                              <a
+                              <a //แสดงหัวข้อคำถาม FAQ แบบ Toggle 
                                  className="d-block w100"
                                  data-toggle="collapse"
                                  href={"#collapse" + key}
@@ -155,7 +156,7 @@ const FAQ = () => {
                                        className="card-title w100 text-success"
                                        style={{ fontSize: 26 }}
                                     >
-                                       {value.faq_title}
+                                       {value.faq_title}  {/*แสดงข้อมูลหัวข้อ FAQ*/}
                                     </h6>
                                  </div>
                               </a>
@@ -165,21 +166,21 @@ const FAQ = () => {
                                  data-parent="#accordion"
                               >
                                  <div className="card-body">
-                                    <TextareaAutosize
+                                    <TextareaAutosize // Componet กล่องข้อความขยายอัตโนมัติ
                                        className="form-control"
                                        style={{
-                                          backgroundColor: "white",
-                                          border: "none",
+                                          backgroundColor: "white", //กำหนดสีพื้นหลังกล่องข้อความเป็นสีขาว
+                                          border: "none", //กำหนดไม่มีเส้นขอบกล่องข้อความ
                                        }}
-                                       value={value.faq_detail}
-                                       disabled
+                                       value={value.faq_detail} //แสดงรายละเอียด FAQ
+                                       disabled //เปิดกล่องข้อความไม่ให้แก้ไขได้
                                     />
                                  </div>
                               </div>
                            </div>
                         ))}
                      </div>
-                     {/* /.card */}
+
                   </div>
                   {/* /.col */}
                </div>

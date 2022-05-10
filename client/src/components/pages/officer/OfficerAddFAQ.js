@@ -73,6 +73,7 @@ const OfficerAddFAQ = () => {
          mem_id: "",
          qst_img: "",
       });
+      navigate("/officer-manage-faq");
    };
    return (
       <div className="content-wrapper">

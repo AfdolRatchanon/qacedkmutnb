@@ -41,37 +41,30 @@ const AdminManageQuestionType = () => {
       return <div>{index + 1}</div>;
    };
 
-   const manageButoon = (cell, row) => {
-      if (row.type_id) {
+   const manageButoon = (cell, row) => { // Component แสดงปุ่ม แก้ไข และลบ ในตาราง
+      if (row.type_id) { //ตรวจตอบข้อมูลจากตาราง
          return (
-            <div className="position-sticky">
-               {/* <button
-                   type="button"
-                   className="btn btn-warning"
-                   onClick={() => {
-                      alert("กำลังดำเนินการสร้าง");
-                   }}
-                >
-                   แก้ไข
-                </button>  */}
-               <Link
-                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
-                  to="/admin-edit-question-type"
-                  className="btn btn-warning"
+            <div className="position-sticky"> {/* เมื่อมีข้อมูลจากตาราง */}
+               <Link // มีหน้าที่เหมือน Tag a <a></a>
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }} //กำหนดขนาดของปุ่ม
+                  to="/admin-edit-question-type" //ส่งไป Page แก้ไขหมวดคำถาม
+                  className="btn btn-warning" //ปุ่มสึเหลือง
                   onClick={() => {
-                     localStorage.setItem("question_type_id", row.type_id);
+                     localStorage.setItem("question_type_id", row.type_id); 
+                     //เก็บ รหัสหมวดคำถาม ไว้ใน browser เพื่อให้ Page แก้ไขหมวดคำถาม เพื่อเรียกข้อมูลมาแก้ไข
                   }}
                >
                   แก้ไข
                </Link>
-               <button
-                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }}
+               <button //ปุ่มลบข้อมูล
+                  style={{ width: "75px", margin: " 0px 5px 0px 5px" }} //กำหนดขนาดของปุ่ม
                   type="button"
-                  className="btn btn-danger"
-                  onClick={() => {
-                     setModalConfirmDeleteValue(row.type_id);
+                  className="btn btn-danger" //ปุ่มสึแดง
+                  onClick={() => {//เมื่อคลิกปุ่ม
+                     setModalConfirmDeleteValue(row.type_id); 
+                     //เก็บ รหัสหมวดคำถาม ไว้ใน browser 
                      // console.log("ลบ", modalConfirmDeleteValue);
-                     toggleMCDTrueFalse();
+                     toggleMCDTrueFalse(); //เรียก Modal ถามความแน่ใจที่จะลบข้อมูลฆ
                   }}
                >
                   ลบ
@@ -143,15 +136,15 @@ const AdminManageQuestionType = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-4">
-                     <h1>จัดการหมวดคำถาม</h1>
+                     {/* <h1>จัดการหมวดคำถาม</h1> */}
                   </div>
                   <div className="col-sm-2">
-                     <Link
+                     {/* <Link
                         className="btn btn-success btn-sm"
                         to="/admin-add-question-type"
                      >
                         เพิ่มหมวดคำถาม
-                     </Link>
+                     </Link> */}
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -175,8 +168,17 @@ const AdminManageQuestionType = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">ข้อมูลหมวดคำถาม</h3>
+                           <h3 className="card-title">จัดการหมวดคำถาม</h3>
+                           <div className="card-tools">
+                              <Link
+                                 className="btn btn-success btn-sm"
+                                 to="/admin-add-question-type"
+                              >
+                                 เพิ่มหมวดคำถาม
+                              </Link>
+                           </div>
                         </div>
+
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 

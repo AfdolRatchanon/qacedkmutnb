@@ -65,7 +65,7 @@ const AdminManageUser = () => {
                <>
                   <div className="dropdown position-static">
                      <button
-                        className="btn btn-primary dropdown-toggle "
+                        className="btn btn-primary  dropdown-toggle "
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
@@ -102,6 +102,22 @@ const AdminManageUser = () => {
       }
    };
 
+   const statusText = (cell, row) => {
+      if (row.sta_id) {
+         return (
+            <div className="position-sticky">
+               {row.sta_id == 2 ? (
+                  <p className="btn btn-danger btn-sm col-12">{row.sta_name}</p>
+               ) : (
+                  <p className="btn btn-success btn-sm col-12">
+                     {row.sta_name}
+                  </p>
+               )}
+            </div>
+         );
+      }
+   };
+
    useEffect(() => {
       loadData();
    }, [dataEnableAndDisable]);
@@ -113,16 +129,14 @@ const AdminManageUser = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
+                  <div className="col-sm-3">{/* <h1>ข้อมูลสมาชิก</h1> */}</div>
                   <div className="col-sm-3">
-                     <h1>ข้อมูลสมาชิก</h1>
-                  </div>
-                  <div className="col-sm-3">
-                     <Link
+                     {/* <Link
                         className="btn btn-success btn-sm"
                         to="/admin-add-member"
                      >
                         เพิ่มข้อมูลสมาชิก
-                     </Link>
+                     </Link> */}
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -148,79 +162,54 @@ const AdminManageUser = () => {
                         <div className="card-header">
                            <h3 className="card-title">ข้อมูลสมาชิก</h3>
                            <div className="card-tools">
-                              {/* <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                 <i className="fas fa-minus" />
-                              </button> */}
-                              {/* <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-                                 <i className="fas fa-times" />
-                              </button> */}
+                              <Link
+                                 className="btn btn-success btn-sm"
+                                 to="/admin-add-member"
+                              >
+                                 เพิ่มข้อมูลสมาชิก
+                              </Link>
                            </div>
                         </div>
                         <div className="card-body">
-                           <BootstrapTable
-                              data={data}
-                              bordered={false}
-                              hover
-                              pagination
-                              search
-                           >
-                              {/*  bordered={false} */}
-                              <TableHeaderColumn
-                                 dataSort
-                                 isKey
-                                 width="150"
-                                 dataAlign="center"
-                                 dataField="num_row"
-                              >
+
+                           <BootstrapTable // Component ตาราง
+                              data={data} // ข้อมูลทังหมดของตาราง
+                              bordered={false} //ไม่แสดงเส้นขอบ
+                              hover //เมื่อนำเม้าส์ขี้มีสีไฮไลน์
+                              pagination //ตัวแยกหน้า
+                              search //ช่องค้นหา
+                              > 
+                              <TableHeaderColumn  // Column ลำดับ
+                                 dataSort //ปุ่มการจัดเรียงข้อมูล
+                                 isKey  
+                                 width="80" //ความกว้างที่น้อยที่สุด
+                                 dataAlign="center" //การจัดตัวอักษรกึ่งกลาง
+                                 dataField="num_row" //ข้อมูล Column ที่แสดงผล
+                              > 
                                  ลำดับ
                               </TableHeaderColumn>
-                              {/* <TableHeaderColumn dataSort width="50" dataAlign="center" dataField="mem_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="150"
-                                 headerAlign="center"
-                                 dataField="mem_name"
-                              >
+                              <TableHeaderColumn dataSort width="300" headerAlign="center" dataField="mem_name">
                                  ชื่อ - สกุล
                               </TableHeaderColumn>
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="150"
-                                 dataAlign="center"
-                                 dataField="sta_name"
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" 
+                                 dataFormat={statusText} //นำ Component มาแสดงผลในตาราง
                               >
                                  สถานะ
                               </TableHeaderColumn>
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="150"
-                                 dataAlign="center"
-                                 dataField="lv_name"
-                              >
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataField="lv_name">
                                  ระดับการเข้าถึง
                               </TableHeaderColumn>
-                              <TableHeaderColumn
-                                 width="150"
-                                 dataAlign="center"
-                                 dataField="any"
-                                 dataFormat={manageButoon}
-                              >
+                              <TableHeaderColumn width="150" dataAlign="center" dataField="any" dataFormat={manageButoon}>
                                  การดำเนินการ
                               </TableHeaderColumn>
                            </BootstrapTable>
+                           
                         </div>
-                        {/* /.card-body */}
-                        {/* <div className="card-footer"></div> */}
-                        {/* /.card-footer*/}
                      </div>
-                     {/* /.card */}
                   </div>
                </div>
             </div>
          </section>
-         {/* /.content */}
       </div>
    );
 };

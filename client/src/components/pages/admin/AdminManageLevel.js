@@ -150,42 +150,33 @@ const AdminManageLevel = () => {
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
-                           <BootstrapTable data={data} hover pagination search>
+                           <BootstrapTable // Component ตาราง
+                              data={data} // ข้อมูลทังหมดของตาราง
+                              hover //เมื่อนำเม้าส์ขี้มีสีไฮไลน์
+                              pagination //ตัวแยกหน้า
+                              search //ช่องค้นหา
+                           >
                               <TableHeaderColumn
-                                 dataSort
-                                 width="75"
+                                 dataSort //ปุ่มการจัดเรียงข้อมูล
+                                 width="75" //ความกว้างที่น้อยที่สุด
                                  isKey
-                                 dataAlign="center"
-                                 dataField="any"
-                                 dataFormat={indexN}
+                                 dataAlign="center" //การจัดตัวอักษรกึ่งกลาง
+                                 dataField="any" //ข้อมูล Column ที่แสดงผล
+                                 dataFormat={indexN} //นำ Component มาแสดงผลในตาราง 
                               >
                                  ลำดับ
                               </TableHeaderColumn>
-                              {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="175"
-                                 headerAlign="center"
-                                 dataField="lv_name"
-                              >
+                              <TableHeaderColumn dataSort width="175" headerAlign="center" dataField="lv_name">
                                  ชื่อระดับการเข้าถึงข้อมูล
                               </TableHeaderColumn>
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="85"
-                                 dataAlign="center"
-                                 dataFormat={manageButoon}
+                              <TableHeaderColumn dataSort width="85" dataAlign="center" 
+                                 dataFormat={manageButoon} //นำ Component มาแสดงผลในตาราง 
                                  dataField="any"
                               >
                                  จัดการ
                               </TableHeaderColumn>
-
-                              {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
-                                 การดำเนินการ
-                              </TableHeaderColumn> */}
                            </BootstrapTable>
+
                         </div>
                         {/* /.card-body */}
                         <div className="card-footer"></div>

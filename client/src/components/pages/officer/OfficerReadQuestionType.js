@@ -76,6 +76,19 @@ const OfficerReadQuestionType = () => {
          );
       }
    };
+   const statusText = (cell, row) => {
+      if (row.sta_id) {
+         return (
+            <div className="position-sticky">
+               {row.sta_id == 3 ? (
+                  <p className="btn btn-warning col-12">{row.sta_name}</p>
+               ) : (
+                  <p className="btn btn-success col-12">{row.sta_name}</p>
+               )}
+            </div>
+         );
+      }
+   };
    return (
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
@@ -83,7 +96,7 @@ const OfficerReadQuestionType = () => {
             <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-4">
-                     <h1>ตอบคำถามตามหมวดคำถาม</h1>
+                     {/* <h1>ตอบคำถามตามหมวดคำถาม</h1> */}
                   </div>
                   {/* <div className="col-sm-3">
                      <Link className="btn btn-success btn-sm " to="/user-add-question">
@@ -118,7 +131,9 @@ const OfficerReadQuestionType = () => {
                               หมวดคำถาม
                            </Link>
                         </li>
-                        <li className="breadcrumb-item font-weight-bold">ตอบคำถามตามหมวดคำถาม</li>
+                        <li className="breadcrumb-item font-weight-bold">
+                           ตอบคำถามตามหมวด {qst_type_name.type_name}
+                        </li>
                      </ol>
                   </div>
                </div>
@@ -133,25 +148,50 @@ const OfficerReadQuestionType = () => {
                      {/* Default box */}
                      <div className="card">
                         <div className="card-header">
-                           <h3 className="card-title">{qst_type_name.type_name}</h3>
+                           <h3 className="card-title">
+                              ตอบคำถามตามหมวด {qst_type_name.type_name}
+                           </h3>
                         </div>
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
                            <BootstrapTable data={data} hover pagination search>
-                              <TableHeaderColumn dataSort width="50" isKey dataAlign="center" dataField="any" dataFormat={indexN}>
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="50"
+                                 isKey
+                                 dataAlign="center"
+                                 dataField="any"
+                                 dataFormat={indexN}
+                              >
                                  ลำดับ
                               </TableHeaderColumn>
                               {/* <TableHeaderColumn dataSort width="50" dataField="qst_id">
                                  ID
                               </TableHeaderColumn> */}
-                              <TableHeaderColumn dataSort width="200" headerAlign="center" dataField="qst_title">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="200"
+                                 headerAlign="center"
+                                 dataField="qst_title"
+                              >
                                  หัวข้อคำถาม
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="sta_name">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="125"
+                                 dataAlign="center"
+                                 // dataField="sta_name"
+                                 dataFormat={statusText}
+                              >
                                  สถานะ
                               </TableHeaderColumn>
-                              <TableHeaderColumn dataSort width="100" dataAlign="center" dataField="date_format">
+                              <TableHeaderColumn
+                                 dataSort
+                                 width="125"
+                                 dataAlign="center"
+                                 dataField="date_format"
+                              >
                                  วันที่ส่งคำถาม
                               </TableHeaderColumn>
                               <TableHeaderColumn

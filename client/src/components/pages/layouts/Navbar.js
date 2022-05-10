@@ -110,7 +110,7 @@ export default function Navbar() {
                            <Link to="/login" className="nav-link">
                               {/* <i className="nav-icon fas fa-file" /> */}
 
-                              <p>ระบบถามคำถาม</p>
+                              <p>ตั้งคำถาม</p>
                            </Link>
                         </li>
                      )}

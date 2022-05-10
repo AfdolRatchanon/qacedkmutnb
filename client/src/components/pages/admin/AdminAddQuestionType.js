@@ -112,6 +112,7 @@ const AdminAddQuestionType = () => {
                                        setValue({
                                           type_name: null,
                                        });
+                                       navigate("/admin-manage-question-type");
                                     }}
                                  >
                                     ยกเลิก

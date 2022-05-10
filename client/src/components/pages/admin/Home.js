@@ -129,7 +129,7 @@ const Home = () => {
                                  <div className="row">
                                     <div className="col-xl-6">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
                                                 <button
@@ -140,7 +140,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <div className="row">
@@ -178,9 +178,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-xl-6">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title">
-                                                {/* Bar Chart */}
+                                               
                                              </h3>
                                              <div className="card-tools">
                                                 <button
@@ -191,7 +191,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <ChartBarMember />
@@ -204,13 +204,14 @@ const Home = () => {
                               </div>
                               {/* /.container-fluid */}
                            </section>
+                           <hr />
                            <h1>สถิติการตอบคำถาม</h1>
                            <section className="content">
                               <div className="container-fluid">
                                  <div className="row">
                                     <div className="col-xl-6">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
                                                 <button
@@ -221,7 +222,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <div className="row">
@@ -265,9 +266,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-xl-6">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title">
-                                                {/* Bar Chart */}
+                                                
                                              </h3>
                                              <div className="card-tools">
                                                 <button
@@ -278,7 +279,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <ChartBarComponent />
@@ -299,6 +300,7 @@ const Home = () => {
                               </div>
                               {/* /.container-fluid */}
                            </section>
+                           <hr />
                            <h1>คำถามทั้งหมด แบ่งตามประเภท</h1>
                            <section className="content">
                               <div className="container-fluid">
@@ -306,7 +308,9 @@ const Home = () => {
                                     <div className="col-xl-6">
                                        <div className="card card-success">
                                           <div className="card-header">
-                                             <h3 className="card-title"></h3>
+                                             <h3 className="card-title">
+                                                สถิติคำถามแยกตามหมวด
+                                             </h3>
                                              <div className="card-tools">
                                                 <button
                                                    type="button"
@@ -329,7 +333,7 @@ const Home = () => {
                                        <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title">
-                                                {/* Bar Chart */}
+                                                สถิติคำถามทั้งหมด
                                              </h3>
                                              <div className="card-tools">
                                                 <button

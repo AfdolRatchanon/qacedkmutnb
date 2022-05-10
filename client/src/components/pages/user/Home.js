@@ -115,7 +115,7 @@ const Home = () => {
                                  <div className="row">
                                     <div className="col-xl-12">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
                                                 <button
@@ -126,7 +126,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <div className="row justify-content-center">
@@ -159,9 +159,8 @@ const Home = () => {
                                     </div>
                                     <div className="col-xl-12">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title">
-                                                {/* Bar Chart */}
                                              </h3>
                                              <div className="card-tools">
                                                 <button
@@ -172,7 +171,7 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <ChartBarQst />

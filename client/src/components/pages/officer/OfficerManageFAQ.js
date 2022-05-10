@@ -110,16 +110,14 @@ const OfficerManageFAQ = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
+                  <div className="col-sm-3">{/* <h1>จัดการ FAQ</h1> */}</div>
                   <div className="col-sm-3">
-                     <h1>จัดการ FAQ</h1>
-                  </div>
-                  <div className="col-sm-3">
-                     <Link
+                     {/* <Link
                         className="btn btn-success btn-sm "
                         to="/officer-add-faq"
                      >
                         เพิ่ม FAQ
-                     </Link>
+                     </Link> */}
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -171,61 +169,45 @@ const OfficerManageFAQ = () => {
                      <div className="card">
                         <div className="card-header">
                            <h3 className="card-title">จัดการ FAQ</h3>
+                           <div className="card-tools">
+                              <Link
+                                 className="btn btn-success btn-sm "
+                                 to="/officer-add-faq"
+                              >
+                                 เพิ่ม FAQ
+                              </Link>
+                           </div>
                         </div>
                         <div className="card-body">
                            {/* <h1>คำถามของฉัน</h1> */}
 
-                           <BootstrapTable
-                              data={dataQuestionType}
-                              hover
-                              pagination
-                              search
+                           <BootstrapTable // Component ตาราง
+                              data={dataQuestionType}  // ข้อมูลทังหมดของตาราง
+                              hover //เมื่อนำเม้าส์ขี้มีสีไฮไลน์
+                              pagination //ตัวแยกหน้า
+                              search //ช่องค้นหา
                            >
                               <TableHeaderColumn
-                                 isKey
-                                 dataSort
-                                 width="65"
-                                 dataAlign="center"
-                                 dataField="any"
-                                 dataFormat={indexN}
+                                 isKey 
+                                 dataSort //ปุ่มการจัดเรียงข้อมูล
+                                 width="65" //ความกว้างที่น้อยที่สุด
+                                 dataAlign="center" //การจัดตัวอักษรกึ่งกลาง
+                                 dataField="any" //ข้อมูล Column ที่แสดงผล
+                                 dataFormat={indexN} //นำ Component มาแสดงผลในตาราง 
                               >
                                  ลำดับ
                               </TableHeaderColumn>
-                              {/* <TableHeaderColumn dataSort width="50" dataField="lv_id">
-                                 ID
-                              </TableHeaderColumn> */}
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="450"
-                                 headerAlign="center"
-                                 dataField="type_name"
-                              >
+                              <TableHeaderColumn dataSort width="450" headerAlign="center" dataField="type_name">
                                  ชื่อหมวดคำถาม
                               </TableHeaderColumn>
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="115"
-                                 headerAlign="center"
-                                 dataAlign="center"
-                                 dataField="count_type_id"
-                              >
+                              <TableHeaderColumn dataSort width="115" headerAlign="center" dataAlign="center" dataField="count_type_id">
                                  จำนวนคำถาม
                               </TableHeaderColumn>
-
-                              <TableHeaderColumn
-                                 dataSort
-                                 width="150"
-                                 dataAlign="center"
-                                 dataFormat={manageButoon}
-                                 dataField="any"
-                              >
+                              <TableHeaderColumn dataSort width="150" dataAlign="center" dataFormat={manageButoon} dataField="any">
                                  จัดการ
                               </TableHeaderColumn>
-
-                              {/* <TableHeaderColumn dataField="any" dataFormat={manageButoon}>
-                                 การดำเนินการ
-                              </TableHeaderColumn> */}
                            </BootstrapTable>
+
                         </div>
                         {/* /.card-body */}
                         <div className="card-footer"></div>

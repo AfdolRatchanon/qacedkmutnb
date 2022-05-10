@@ -45,19 +45,19 @@ const Login = () => {
       });
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = (e) => {//เมื่อกดเข้าสู่ระบบ
       e.preventDefault();
       // console.log("submit", value);
       localStorage.clear();
-      login(value)
-         .then((res) => {
+      login(value) //นำข้อมูล Username, Password ส่งไปยัง BackEnd เพื่อตรวจสอบกับฐานข้อมูล
+         .then((res) => {// เมื่อ Username, Password ถูกต้อง
             // console.log(res.data);
-            toast.success(
+            toast.success( //แสดงข้อมูลตอนรับเหมือน alert
                "ยินดีต้อนรับคุณ " +
                   res.data.payLoad.user.mem_user +
                   " เข้าสู่เว็บไซต์"
             );
-            dispatch({
+            dispatch({ //เก็บข้อมูลไว้ที่ Store กลาง (ง่ายต่อการเรียกใช้)
                type: "LOGIN",
                payload: {
                   token: res.data.token,
@@ -68,12 +68,12 @@ const Login = () => {
                   lv_name: res.data.payLoad.user.lv_name,
                },
             });
-            localStorage.setItem("token", res.data.token);
-            roleBaseRedirect(res.data.payLoad.user.lv_id);
+            localStorage.setItem("token", res.data.token); //เก็บ token ยืนยันตัวตนไว้ที่ browser
+            roleBaseRedirect(res.data.payLoad.user.lv_id); //ตรวจสอบสิทธ์การเข้าถึงข้อมูลเพื่อย้ายไปยังหน้าที่มีสิทธิ์เข้าถึง
          })
          .catch((err) => {
             console.log(err.response.data);
-            toast.error(err.response.data);
+            toast.error(err.response.data); //แสดงข้อมูลสาเหตุที่ผิดพลาดเหมือน alert
             localStorage.clear();
          });
    };
@@ -161,7 +161,6 @@ const Login = () => {
                                  </div>
 
                                  <Link
-                                    // style={{ width: "110px", margin: " 5px 5px 5px 5px" }}
                                     className="btn btn-warning col-sm-3 mx-2 my-1"
                                     to="/ForgotPassword"
                                  >

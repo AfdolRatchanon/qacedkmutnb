@@ -116,7 +116,7 @@ const Home = () => {
                                  <div className="row">
                                     <div className="col-xl-6">
                                        <div className="card card-success">
-                                          <div className="card-header">
+                                          {/* <div className="card-header">
                                              <h3 className="card-title"></h3>
                                              <div className="card-tools">
                                                 <button
@@ -127,13 +127,10 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
-                                                {/* <Doughnut data={chartDoughnutData} /> */}
-                                                {/* <Doughnut data={data} /> */}
                                                 <div className="row">
-                                                   {/* BOX BOX BOX */}
                                                    <Small_Boxes
                                                       name={"คำถามทั้งหมด"}
                                                       count={countQst.allQst}
@@ -164,17 +161,14 @@ const Home = () => {
                                                       count={countQst.ownReply}
                                                       p_key={3}
                                                    />
-                                                   {/* BOX BOX BOX */}
                                                 </div>
                                              </div>
                                           </div>
                                           {/* /.card-body */}
                                        </div>
                                        <div className="card card-success">
-                                          <div className="card-header">
-                                             <h3 className="card-title">
-                                                {/* Bar Chart */}
-                                             </h3>
+                                          {/* <div className="card-header">
+                                             <h3 className="card-title"></h3>
                                              <div className="card-tools">
                                                 <button
                                                    type="button"
@@ -184,18 +178,13 @@ const Home = () => {
                                                    <i className="fas fa-minus" />
                                                 </button>
                                              </div>
-                                          </div>
+                                          </div> */}
                                           <div className="card-body">
                                              <div className="chart">
                                                 <ChartBarComponent />
                                              </div>
                                           </div>
                                        </div>
-
-                                       {/* /.card */}
-                                       {/* DONUT CHART */}
-
-                                       {/* /.card */}
                                     </div>
                                     {/* /.col (LEFT) */}
                                     <div className="col-xl-6">
@@ -203,7 +192,7 @@ const Home = () => {
                                        <div className="card card-success">
                                           <div className="card-header">
                                              <h3 className="card-title">
-                                                {/* Donut Chart */}
+                                                สถิติคำถามทั้งหมด
                                              </h3>
                                              <div className="card-tools">
                                                 <button

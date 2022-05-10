@@ -25,24 +25,24 @@ const ChartDoughnutComponent = () => {
       ],
    });
 
-   const chartDoughnut = () => {
+   const chartDoughnut = () => { 
       let countType = [];
       let nameType = [];
 
-      officerCountQuestionTypeAll()
-         .then((res) => {
+      officerCountQuestionTypeAll() //ดึงข้อมูลจากฐานข้อมูล
+         .then((res) => { //เมื่อดึงข้อมูลจากฐานข้อมูลสำเร็จ
             // console.log("res.data", res.data);
-            for (const dataObj of res.data) {
-               countType.push(parseInt(dataObj.count_type_All));
-               nameType.push(dataObj.type_name);
+            for (const dataObj of res.data) { //วนซ้ำเพื่อนนำข้อมูลทั้งหมดลงตัวแปร
+               countType.push(parseInt(dataObj.count_type_All)); //นำข้อมูลมาใส่ตัวแปล เพื่อแสดงตัวเลข
+               nameType.push(dataObj.type_name); //นำข้อมูลมาใส่ตัวแปล เพื่อเพื่อแสดงชื่อข้อมูล
             }
-            setData({
+            setData({ //นำข้อมูลเข้าตัวแปร data
                labels: nameType,
                datasets: [
                   {
                      label: "# of Votes",
-                     data: countType,
-                     backgroundColor: [
+                     data: countType, //นำข้อมูลชนิดตัวเลขมาแสดงผล
+                     backgroundColor: [ //ระบุสีพื้นหลังให้แต่ละข้อมูล
                         "rgba(255, 99, 132, 0.2)",
                         "rgba(255, 0, 255, 0.2)",
                         "rgba(54, 162, 235, 0.2)",
@@ -54,7 +54,7 @@ const ChartDoughnutComponent = () => {
                         "rgba(255, 159, 64, 0.2)",
                         "rgba(255, 255, 64, 0.2)",
                      ],
-                     borderColor: [
+                     borderColor: [ //ระบุสีขอบให้แต่ละข้อมูล
                         "rgba(255, 99, 132, 1)",
                         "rgba(255, 0, 255, 1)",
                         "rgba(54, 162, 235, 1)",
@@ -71,7 +71,7 @@ const ChartDoughnutComponent = () => {
                ],
             });
          })
-         .catch((err) => {
+         .catch((err) => { //เมื่อดึงข้อมูลจากฐานข้อมูลไม่สำเร็จ
             console.log(err.response.data);
          });
       // console.log("countType", countType);
@@ -83,7 +83,7 @@ const ChartDoughnutComponent = () => {
       chartDoughnut();
    }, []);
 
-   return <Doughnut data={data} />;
+   return <Doughnut data={data} />; //แสดงผลแผนภูมิโดนัท
 };
 
 export default ChartDoughnutComponent;

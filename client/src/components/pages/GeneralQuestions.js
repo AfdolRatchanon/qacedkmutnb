@@ -64,8 +64,8 @@ const GeneralQuestions = () => {
                            <section className="content">
                               <div className="container-fluid">
                                  <div className="row">
-                                    {data &&
-                                       data.map((value, key) => (
+                                    {data && //ตรวจสอบการมีอยู่ของข้อมูล
+                                       data.map((value, key) => ( //เมื่อมีข้อมูลทำการวนซ้ำเพื่อดึงข้อมูล
                                           <div
                                              key={key}
                                              className="post col-10 col-md-10 col-lg-10 col-xl-5 mx-5"
@@ -81,43 +81,29 @@ const GeneralQuestions = () => {
                                                          "/" +
                                                          value.mem_img
                                                       }
-                                                      // alt="user image"
                                                    />
-                                                   <span className="username">
-                                                      <h5 className="text-primary">
-                                                         {value.mem_name}
-                                                      </h5>
-                                                   </span>
                                                    <span className="description">
-                                                      {value.date}
+                                                      {value.date} {/* แสดงข้อมูลวันที่ถามคำถาม */}
                                                    </span>
                                                 </div>
                                              ) : (
                                                 <div className="user-block">
-                                                   <img
+                                                   <img //แสดงรูปกรณีผู้ใช้ยังไม่เพิ่มรูปของตนเอง
                                                       className="img-circle img-bordered-sm"
                                                       src={
                                                          "../../dist/img/avatar6.jpg"
                                                       }
-                                                      // alt="user image"
                                                    />
-                                                   <span className="username">
-                                                      <h5 className="text-primary">
-                                                         {value.mem_name}
-                                                      </h5>
-                                                   </span>
                                                    <span className="description">
-                                                      {value.date}
+                                                      {value.date} {/* แสดงข้อมูลวันที่ถามคำถาม */}
                                                    </span>
                                                 </div>
                                              )}
-
-                                             {/* /.user-block */}
-                                             <h4>{value.qst_title}</h4>
-                                             <p>{value.qst_detail}</p>
-                                             {value.sta_id == 3 ? (
-                                                <p className="text-warning">
-                                                   กำลังดำเนินการ
+                                             <h4>{value.qst_title}</h4> {/* แสดงข้อมูลหัวข้อคำถาม */}
+                                             <p>{value.qst_detail}</p> {/* แสดงข้อมูลรายละเอียด */}
+                                             {value.sta_id == 3 ? ( //ตรวสอบสถานะคำถามเพื่อแสดงข้อความสถานะ 
+                                                <p className="text-warning"> 
+                                                   กำลังดำเนินการ 
                                                 </p>
                                              ) : (
                                                 <p className="text-success">

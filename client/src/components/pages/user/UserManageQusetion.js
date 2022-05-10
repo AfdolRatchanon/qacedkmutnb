@@ -114,6 +114,24 @@ const UserManageQusetion = () => {
       return <div>{index + 1}</div>;
    };
 
+   const statusText = (cell, row) => {
+      if (row.sta_id) {
+         return (
+            <div className="position-sticky">
+               {row.sta_id == 3 ? (
+                  <p className="btn btn-warning btn-sm col-12">
+                     {row.sta_name}
+                  </p>
+               ) : (
+                  <p className="btn btn-success btn-sm col-12">
+                     {row.sta_name}
+                  </p>
+               )}
+            </div>
+         );
+      }
+   };
+
    const manageButoon = (cell, row) => {
       if (row.qst_id) {
          if (row.sta_id == 3) {
@@ -263,115 +281,123 @@ const UserManageQusetion = () => {
 
    const ModalView = (val) => {
       return (
-         <Modal
-            show={showMV}
-            onHide={handleMVClose}
-            aria-labelledby="contained-modal-title-vcenter"
+         <Modal // component Modal
+            size="lg" //ขนาดของ Moal
+            show={showMV} //สถานะการเปิดปิด Modal
+            onHide={handleMVClose} //ปุ่มกากบาทของ Modal
+            aria-labelledby="contained-modal-title-vcenter" 
             centered
          >
-            <Modal.Header>
+            <Modal.Header> {/* หัวข้อ Modal */}
                <Modal.Title>รายละเอียด</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-               <table className="table table-borderless">
-                  {/* <thead>
-                     <tr>
-                        <th scope="col">หัวข้อ</th>
-                        <th scope="col">ข้อมูล</th>
-                     </tr>
-                  </thead> */}
-                  <tbody>
-                     <tr className="bg-dark">
-                        <th width="125">หมวดคำถาม</th>
-                        <td>{modalViewValue.type_name}</td>
-                     </tr>
-                     <tr>
-                        <th>หัวข้อคำถาม</th>
-                        <td>{modalViewValue.qst_title}</td>
-                     </tr>
+            <Modal.Body> {/* รายละเอียดของ Modal */}
+               <div className="table-responsive"> {/* ตารางแสดงผลแบบ responsive */}
+                  <table
+                     className="table table-borderless table-hover" //ตางไม่มีเส้นขอบ เมื่อนำเม้าส์ชี้มีไฮไลน์
+                  >
+                     <tbody>
+                        <tr className="bg-dark">
+                           <th width="150">หมวดคำถาม</th>
+                           <td>{modalViewValue.type_name}</td>  {/* แสดงข้อมูลหมวดคำถาม */}
+                        </tr>
+                        <tr>
+                           <th>หัวข้อคำถาม</th>
+                           <td>{modalViewValue.qst_title}</td> {/* แสดงข้อมูลหัวข้อคำถาม */}
+                        </tr>
 
-                     <tr>
-                        <th>รายละเอียด</th>
-                        <td>{modalViewValue.qst_detail}</td>
-                     </tr>
-                     <tr>
-                        <th>วันที่ตั้งคำถาม</th>
-                        <td>{modalViewValue.date_q}</td>
-                     </tr>
-                     <tr>
-                        <th>ผู้ตั้งคำถาม</th>
-                        <td>{modalViewValue.qst_name}</td>
-                     </tr>
-                     <tr>
-                        <th>อีเมล</th>
-                        <td>{modalViewValue.qst_mail}</td>
-                     </tr>
-                     <tr>
-                        <th>ไฟล์แนบ</th>
-                        <td>
-                           {modalViewValue.qst_img != 0 ? (
-                              <>
-                                 {modalViewValue.qst_img.match(
-                                    /\.(pdf|PDF)$/
-                                 ) ? (
-                                    <>
-                                       {/* <h1>/user-read-pdf</h1> */}
-                                       {/* <Link to="/user-read-pdf" className="btn btn-success">
+                        <tr>
+                           <th>รายละเอียด</th>
+                           <td>{modalViewValue.qst_detail}</td> {/* แสดงข้อมูลรายละเอียดคำถาม */}
+                        </tr>
+                        <tr>
+                           <th>วันที่ตั้งคำถาม</th>
+                           <td>{modalViewValue.date_q}</td> {/* แสดงข้อมูลวันที่ตั้งคำถาม */}
+                        </tr>
+                        <tr>
+                           <th>ผู้ตั้งคำถาม</th>
+                           <td>{modalViewValue.qst_name}</td> {/* แสดงข้อมูลชื่อผู้ตั้งคำถาม */}
+                        </tr>
+                        <tr>
+                           <th>อีเมล</th>
+                           <td>{modalViewValue.qst_mail}</td>
+                        </tr>
+                        <tr>
+                           <th>ไฟล์แนบ</th>
+                           <td>
+                              {modalViewValue.qst_img != 0 ? (
+                                 <>
+                                    {modalViewValue.qst_img.match(
+                                       /\.(pdf|PDF)$/
+                                    ) ? (
+                                       <>
+                                          {/* <h1>/user-read-pdf</h1> */}
+                                          {/* <Link to="/user-read-pdf" className="btn btn-success">
                                        อ่านไฟล์ PDF
                                     </Link> */}
-                                       <a
-                                          className="btn btn-success"
-                                          href={
-                                             process.env.REACT_APP_API_IMG +
-                                             "/" +
-                                             modalViewValue.qst_img
-                                          }
-                                          target="_blank"
-                                       >
-                                          อ่านไฟล์ PDF
-                                       </a>
-                                    </>
-                                 ) : (
-                                    <>
-                                       <button
-                                          type="button"
-                                          className="btn btn-success"
-                                          onClick={() => openImageViewer(0)}
-                                       >
-                                          เปิดไฟล์
-                                       </button>
-                                       {isViewerOpen && (
-                                          <ImageViewer
-                                             src={[
+                                          <a
+                                             className="btn btn-success"
+                                             href={
                                                 process.env.REACT_APP_API_IMG +
-                                                   "/" +
-                                                   modalViewValue.qst_img,
-                                             ]}
-                                             currentIndex={currentImage}
-                                             zoomScale=""
-                                             disableScroll={true}
-                                             closeOnClickOutside={true}
-                                             onClose={closeImageViewer}
-                                          />
-                                       )}
-                                    </>
-                                 )}
-                              </>
-                           ) : (
-                              <>-</>
-                           )}
-                        </td>
-                     </tr>
-                     <tr className="table-success">
-                        <th width="125">วันที่ตอบ</th>
-                        <td>{modalViewValue.date_a}</td>
-                     </tr>
-                     <tr className="table-success">
-                        <th>คำตอบกลับ</th>
-                        <td>{modalViewValue.reply_detail}</td>
-                     </tr>
-                  </tbody>
-               </table>
+                                                "/" +
+                                                modalViewValue.qst_img
+                                             }
+                                             target="_blank"
+                                          >
+                                             อ่านไฟล์ PDF
+                                          </a>
+                                       </>
+                                    ) : (
+                                       <>
+                                          <button
+                                             type="button"
+                                             className="btn btn-success"
+                                             onClick={() => openImageViewer(0)}
+                                          >
+                                             เปิดไฟล์
+                                          </button>
+                                          {isViewerOpen && (
+                                             <ImageViewer
+                                                src={[
+                                                   process.env
+                                                      .REACT_APP_API_IMG +
+                                                      "/" +
+                                                      modalViewValue.qst_img,
+                                                ]}
+                                                currentIndex={currentImage}
+                                                zoomScale=""
+                                                disableScroll={true}
+                                                closeOnClickOutside={true}
+                                                onClose={closeImageViewer}
+                                             />
+                                          )}
+                                       </>
+                                    )}
+                                 </>
+                              ) : (
+                                 <>-</>
+                              )}
+                           </td>
+                        </tr>
+                        <tr className="table-success">
+                           <th width="125">วันที่ตอบ</th>
+                           <td>{modalViewValue.date_a}</td>
+                        </tr>
+                        <tr className="table-success">
+                           <th>คำตอบกลับ</th>
+                           <td>
+                              <p
+                                 style={{
+                                    overflowWrap: "break-word",
+                                 }}
+                              >
+                                 {modalViewValue.reply_detail}
+                              </p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
             </Modal.Body>
             <Modal.Footer>
                {/* onClick={props.onHide} */}
@@ -501,16 +527,14 @@ const UserManageQusetion = () => {
          <section className="content-header">
             <div className="container-fluid">
                <div className="row mb-2">
+                  <div className="col-sm-3">{/* <h1>คำถามของฉัน</h1> */}</div>
                   <div className="col-sm-3">
-                     <h1>คำถามของฉัน</h1>
-                  </div>
-                  <div className="col-sm-3">
-                     <Link
+                     {/* <Link
                         className="btn btn-success btn-sm "
                         to="/user-add-question"
                      >
                         เพิ่มคำถาม
-                     </Link>
+                     </Link> */}
                   </div>
                   <div className="col-sm-6">
                      <ol className="breadcrumb float-sm-right">
@@ -537,6 +561,15 @@ const UserManageQusetion = () => {
                            <h3 className="card-title">
                               ข้อมูลคำถาม - {user.mem_name}
                            </h3>
+
+                           <div className="card-tools">
+                              <Link
+                                 className="btn btn-success btn-sm "
+                                 to="/user-add-question"
+                              >
+                                 เพิ่มคำถาม
+                              </Link>
+                           </div>
                         </div>
                         <div className="card-body">
                            <h1>คำถามของฉัน</h1>
@@ -553,7 +586,7 @@ const UserManageQusetion = () => {
 
                               <TableHeaderColumn
                                  dataSort
-                                 width="150"
+                                 width="300"
                                  headerAlign="center"
                                  dataField="qst_title"
                               >
@@ -563,7 +596,7 @@ const UserManageQusetion = () => {
                                  dataSort
                                  width="150"
                                  dataAlign="center"
-                                 dataField="sta_name"
+                                 dataFormat={statusText}
                               >
                                  สถานะ
                               </TableHeaderColumn>
