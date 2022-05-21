@@ -100,7 +100,7 @@ const ForgotPassword = () => {
                                        type="email"
                                        className="form-control"
                                        name="mem_mail"
-                                       placeholder="รหัสผ่าน"
+                                       placeholder="อีเมล"
                                        title="Please input range 6 - 30 alphabet"
                                        onChange={handleChang}
                                     />

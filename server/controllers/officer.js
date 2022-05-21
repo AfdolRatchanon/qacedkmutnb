@@ -64,62 +64,80 @@ exports.officerReadQuestion = async (req, res) => {
 exports.replyQuestion = async (req, res) => {
    try {
       // Check user
-      const { reply_detail, qst_id, mem_id } = req.body;
+      const { reply_detail, reply_url, qst_id, mem_id } = req.body;
       console.log(req.body, req.user);
-      db.query("SELECT reply_id FROM tbl_question WHERE qst_id = ?", [qst_id], async (err, result) => {
-         if (err) {
-            console.log(err);
-            return res.status(400).send("Query Database ERROR!!!");
-         } else {
-            if (result[0].reply_id != 0) {
-               const { reply_id } = result[0];
-               console.log("Select reply_id :", reply_id);
-               db.query(
-                  "UPDATE tbl_reply SET reply_detail = ? WHERE reply_id = ?",
-                  [reply_detail, reply_id],
-                  async (err, result) => {
-                     if (err) {
-                        console.log(err);
-                        return res.status(400).send("Query Database ERROR!!!");
-                     }
-                     return res.send("บันทึกคำตอบสำเร็จ");
-                  }
-               );
-               // return res.status(400).send("ไม่สามารถบันทึกได้เนื่องจากได้รับคำตอบแล้ว");
+      db.query(
+         "SELECT reply_id FROM tbl_question WHERE qst_id = ?",
+         [qst_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
             } else {
-               db.query(
-                  "INSERT INTO tbl_reply (reply_detail,reply_date,qst_id,mem_id) VALUES (?,now(),?,?)",
-                  [reply_detail, qst_id, mem_id],
-                  async (err, result) => {
-                     if (err) {
-                        console.log(err);
-                        return res.status(400).send("Query Database ERROR!!!");
-                     } else {
-                        db.query("SELECT reply_id FROM tbl_reply WHERE qst_id = ?", [qst_id], async (err, result) => {
-                           if (err) {
-                              console.log(err);
-                              return res.status(400).send("Query Database ERROR!!!");
-                           } else {
-                              const { reply_id } = result[0];
-                              db.query(
-                                 "UPDATE tbl_question SET reply_id = ?, sta_id = 4 WHERE qst_id = ?",
-                                 [reply_id, qst_id, mem_id],
-                                 async (err, result) => {
-                                    if (err) {
-                                       console.log(err);
-                                       return res.status(400).send("Query Database ERROR!!!");
-                                    }
-                                    return res.send("บันทึกคำตอบสำเร็จ");
-                                 }
-                              );
-                           }
-                        });
+               if (result[0].reply_id != 0) {
+                  const { reply_id } = result[0];
+                  console.log("Select reply_id :", reply_id);
+                  db.query(
+                     "UPDATE tbl_reply SET reply_detail = ?, reply_url = ? WHERE reply_id = ?",
+                     [reply_detail, reply_url, reply_id],
+                     async (err, result) => {
+                        if (err) {
+                           console.log(err);
+                           return res
+                              .status(400)
+                              .send("Query Database ERROR!!!");
+                        }
+                        return res.send("บันทึกคำตอบสำเร็จ");
                      }
-                  }
-               );
+                  );
+                  // return res.status(400).send("ไม่สามารถบันทึกได้เนื่องจากได้รับคำตอบแล้ว");
+               } else {
+                  db.query(
+                     "INSERT INTO tbl_reply (reply_detail,reply_url,reply_date,qst_id,mem_id) VALUES (?,?,now(),?,?)",
+                     [reply_detail, reply_url, qst_id, mem_id],
+                     async (err, result) => {
+                        if (err) {
+                           console.log(err);
+                           return res
+                              .status(400)
+                              .send("Query Database ERROR!!!");
+                        } else {
+                           db.query(
+                              "SELECT reply_id FROM tbl_reply WHERE qst_id = ?",
+                              [qst_id],
+                              async (err, result) => {
+                                 if (err) {
+                                    console.log(err);
+                                    return res
+                                       .status(400)
+                                       .send("Query Database ERROR!!!");
+                                 } else {
+                                    const { reply_id } = result[0];
+                                    db.query(
+                                       "UPDATE tbl_question SET reply_id = ?, sta_id = 4 WHERE qst_id = ?",
+                                       [reply_id, qst_id, mem_id],
+                                       async (err, result) => {
+                                          if (err) {
+                                             console.log(err);
+                                             return res
+                                                .status(400)
+                                                .send(
+                                                   "Query Database ERROR!!!"
+                                                );
+                                          }
+                                          return res.send("บันทึกคำตอบสำเร็จ");
+                                       }
+                                    );
+                                 }
+                              }
+                           );
+                        }
+                     }
+                  );
+               }
             }
          }
-      });
+      );
 
       // res.send("adminListUser");
    } catch (error) {
@@ -169,20 +187,24 @@ exports.officerReadFAQType = async (req, res) => {
       // Check user
       const { type_id } = req.body;
       console.log(req.body, req.user);
-      db.query("SELECT  * FROM tbl_faq WHERE type_id = ? ", [type_id], async (err, result) => {
-         if (err) {
-            console.log(err);
-            return res.status(400).send("Query Database ERROR!!!");
-         } else {
-            if (result[0] == null) {
-               // Username มีข้อมูลหรือไม่
-               //console.log(result);
-               return res.status(400).send("ไม่พบข้อมูล");
+      db.query(
+         "SELECT  * FROM tbl_faq WHERE type_id = ? ",
+         [type_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
             } else {
-               return res.send(result);
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("ไม่พบข้อมูล");
+               } else {
+                  return res.send(result);
+               }
             }
          }
-      });
+      );
       //res.send("adminListUser");
    } catch (error) {
       console.log(error);
@@ -194,21 +216,25 @@ exports.officerReadFAQ = async (req, res) => {
       // Check user
       const { faq_id } = req.body;
       console.log(req.body, req.user);
-      db.query("SELECT * FROM tbl_faq WHERE faq_id = ? ", [faq_id], async (err, result) => {
-         if (err) {
-            console.log(err);
-            return res.status(400).send("Query Database ERROR!!!");
-         } else {
-            if (result[0] == null) {
-               // Username มีข้อมูลหรือไม่
-               //console.log(result);
-               return res.status(400).send("ไม่พบข้อมูล");
+      db.query(
+         "SELECT * FROM tbl_faq WHERE faq_id = ? ",
+         [faq_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
             } else {
-               console.log(result[0]);
-               return res.send(result);
+               if (result[0] == null) {
+                  // Username มีข้อมูลหรือไม่
+                  //console.log(result);
+                  return res.status(400).send("ไม่พบข้อมูล");
+               } else {
+                  console.log(result[0]);
+                  return res.send(result);
+               }
             }
          }
-      });
+      );
       //res.send("adminListUser");
    } catch (error) {
       console.log(error);
@@ -246,14 +272,18 @@ exports.officerDeleteFAQ = async (req, res) => {
       // Check user
       const { faq_id } = req.body;
       // console.log("delete FAQ : ", req.body);
-      db.query("DELETE FROM tbl_faq WHERE faq_id = ?", [faq_id], async (err, result) => {
-         if (err) {
-            console.log(err);
-            return res.status(400).send("Query Database ERROR!!!");
-         } else {
-            res.send("ลบข้อมูลสำเร็จ");
+      db.query(
+         "DELETE FROM tbl_faq WHERE faq_id = ?",
+         [faq_id],
+         async (err, result) => {
+            if (err) {
+               console.log(err);
+               return res.status(400).send("Query Database ERROR!!!");
+            } else {
+               res.send("ลบข้อมูลสำเร็จ");
+            }
          }
-      });
+      );
    } catch (error) {
       console.log(error);
       res.status(500).send("Server Error!!!");

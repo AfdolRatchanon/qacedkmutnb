@@ -188,7 +188,7 @@ exports.adminUpdateQuestionType = async (req, res) => {
                if (err) {
                   console.log(err);
                } else {
-                  res.send("บันทึกระดับการเข้าถึงสำเร็จ");
+                  res.send("บันทึกหมวดคำถามสำเร็จ");
                }
             }
          );

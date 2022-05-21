@@ -285,38 +285,49 @@ const UserManageQusetion = () => {
             size="lg" //ขนาดของ Moal
             show={showMV} //สถานะการเปิดปิด Modal
             onHide={handleMVClose} //ปุ่มกากบาทของ Modal
-            aria-labelledby="contained-modal-title-vcenter" 
+            aria-labelledby="contained-modal-title-vcenter"
             centered
          >
-            <Modal.Header> {/* หัวข้อ Modal */}
+            <Modal.Header>
+               {" "}
+               {/* หัวข้อ Modal */}
                <Modal.Title>รายละเอียด</Modal.Title>
             </Modal.Header>
-            <Modal.Body> {/* รายละเอียดของ Modal */}
-               <div className="table-responsive"> {/* ตารางแสดงผลแบบ responsive */}
+            <Modal.Body>
+               {" "}
+               {/* รายละเอียดของ Modal */}
+               <div className="table-responsive">
+                  {" "}
+                  {/* ตารางแสดงผลแบบ responsive */}
                   <table
                      className="table table-borderless table-hover" //ตางไม่มีเส้นขอบ เมื่อนำเม้าส์ชี้มีไฮไลน์
                   >
                      <tbody>
                         <tr className="bg-dark">
                            <th width="150">หมวดคำถาม</th>
-                           <td>{modalViewValue.type_name}</td>  {/* แสดงข้อมูลหมวดคำถาม */}
+                           <td>{modalViewValue.type_name}</td>{" "}
+                           {/* แสดงข้อมูลหมวดคำถาม */}
                         </tr>
                         <tr>
                            <th>หัวข้อคำถาม</th>
-                           <td>{modalViewValue.qst_title}</td> {/* แสดงข้อมูลหัวข้อคำถาม */}
+                           <td>{modalViewValue.qst_title}</td>{" "}
+                           {/* แสดงข้อมูลหัวข้อคำถาม */}
                         </tr>
 
                         <tr>
                            <th>รายละเอียด</th>
-                           <td>{modalViewValue.qst_detail}</td> {/* แสดงข้อมูลรายละเอียดคำถาม */}
+                           <td>{modalViewValue.qst_detail}</td>{" "}
+                           {/* แสดงข้อมูลรายละเอียดคำถาม */}
                         </tr>
                         <tr>
                            <th>วันที่ตั้งคำถาม</th>
-                           <td>{modalViewValue.date_q}</td> {/* แสดงข้อมูลวันที่ตั้งคำถาม */}
+                           <td>{modalViewValue.date_q}</td>{" "}
+                           {/* แสดงข้อมูลวันที่ตั้งคำถาม */}
                         </tr>
                         <tr>
                            <th>ผู้ตั้งคำถาม</th>
-                           <td>{modalViewValue.qst_name}</td> {/* แสดงข้อมูลชื่อผู้ตั้งคำถาม */}
+                           <td>{modalViewValue.qst_name}</td>{" "}
+                           {/* แสดงข้อมูลชื่อผู้ตั้งคำถาม */}
                         </tr>
                         <tr>
                            <th>อีเมล</th>
@@ -393,6 +404,20 @@ const UserManageQusetion = () => {
                               >
                                  {modalViewValue.reply_detail}
                               </p>
+                           </td>
+                        </tr>
+                        <tr className="table-success">
+                           <th>URL</th>
+                           <td>
+                              <a
+                                 href={modalViewValue.reply_url}
+                                 style={{
+                                    overflowWrap: "break-word",
+                                 }}
+                                 target="_blank"
+                              >
+                                 {modalViewValue.reply_url}
+                              </a>
                            </td>
                         </tr>
                      </tbody>

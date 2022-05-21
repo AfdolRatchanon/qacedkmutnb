@@ -38,6 +38,7 @@ const OfficerAnswerQuestion = () => {
    const [editValue, setEditValue] = useState([]);
    const [value, setValue] = useState({
       reply_detail: "",
+      reply_url: "",
       qst_id: question_id,
       mem_id: user.mem_id,
    });
@@ -47,6 +48,12 @@ const OfficerAnswerQuestion = () => {
          .then((res) => {
             // console.log(res.data);
             setEditValue(res.data);
+            console.log(res.data);
+            setValue({
+               ...value,
+               reply_detail: res.data[0].reply_detail,
+               reply_url: res.data[0].reply_url,
+            });
          })
          .catch((err) => {
             console.log(err.response);
@@ -65,11 +72,13 @@ const OfficerAnswerQuestion = () => {
    //เก็บข้อมูลจาก TextBox ลงตัวแปรต่าง ๆ
    const handleChang = (e) => {
       setValue({ ...value, [e.target.name]: e.target.value });
+      console.log(value);
    };
 
    // console.log(value);
    const handCancel = (e) => {
-      setValue({ ...value, reply_detail: "" });
+      setValue({ ...value, reply_detail: "", reply_url: "" });
+      console.log(value);
    };
 
    const handleSubmit = (e) => {
@@ -303,6 +312,7 @@ const OfficerAnswerQuestion = () => {
                                     />
                                     <div className="col-sm-2"></div>
                                  </div>
+
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
                                     <label className="col-sm-2">ตอบ</label>
@@ -313,6 +323,18 @@ const OfficerAnswerQuestion = () => {
                                        onChange={handleChang}
                                        defaultValue={value.reply_detail}
                                     ></textarea>
+                                    <div className="col-sm-2"></div>
+                                 </div>
+                                 <div className="form-group row">
+                                    <div className="col-sm-2"></div>
+                                    <label className="col-sm-2">URL</label>
+                                    <input
+                                       type="text"
+                                       className="form-control col-sm-6"
+                                       name="reply_url"
+                                       defaultValue={value.reply_url}
+                                       onChange={handleChang}
+                                    />
                                     <div className="col-sm-2"></div>
                                  </div>
 

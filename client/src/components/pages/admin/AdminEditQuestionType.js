@@ -126,18 +126,18 @@ const AdminEditQuestionType = () => {
                               <form key={key} onSubmit={handleSubmit}>
                                  <div className="form-group row">
                                     <div className="col-sm-2"></div>
-                                    <label className="col-sm-3">
+                                    <label className="col-sm-2 col-form-label">
                                        ชื่อหมวดคำถาม
                                     </label>
                                     <input
                                        type="text"
-                                       className="form-control col-sm-6"
+                                       className="form-control col-sm-5"
                                        name="type_name"
                                        defaultValue={value.type_name}
                                        placeholder="กรอกหัวข้อคำถาม"
                                        onChange={handleChang}
                                     />
-                                    <div className="col-sm-1"></div>
+                                    {/* <div className="col-sm-1"></div> */}
                                  </div>
                                  <div className="form-group" align="center">
                                     <Link
