@@ -22,7 +22,7 @@ const GeneralQuestions = () => {
       <div className="content-wrapper">
          {/* Content Header (Page header) */}
          <section className="content-header">
-            <div className="container-fluid">
+            {/* <div className="container-fluid">
                <div className="row mb-2">
                   <div className="col-sm-6">
                      <h1>คำถามทั่วไป</h1>
@@ -35,7 +35,7 @@ const GeneralQuestions = () => {
                      </ol>
                   </div>
                </div>
-            </div>
+            </div> */}
             {/* /.container-fluid */}
          </section>
          {/* Main content */}
