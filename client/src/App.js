@@ -61,41 +61,42 @@ import { toast } from "react-toastify";
 function App() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const idtoken = localStorage.token;
 
    //เช็ค User เมื่อมีการ Refresh
+   useEffect(() => {
+      const idtoken = localStorage.token;
+      if (idtoken) {
+         // console.log(idtoken);
+         currentUser(idtoken)
+            .then((res) => {
+               // console.log(res.data);
+               dispatch({
+                  type: "LOGIN",
+                  payload: {
+                     token: idtoken,
+                     mem_id: res.data.mem_id,
+                     mem_mail: res.data.mem_mail,
+                     mem_user: res.data.mem_user,
+                     mem_name: res.data.mem_name,
+                     mem_tal: res.data.mem_tal,
+                     mem_img: res.data.mem_img,
+                     lv_id: res.data.lv_id,
+                     lv_name: res.data.lv_name,
+                  },
+               });
+            })
+            .catch((err) => {
+               //err
+               // console.log(err);
+               // alert(err);
+               // localStorage.clear();
+               console.log(err.response?.data);
+               // toast.warning(err.response?.data + " โทเค็นหมดอายุกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
 
-   if (idtoken) {
-      // console.log(idtoken);
-      currentUser(idtoken)
-         .then((res) => {
-            // console.log(res.data);
-            dispatch({
-               type: "LOGIN",
-               payload: {
-                  token: idtoken,
-                  mem_id: res.data.mem_id,
-                  mem_mail: res.data.mem_mail,
-                  mem_user: res.data.mem_user,
-                  mem_name: res.data.mem_name,
-                  mem_tal: res.data.mem_tal,
-                  mem_img: res.data.mem_img,
-                  lv_id: res.data.lv_id,
-                  lv_name: res.data.lv_name,
-               },
+               // navigate("/Login");
             });
-         })
-         .catch((err) => {
-            //err
-            // console.log(err);
-            // alert(err);
-            // localStorage.clear();
-            console.log(err.response.data);
-            // toast.warning(err.response.data + " โทเค็นหมดอายุกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
-
-            // navigate("/Login");
-         });
-   }
+      }
+   }, []);
 
    return (
       <div className="App">

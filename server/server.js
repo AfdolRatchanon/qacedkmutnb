@@ -1,7 +1,7 @@
 //NOTE IMPORT
 const express = require("express");
 const fileUpload = require("express-fileupload");
-// require("dotenv").config();
+require("dotenv").config();
 const { readdirSync } = require("fs");
 
 //NOTE VALIABLE

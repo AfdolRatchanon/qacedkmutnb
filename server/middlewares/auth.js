@@ -1,5 +1,5 @@
-// const { default: LocaleProvider } = require("antd/lib/locale-provider");
 const jwt = require("jsonwebtoken");
+const db = require("../configs/db");
 
 exports.auth = (req, res, next) => {
    try {

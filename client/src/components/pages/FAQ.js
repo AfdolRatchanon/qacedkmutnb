@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { loadQuestionTypeFAQ, readFAQType } from "../functions/query";
 
 import { toast } from "react-toastify";
-import TextareaAutosize from "react-autosize-textarea";
+import TextareaAutosize from "react-textarea-autosize";
 const FAQ = () => {
    const frequently_asked_question_ID = localStorage.faq_id;
    const navigate = useNavigate();

@@ -21,7 +21,7 @@ const OfficerRoute = ({ children }) => {
                toast.error(err.response.data);
                console.log(err.response);
                // console.log(err.response.data);
-               navigate("/login");
+               navigate("/Login");
                setOk(false);
             });
       }

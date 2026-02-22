@@ -27,10 +27,10 @@ const mysql_npm = require("mysql");
 // };
 
 var db_config = {
-   user: "root",
-   password: "",
-   host: "localhost",
-   database: "comedu_q_&_a",
+   user: process.env.USER_DB,
+   password: process.env.PASSWORD_DB,
+   host: process.env.HOST_DB,
+   database: process.env.DATABASE,
 };
 
 //-
@@ -65,7 +65,7 @@ function reconnect(db) {
    db.getConnection(function (err) {
       if (err) {
          //- Try to connect every 2 seconds.
-         setTimeout(reconnect(db), 2000);
+         setTimeout(() => reconnect(db), 2000);
       } else {
          console.log("\n\t *** New connection established with the database. ***");
          return db;

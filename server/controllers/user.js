@@ -14,10 +14,10 @@ exports.addQuestion = async (req, res) => {
 
          // return res.status(400).json({ msg: "No file uploaded" });
       } else {
-         file = req.files.file;
+         var file = req.files.file;
          if (!file.name.match(/\.(png|jpg|jpeg|pdf|PNG|JPG|JPEG|PDF)$/)) {
             return res.status(400).send("ไฟล์ไม่ถูกต้อง");
-         } else if (file2.size > 209715200) {
+         } else if (file.size > 209715200) {
             return res.status(400).send("ขนาดไฟล์ไม่เกิน 200 MB");
          } else {
             file_new_Name = `${Date.now()}${path.extname(file.name)}`;
