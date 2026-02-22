@@ -1,6 +1,6 @@
 # ComEduQ&A — ระบบถาม-ตอบสำหรับภาควิชาคอมพิวเตอร์ศึกษา
 
-> **Q&A System for Computer Education Department (KMUTNB)**
+> **Q&A System for Department of Computer Education (KMUTNB)**
 > ระบบถาม-ตอบออนไลน์สำหรับภาควิชาคอมพิวเตอร์ศึกษา มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
 
 ---
@@ -24,7 +24,7 @@
 ComEduQ&A เป็นระบบถาม-ตอบออนไลน์ที่พัฒนาขึ้นเพื่อใช้ภายในภาควิชาคอมพิวเตอร์ศึกษา รองรับผู้ใช้งาน 3 ระดับ ได้แก่ ผู้ใช้ทั่วไป เจ้าหน้าที่ และผู้ดูแลระบบ ผู้ใช้สามารถตั้งคำถาม แนบไฟล์ และรอรับคำตอบจากเจ้าหน้าที่ รวมถึงเรียกดู FAQ และสถิติต่าง ๆ
 
 **English:**
-ComEduQ&A is an online Q&A platform for the Computer Education Department. It supports three user roles: Regular User, Officer, and Admin. Users can submit questions with file attachments, receive answers from officers, browse FAQs, and view statistics dashboards.
+ComEduQ&A is an online Q&A platform for the Department of Computer Education. It supports three user roles: Regular User, Officer, and Admin. Users can submit questions with file attachments, receive answers from officers, browse FAQs, and view statistics dashboards.
 
 ---
 
@@ -390,7 +390,7 @@ Base URL: `http://localhost:3300/api`
 
 ## ผู้พัฒนา / Developer
 
-> _TCT-RA Capstone Project — Computer Education Department, KMUTNB_
+> _TCT-RA Capstone Project — Department of Computer Education, KMUTNB_
 
 > นายรัชชานนท์ เสมสายัณห์
 
